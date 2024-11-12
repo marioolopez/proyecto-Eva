@@ -1,0 +1,18 @@
+TEMÁTICA: GIMNASIO
+
+TAREAS REALIZADAS: CREACIÓN BASE DE DATOS. IDENTIFICACIÓN DE LOS ASPECTOS DE GESTIÓN DE LA EMPRESA.
+	CLIENTES: alta, baja, modifcación.
+	TARIFA: alta.
+	EMPLEADO: alta, baja, modificación.
+	ACTIVIDAD: alta.
+	EQUIPAMIENTO: alta y dar mantenimiento al equipamiento.
+	PEDIDO: alta.
+	PRODUCTO: alta, y dar de alta proveedor.
+
+REPARTO TAREAS:
+	MARCOS: Alta, baja modificación de clientes.
+	YOEL: Alta de tarifas y actividades.
+	JUAN: Alta, baja modificación de empleados.
+	JORGE: Alta de productos.
+	MARIO: Alta de equipamiento y mantenimiento.
+	álvaro: Alta de productos y proveedores.
