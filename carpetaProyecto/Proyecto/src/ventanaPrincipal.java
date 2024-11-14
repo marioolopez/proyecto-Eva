@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URI;
@@ -8,8 +9,8 @@ public class ventanaPrincipal extends JFrame{
     private JLabel fotoGym;
     private ImageIcon img;
     private JMenuBar barra;
-    private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3, equip1, prod1, act1, tar1;
-    private JMenu menu1, menu2, menu3, menu4, menu5, menu6;
+    private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3, equip1, prod1, act1, tar1, ped1;
+    private JMenu menu1, menu2, menu3, menu4, menu5, menu6, menu7;
     ventanaPrincipal() {
         setTitle("BIENVENIDO A NUESTRA WEB");
         this.setBounds(300, 300, 800, 600);
@@ -89,6 +90,16 @@ public class ventanaPrincipal extends JFrame{
         tar1.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu6.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu6.add(tar1);
+        
+        
+        
+        menu7 = new JMenu("PEDIDOS");
+        ped1 = new JMenuItem("Pedidos");
+        ped1.setActionCommand("pedido");
+        ped1.addActionListener(new MenuAccion(this));
+        ped1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu7.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu7.add(ped1);
 
         
         barra.add(menu1);
@@ -97,6 +108,7 @@ public class ventanaPrincipal extends JFrame{
         barra.add(menu4);
         barra.add(menu5);
         barra.add(menu6);
+        barra.add(menu7);
         this.add(barra, BorderLayout.NORTH); //Hasta aqui todo son opciones en el JMenuBar
         //-----------------------------------------------------------
        
