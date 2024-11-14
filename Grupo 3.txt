@@ -13,6 +13,18 @@ REPARTO TAREAS:
 	MARCOS: Alta, baja modificación de clientes.
 	YOEL: Alta de tarifas y actividades.
 	JUAN: Alta, baja modificación de empleados.
-	JORGE: Alta de productos.
+	JORGE: Alta de pedidos y compra.
 	MARIO: Alta de equipamiento y mantenimiento.
 	álvaro: Alta de productos y proveedores.
+
+Pedidos:
+	-Id unico
+	-Formado por numerosas compras
+	-indica el cliente
+	-fecha
+
+Compra: 
+	id compra UNICO
+	id producto
+	cantidad
+	
