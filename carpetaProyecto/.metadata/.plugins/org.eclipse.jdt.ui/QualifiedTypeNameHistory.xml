@@ -16,12 +16,12 @@
     <fullyQualifiedTypeName name="java.util.Calendar"/>
     <fullyQualifiedTypeName name="java.awt.GridBagLayout"/>
     <fullyQualifiedTypeName name="javax.swing.JInternalFrame"/>
-    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="ventanaPrincipal"/>
     <fullyQualifiedTypeName name="sun.security.ec.ECOperations.PointMultiplier.Default"/>
     <fullyQualifiedTypeName name="escuchaEquipamiento"/>
-    <fullyQualifiedTypeName name="ParteMario.parteEquipamiento"/>
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
     <fullyQualifiedTypeName name="java.awt.GridLayout"/>
+    <fullyQualifiedTypeName name="ParteMario.parteEquipamiento"/>
+    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="javax.swing.JTextField"/>
 </qualifiedTypeNameHistroy>

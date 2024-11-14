@@ -4,7 +4,7 @@ import ParteMario.parteEquipamiento;
 public class escuchaEquipamiento implements ActionListener{
 	private ventanaPrincipal vp;
 	private parteEquipamiento pe;
-	escuchaEquipamiento(ventanaPrincipal vpp) {
+	escuchaEquipamiento(ventanaPrincipal vpp){
 		vp = vpp;
 		pe = new parteEquipamiento();
 	}
