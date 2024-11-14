@@ -47,10 +47,16 @@ public class ventanaPrincipal extends JFrame{
         menu2 = new JMenu("EMPLEADOS");
         menu2.setFont(new Font("Arial Black", Font.BOLD, 12));
         emp1 = new JMenuItem("Alta de Empleados");
+        emp1.setActionCommand("alt");
+        emp1.addActionListener(new ClickEmpleados(this));
         emp1.setFont(new Font("Arial Black", Font.BOLD, 12));
         emp2 = new JMenuItem("Baja de Empleados");
+        emp2.setActionCommand("baj");
+        emp2.addActionListener(new ClickEmpleados(this));
         emp2.setFont(new Font("Arial Black", Font.BOLD, 12));
         emp3 = new JMenuItem("Modificaciones de Empleados");
+        emp3.setActionCommand("mod");
+        emp3.addActionListener(new ClickEmpleados(this));
         emp3.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu2.add(emp1);
         menu2.addSeparator();
@@ -97,7 +103,7 @@ public class ventanaPrincipal extends JFrame{
         barra.add(menu4);
         barra.add(menu5);
         barra.add(menu6);
-        this.add(barra, BorderLayout.NORTH); //Hasta aqui todo son opciones en el JMenuBar
+        this.setJMenuBar(barra); //Hasta aqui todo son opciones en el JMenuBar
         //-----------------------------------------------------------
        
         

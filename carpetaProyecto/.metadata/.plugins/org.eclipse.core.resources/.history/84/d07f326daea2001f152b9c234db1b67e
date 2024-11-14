@@ -1,0 +1,90 @@
+package partejuanandres;
+import javax.swing.*;
+import java.awt.*;
+public class PanelEmp extends JInternalFrame{
+
+	private int identificador;
+	
+	private  JLabel [] etiquetas;
+	private JTextField [] campos;
+	private JButton buscar;
+	private JButton accion;
+	
+	public PanelEmp (int i){
+		this.getContentPane().setLayout(new GridLayout(5,2));
+		identificador=i;
+		etiquetas=new JLabel[4];
+		campos=new JTextField[4];
+		buscar=new JButton("Buscar");
+		accion=new JButton("");
+		
+		etiquetas[0]=new JLabel("Codigo: ");
+		campos[0]=new JTextField();
+		this.getContentPane().add(etiquetas[0]);
+		this.getContentPane().add(campos[0]);
+		etiquetas[1]=new JLabel("Nombre: ");
+		campos[1]=new JTextField();
+		this.getContentPane().add(etiquetas[1]);
+		this.getContentPane().add(campos[1]);
+		etiquetas[2]=new JLabel("DNI: ");
+		campos[2]=new JTextField();
+		this.getContentPane().add(etiquetas[2]);
+		this.getContentPane().add(campos[2]);
+		etiquetas[3]=new JLabel("Salario");
+		campos[3]=new JTextField();
+		this.getContentPane().add(etiquetas[3]);
+		this.getContentPane().add(campos[3]);
+		
+		JPanel pbuscar=new JPanel(new FlowLayout());
+		
+		buscar.setPreferredSize(new Dimension(100,50));
+		buscar.setForeground(Color.white);
+		
+		buscar.setBackground(new Color(122, 108, 67));
+		pbuscar.add(buscar);
+		pbuscar.setBackground(new Color(211, 211, 190));
+		
+		this.getContentPane().add(pbuscar);
+		
+		JPanel paccion=new JPanel(new FlowLayout());
+		
+
+		accion.setPreferredSize(new Dimension(100,50));
+		accion.setForeground(Color.white);
+		
+		accion.setBackground(new Color(122, 108, 67));
+		
+		
+		this.getContentPane().add(paccion);
+		
+		
+		for (JLabel x:etiquetas)
+			{x.setFont(new Font("Arial Black",Font.BOLD,14));
+			x.setHorizontalAlignment(JLabel.CENTER);
+			}
+		
+		modTextoBotton();
+		
+		this.setVisible(true);
+		
+	}
+
+	private void modTextoBotton() {
+		// TODO Auto-generated method stub
+		switch (identificador) {
+		case 1:accion.setText("Insertar Empleado");
+			   buscar.setVisible(false);
+			   buscar.setEnabled(false);
+		break;
+		case 2:accion.setText("Borrar Empleado");
+		 buscar.setVisible(true);
+		   buscar.setEnabled(true);
+		break;
+		case 3:accion.setText("Modificar Empleado");
+		buscar.setVisible(true);
+		   buscar.setEnabled(true);
+		break;
+		}
+	}
+	
+}
