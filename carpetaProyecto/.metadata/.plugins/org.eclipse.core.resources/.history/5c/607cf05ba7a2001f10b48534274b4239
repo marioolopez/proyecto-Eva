@@ -1,0 +1,11 @@
+package ParteMario;
+
+import javax.swing.JInternalFrame;
+
+public class parteEquipamiento extends JInternalFrame{
+
+	public parteEquipamiento() {
+		// TODO Auto-generated constructor stub
+	}
+	
+}

@@ -1,0 +1,17 @@
+package ParteMario;
+import java.awt.GridLayout;
+import javax.swing.*;
+import javax.swing.JInternalFrame;
+public class parteEquipamiento extends JInternalFrame {
+	private JPanel p;
+	private JLabel l;
+	private JTextField id, nombre;
+	public parteEquipamiento() {
+		super("EQUIPAMIENTOS GIMNASIO DAM");
+		p = new JPanel(new GridLayout());
+		
+		
+		
+		this.add(p);
+	}
+}
