@@ -1,0 +1,17 @@
+package Yoel;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.util.Iterator;
+
+import javax.swing.*;
+
+public class Altatarifas extends JInternalFrame{
+private PanelParaContenidoAltas pa;
+public Altatarifas() {
+	this.setLayout(new FlowLayout(FlowLayout.CENTER));
+pa=new PanelParaContenidoAltas();
+this.add(pa);
+this.setVisible(true);
+}
+}

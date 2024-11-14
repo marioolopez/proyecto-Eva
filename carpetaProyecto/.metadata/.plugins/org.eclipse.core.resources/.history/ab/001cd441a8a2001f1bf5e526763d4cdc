@@ -1,0 +1,9 @@
+package Yoel;
+
+import javax.swing.JInternalFrame;
+
+public class Altatarifas extends JInternalFrame{
+public Altatarifas() {
+System.out.println("HOla");
+}
+}

@@ -12,7 +12,7 @@ public class ventanaPrincipal extends JFrame{
     private JMenu menu1, menu2, menu3, menu4, menu5, menu6;
     ventanaPrincipal() {
         setTitle("BIENVENIDO A NUESTRA WEB");
-        this.setBounds(300, 300, 800, 600);
+        this.setBounds(600, 200, 800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //es la barra superior
@@ -89,7 +89,8 @@ public class ventanaPrincipal extends JFrame{
         tar1.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu6.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu6.add(tar1);
-
+        tar1.setActionCommand("Tarifa");
+        tar1.addActionListener(new escuchador(this));
         
         barra.add(menu1);
         barra.add(menu2);
@@ -97,7 +98,7 @@ public class ventanaPrincipal extends JFrame{
         barra.add(menu4);
         barra.add(menu5);
         barra.add(menu6);
-        this.add(barra, BorderLayout.NORTH); //Hasta aqui todo son opciones en el JMenuBar
+        this.setJMenuBar(barra); //Hasta aqui todo son opciones en el JMenuBar
         //-----------------------------------------------------------
        
         
