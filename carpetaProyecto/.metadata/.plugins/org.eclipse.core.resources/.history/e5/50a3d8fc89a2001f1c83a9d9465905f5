@@ -1,0 +1,299 @@
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URI;
+import javax.swing.*;
+
+import com.toedter.calendar.JCalendar;
+public class ventanaPrincipal extends JFrame{
+    private JLabel fotoGym;
+    private ImageIcon img;
+    private JMenuBar barra;
+    private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3, equip1, prod1, act1, tar1;
+    private JMenu menu1, menu2, menu3, menu4, menu5, menu6;
+    ventanaPrincipal() {
+        setTitle("BIENVENIDO A NUESTRA WEB");
+        this.setBounds(300, 300, 800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //es la barra superior
+        barra = new JMenuBar();
+        barra.setBackground(new Color(211, 211, 190));
+        barra.setPreferredSize(new Dimension(120, 60));
+
+         
+        img = new ImageIcon("img/gym.jpg");
+        Image tamano = img.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+        fotoGym = new JLabel(new ImageIcon(tamano));
+        barra.add(fotoGym);
+
+        
+        
+        menu1 = new JMenu("CLIENTES");
+        menu1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        cli1 = new JMenuItem("Alta de Clientes");
+        cli1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        cli2 = new JMenuItem("Baja de Clientes");
+        cli2.setFont(new Font("Arial Black", Font.BOLD, 12));
+        cli3 = new JMenuItem("Modificaciones de Clientes");
+        cli3.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu1.add(cli1);
+        menu1.addSeparator();
+        menu1.add(cli2);
+        menu1.addSeparator();
+        menu1.add(cli3);
+
+        
+        
+        menu2 = new JMenu("EMPLEADOS");
+        menu2.setFont(new Font("Arial Black", Font.BOLD, 12));
+        emp1 = new JMenuItem("Alta de Empleados");
+        emp1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        emp2 = new JMenuItem("Baja de Empleados");
+        emp2.setFont(new Font("Arial Black", Font.BOLD, 12));
+        emp3 = new JMenuItem("Modificaciones de Empleados");
+        emp3.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu2.add(emp1);
+        menu2.addSeparator();
+        menu2.add(emp2);
+        menu2.addSeparator();
+        menu2.add(emp3);
+
+        
+        
+        menu3 = new JMenu("EQUIPAMIENTO");
+        menu3.setFont(new Font("Arial Black", Font.BOLD, 12));
+        equip1 = new JMenuItem("Alta de Equipamiento");
+        equip1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu3.add(equip1);
+
+        
+        
+        menu4 = new JMenu("PRODUCTOS");
+        menu4.setFont(new Font("Arial Black", Font.BOLD, 12));
+        prod1 = new JMenuItem("Agregar Producto");
+        prod1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu4.add(prod1);
+        
+        
+        
+        menu5 = new JMenu("ACTIVIDADES");
+        menu5.setFont(new Font("Arial Black", Font.BOLD, 12));
+        act1 = new JMenuItem("Agegar Nueva Actividad");
+        act1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu5.add(act1);
+        
+        
+        
+        menu6 = new JMenu("TARIFA");
+        tar1 = new JMenuItem("Alta de Tarifa");
+        tar1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu6.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu6.add(tar1);
+        
+  
+        
+        barra.add(menu1);
+        barra.add(menu2);
+        barra.add(menu3);
+        barra.add(menu4);
+        barra.add(menu5);
+        barra.add(menu6);
+        this.add(barra, BorderLayout.NORTH); //Hasta aqui todo son opciones en el JMenuBar
+        
+       
+        
+        
+        
+        
+        
+        
+        
+        //------------------------------------------------------------
+        //panel izquierdo "GIMNASIO DAM"
+        JPanel panelIzquierda = new JPanel(new GridLayout(12, 1));
+        panelIzquierda.setBackground(new Color(211, 211, 190));
+        panelIzquierda.setPreferredSize(new Dimension(60, 600));
+        //Las etiquetas con las letras de "GIMNASIO DAM"
+        JLabel uno = new JLabel("G", SwingConstants.CENTER);
+        uno.setFont(new Font("Arial Black", Font.BOLD, 24));
+        uno.setForeground(new Color(70, 70, 70));
+        JLabel dos = new JLabel("I", SwingConstants.CENTER);
+        dos.setFont(new Font("Arial Black", Font.BOLD, 24));
+        dos.setForeground(new Color(70, 70, 70));
+        JLabel tres = new JLabel("M", SwingConstants.CENTER);
+        tres.setFont(new Font("Arial Black", Font.BOLD, 24));
+        tres.setForeground(new Color(70, 70, 70));
+        JLabel cuatro = new JLabel("N", SwingConstants.CENTER);
+        cuatro.setFont(new Font("Arial Black", Font.BOLD, 24));
+        cuatro.setForeground(new Color(70, 70, 70));
+        JLabel cinco = new JLabel("A", SwingConstants.CENTER);
+        cinco.setFont(new Font("Arial Black", Font.BOLD, 24));
+        cinco.setForeground(new Color(70, 70, 70));
+        JLabel seis = new JLabel("S", SwingConstants.CENTER);
+        seis.setFont(new Font("Arial Black", Font.BOLD, 24));
+        seis.setForeground(new Color(70, 70, 70));
+        JLabel siete = new JLabel("I", SwingConstants.CENTER);
+        siete.setFont(new Font("Arial Black", Font.BOLD, 24));
+        siete.setForeground(new Color(70, 70, 70));
+        JLabel ocho = new JLabel("O", SwingConstants.CENTER);
+        ocho.setFont(new Font("Arial Black", Font.BOLD, 24));
+        ocho.setForeground(new Color(70, 70, 70));
+        JLabel nueve = new JLabel();
+        nueve.setFont(new Font("Arial Black", Font.BOLD, 24));
+        nueve.setForeground(new Color(70, 70, 70));
+        JLabel diez = new JLabel("D", SwingConstants.CENTER);
+        diez.setFont(new Font("Arial Black", Font.BOLD, 24));
+        diez.setForeground(new Color(70, 70, 70));
+        JLabel once = new JLabel("A", SwingConstants.CENTER);
+        once.setFont(new Font("Arial Black", Font.BOLD, 24));
+        once.setForeground(new Color(70, 70, 70));
+        JLabel doce = new JLabel("M", SwingConstants.CENTER);
+        doce.setFont(new Font("Arial Black", Font.BOLD, 24));
+        doce.setForeground(new Color(70, 70, 70));
+        panelIzquierda.add(uno);
+        panelIzquierda.add(dos);
+        panelIzquierda.add(tres);
+        panelIzquierda.add(cuatro);
+        panelIzquierda.add(cinco);
+        panelIzquierda.add(seis);
+        panelIzquierda.add(siete);
+        panelIzquierda.add(ocho);
+        panelIzquierda.add(nueve);
+        panelIzquierda.add(diez);
+        panelIzquierda.add(once);
+        panelIzquierda.add(doce);
+        this.add(panelIzquierda, BorderLayout.WEST);
+        //------------------------------------------------------------------
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //-----------------------------------------------------------------
+        //este es el panel centro que tiene las fotos y demás
+        JPanel panelCentro = new JPanel(new GridLayout(2, 2));
+        
+        JPanel p1 = new JPanel();
+        p1.setBackground(new Color(240, 240, 230)); 
+        JCalendar calendario = new JCalendar();
+        calendario.setBackground(Color.white);  // Color de fondo del calendario
+        calendario.setPreferredSize(new Dimension(230, 200));  // Ajustar el tamaño
+        calendario.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 2));  // Borde para hacerlo más profesiona
+        p1.add(calendario); 
+        
+ 
+        JPanel p2 = new JPanel();
+        p2.setBackground(new Color(240, 240, 230)); 
+        ImageIcon imgEntrenamiento2 = new ImageIcon(new ImageIcon("img/img2.jpg").getImage().getScaledInstance(340, 220, Image.SCALE_SMOOTH));
+        JLabel labelEntrenamiento2 = new JLabel(imgEntrenamiento2);
+        p2.add(labelEntrenamiento2);
+        
+       
+        
+        JPanel p3 = new JPanel();
+        p3.setBackground(new Color(240, 240, 230)); 
+        JLabel t = new JLabel("PRUEBA NUESTRAS ACTIVIDADES!");
+        t.setFont(new Font("Arial Black", Font.BOLD, 11));
+        ImageIcon imgEntrenamiento1 = new ImageIcon(new ImageIcon("img/img1.jpg").getImage().getScaledInstance(330, 200, Image.SCALE_SMOOTH));
+        JLabel labelEntrenamiento1 = new JLabel(imgEntrenamiento1);
+        p3.add(t, BorderLayout.NORTH);
+        p3.add(labelEntrenamiento1);
+        
+       
+        
+        JPanel p4 = new JPanel(new BorderLayout());
+        p4.setBackground(new Color(240, 240, 230)); 
+        JLabel tituloubi = new JLabel("Encuéntranos Aquí", SwingConstants.CENTER);
+        tituloubi.setFont(new Font("Arial Black", Font.BOLD, 12));
+        JLabel imgmapa = new JLabel(new ImageIcon(new ImageIcon("img/mapa.jpg").getImage().getScaledInstance(330, 210, Image.SCALE_SMOOTH)));
+        imgmapa.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try { //utilizamos desktop.browse para abrir un enlace en el navegador
+                    Desktop.getDesktop().browse(new URI("https://www.google.com/maps/place/Gimnasio+Kronos/@40.9655002,-5.6690048,17z/data=!3m1!4b1!4m6!3m5!1s0xd3f263e7bcc58b9:0xfcd86771c948bcd3!8m2!3d40.9655002!4d-5.6690048!16s%2Fg%2F1q65cxh3j?entry=ttu&g_ep=EgoyMDI0MTExMi4wIKXMDSoASAFQAw%3D%3D"));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        p4.add(tituloubi, BorderLayout.NORTH);
+        p4.add(imgmapa, BorderLayout.CENTER);
+        
+        panelCentro.add(p1);
+        panelCentro.add(p2);
+        panelCentro.add(p3);
+        panelCentro.add(p4);
+        this.add(panelCentro, BorderLayout.CENTER);
+        //------------------------------------------------------------------------
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //-----------------------------------------------------------------------
+        //pie de pagina con los logos de las redes sociales 
+        JPanel derechos = new JPanel(new GridBagLayout());
+        derechos.setBackground(new Color(50, 50, 50));
+        JLabel derch = new JLabel("© 2024 Gimnasio DAM. Todos los derechos reservados --");
+        JLabel nom = new JLabel("Calle del Deporte, Nº23 -- Nuestras Redes Sociales:");
+        derch.setForeground(Color.WHITE);
+        nom.setForeground(Color.WHITE);
+
+        
+        //panel contenedor para el texto y logos
+        JPanel conInf = new JPanel();
+        conInf.setBackground(new Color(50, 50, 50));
+        conInf.add(derch);
+        conInf.add(nom);
+
+        //panel de logos
+        JPanel panelLogos = new JPanel(new GridBagLayout());
+        panelLogos.setBackground(new Color(211, 211, 190));
+        
+     	//para añadir separacion entre una fila, en este caso haciendo una separacion entre un logo y otro
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0, 5, 0, 5);
+        
+        ImageIcon iconoFace = new ImageIcon(new ImageIcon("img/face.png").getImage().getScaledInstance(27, 27, Image.SCALE_SMOOTH));
+        JLabel logoFacebook = new JLabel(iconoFace);
+        panelLogos.add(logoFacebook, gbc);
+        
+        ImageIcon iconoInsta = new ImageIcon(new ImageIcon("img/insta.png").getImage().getScaledInstance(27, 27, Image.SCALE_SMOOTH));
+        JLabel labelInstagram = new JLabel(iconoInsta);
+        panelLogos.add(labelInstagram, gbc);
+        
+        ImageIcon iconYout = new ImageIcon(new ImageIcon("img/yt.png").getImage().getScaledInstance(27, 27, Image.SCALE_SMOOTH));
+        JLabel labelYoutube = new JLabel(iconYout);
+        panelLogos.add(labelYoutube, gbc);
+        
+        ImageIcon iconTwi = new ImageIcon(new ImageIcon("img/tw.png").getImage().getScaledInstance(27, 27, Image.SCALE_SMOOTH));
+        JLabel labelTwitter = new JLabel(iconTwi);
+        panelLogos.add(labelTwitter, gbc);
+        
+        conInf.add(panelLogos);
+        derechos.add(conInf);
+        this.add(derechos, BorderLayout.SOUTH);
+        this.setResizable(false);
+        this.setVisible(true);
+    }
+}

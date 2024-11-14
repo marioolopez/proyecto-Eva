@@ -1,0 +1,17 @@
+import javax.swing.JFrame;
+import javax.swing.*;
+public class diseñoMantenimiento extends JFrame {
+	private JPanel p;
+	diseñoMantenimiento(){
+		this.setBounds(400, 400, 400, 400);
+		p = new JPanel();
+	
+		
+		
+		
+		
+		
+		this.add(p);
+		this.setVisible(true);
+	}
+}
