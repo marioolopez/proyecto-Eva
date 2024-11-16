@@ -56,15 +56,9 @@
           <tags>persp.newWizSC:org.eclipse.ui.editors.wizards.UntitledTextFileWizard</tags>
           <tags>persp.perspSC:org.eclipse.jdt.ui.JavaBrowsingPerspective</tags>
           <tags>persp.perspSC:org.eclipse.debug.ui.DebugPerspective</tags>
-          <tags>persp.editorOnboardingImageUri:platform:/plugin/org.eclipse.jdt.ui/$nl$/icons/full/onboarding_jperspective.png</tags>
-          <tags>persp.editorOnboardingText:Open a file or drop files here to open them.</tags>
           <tags>persp.showIn:org.eclipse.jdt.ui.PackageExplorer</tags>
           <tags>persp.showIn:org.eclipse.team.ui.GenericHistoryView</tags>
           <tags>persp.showIn:org.eclipse.ui.navigator.ProjectExplorer</tags>
-          <tags>persp.editorOnboardingCommand:Find Actions$$$Ctrl+3</tags>
-          <tags>persp.editorOnboardingCommand:Show Key Assist$$$Ctrl+Shift+L</tags>
-          <tags>persp.editorOnboardingCommand:New$$$Ctrl+N</tags>
-          <tags>persp.editorOnboardingCommand:Open Type$$$Ctrl+Shift+T</tags>
           <tags>persp.viewSC:org.eclipse.mylyn.tasks.ui.views.tasks</tags>
           <tags>persp.newWizSC:org.eclipse.mylyn.tasks.ui.wizards.new.repository.task</tags>
           <tags>persp.actionSet:org.eclipse.debug.ui.breakpointActionSet</tags>
@@ -79,6 +73,12 @@
           <tags>persp.newWizSC:org.eclipse.jdt.junit.wizards.NewTestCaseCreationWizard</tags>
           <tags>persp.actionSet:org.eclipse.jdt.junit.JUnitActionSet</tags>
           <tags>persp.viewSC:org.eclipse.ant.ui.views.AntView</tags>
+          <tags>persp.editorOnboardingImageUri:platform:/plugin/org.eclipse.jdt.ui/$nl$/icons/full/onboarding_jperspective.png</tags>
+          <tags>persp.editorOnboardingText:Open a file or drop files here to open them.</tags>
+          <tags>persp.editorOnboardingCommand:Find Actions$$$Ctrl+3</tags>
+          <tags>persp.editorOnboardingCommand:Show Key Assist$$$Ctrl+Shift+L</tags>
+          <tags>persp.editorOnboardingCommand:New$$$Ctrl+N</tags>
+          <tags>persp.editorOnboardingCommand:Open Type$$$Ctrl+Shift+T</tags>
           <children xsi:type="basic:PartSashContainer" xmi:id="_8HfHoaKlEe-iZcS_u2RCVw" selectedElement="_8HfHoqKlEe-iZcS_u2RCVw" horizontal="true">
             <children xsi:type="basic:PartSashContainer" xmi:id="_8HfHoqKlEe-iZcS_u2RCVw" containerData="2500" selectedElement="_8HfHo6KlEe-iZcS_u2RCVw">
               <children xsi:type="basic:PartStack" xmi:id="_8HfHo6KlEe-iZcS_u2RCVw" elementId="left" containerData="6000" selectedElement="_8HfHpKKlEe-iZcS_u2RCVw">
@@ -374,7 +374,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_8CiWMKKlEe-iZcS_u2RCVw" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_8Cq5EKKlEe-iZcS_u2RCVw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_7xcmRqKlEe-iZcS_u2RCVw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_eqsx0KQLEe-MZNvL_WBiKA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_7xcmRqKlEe-iZcS_u2RCVw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_8Ci9QKKlEe-iZcS_u2RCVw" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -382,8 +382,8 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_8CmnoKKlEe-iZcS_u2RCVw" elementId="org.eclipse.ui.workbench.edit">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_8CrgIKKlEe-iZcS_u2RCVw" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.png" tooltip="Undo" enabled="false" command="_7xaKAKKlEe-iZcS_u2RCVw"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_8CrgIaKlEe-iZcS_u2RCVw" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.png" tooltip="Redo" enabled="false" command="_7xaxAqKlEe-iZcS_u2RCVw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_eqtY4KQLEe-MZNvL_WBiKA" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.png" tooltip="Undo" enabled="false" command="_7xaKAKKlEe-iZcS_u2RCVw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_eqtY4aQLEe-MZNvL_WBiKA" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.png" tooltip="Redo" enabled="false" command="_7xaxAqKlEe-iZcS_u2RCVw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_8CmnoaKlEe-iZcS_u2RCVw" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -404,7 +404,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_8CmnpaKlEe-iZcS_u2RCVw" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_8CsHMKKlEe-iZcS_u2RCVw" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_7xb_ZqKlEe-iZcS_u2RCVw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_eqt_9aQLEe-MZNvL_WBiKA" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_7xb_ZqKlEe-iZcS_u2RCVw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_8CnOsKKlEe-iZcS_u2RCVw" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
