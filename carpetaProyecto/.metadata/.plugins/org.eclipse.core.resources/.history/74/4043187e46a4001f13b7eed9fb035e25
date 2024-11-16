@@ -1,0 +1,22 @@
+import marcos.VentanaCliente;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class onClick implements ActionListener {
+    private ventanaPrincipal ventanaPrincipal;
+
+    public onClick(ventanaPrincipal ventanaPrincipal) {
+        this.ventanaPrincipal = ventanaPrincipal;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()) {
+            case "menuCliente":
+                this.ventanaPrincipal.instanciarVentanaCliente();
+                break;
+            case "botonAltaCliente":
+                int edad = this.ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaAltaCliente().getBordeFormularioAltaCliente().getBarraEdadCliente().getValue();
+                System.out.println(edad);
+        }
+
+    }
+}

@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Alumno/Documents/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/mysql-connector-java-8.0.19.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Alumno/Documents/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sandr/OneDrive/Documentos/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/mysql-connector-java-8.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sandr/OneDrive/Documentos/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

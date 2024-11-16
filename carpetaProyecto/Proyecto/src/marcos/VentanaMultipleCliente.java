@@ -6,7 +6,7 @@ public class VentanaMultipleCliente extends JTabbedPane {
     private VentanaAltaCliente ventanaAltaCliente;
     private VentanaBajaCliente ventanaBajaCliente;
 
-    public VentanaMultipleCliente(VentanaPrincipal ventanaPrincipal) {
+    public VentanaMultipleCliente(ventanaPrincipal ventanaPrincipal) {
         this.ventanaAltaCliente = new VentanaAltaCliente(ventanaPrincipal);
         this.ventanaBajaCliente = new VentanaBajaCliente(ventanaPrincipal);
         this.addTab("ALTA CLIENTE", this.ventanaAltaCliente);

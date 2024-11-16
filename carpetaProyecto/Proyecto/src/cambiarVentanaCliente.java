@@ -1,7 +1,8 @@
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import marcos.*;
 
+import marcos.*;
+import marcos.*;
 public class cambiarVentanaCliente implements ChangeListener {
     private ventanaPrincipal ventanaPrincipal;
     

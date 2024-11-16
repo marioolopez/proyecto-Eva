@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import marcos.*;
 public class BaseDatos {
 	private Connection c;
 	BaseDatos() throws SQLException, ClassNotFoundException{

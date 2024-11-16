@@ -1,16 +1,21 @@
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URI;
 import javax.swing.*;
 import com.toedter.calendar.JCalendar;
+
+import marcos.*;
 public class ventanaPrincipal extends JFrame{
     private JLabel fotoGym;
     private ImageIcon img;
     private JMenuBar barra;
     private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3, equip1, prod1, act1, tar1;
     private JMenu menu1, menu2, menu3, menu4, menu5, menu6;
-    ventanaPrincipal() {
+    
+    private VentanaCliente ventanaCliente;
+    public ventanaPrincipal() {
         setTitle("BIENVENIDO A NUESTRA WEB");
         this.setBounds(300, 300, 800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -292,7 +297,25 @@ public class ventanaPrincipal extends JFrame{
         this.add(derechos, BorderLayout.SOUTH);
         this.setResizable(false);
         this.setVisible(true);
-    } 
+    }
+    
+    public void instanciarVentanaCliente() {//AQUI INSTANCIO LA VENTANA CLIENTE Y LE DOY UN CAMBIO EL TAMAÑO PARA QUE SE HAGA MAS GRANDE, ESTE METODO ESTA EN EL ONCLICK.
+		ventanaCliente = new VentanaCliente(this);
+		this.setSize(500,500);
+		this.getContentPane().add(ventanaCliente);
+		ventanaCliente.setVisible(true);
+	}
+    
+    
+    
+	public VentanaCliente getVentanaCliente() {
+		return ventanaCliente;
+	}
+
+	public void setVentanaCliente(VentanaCliente ventanaCliente) {
+		this.ventanaCliente = ventanaCliente;
+	}
+
 	public JLabel getFotoGym() {
 		return fotoGym;
 	}

@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 public class VentanaAltaCliente extends JPanel {
     private BordeFormulario bordeFormularioAltaCliente;
 
-    public VentanaAltaCliente(VentanaPrincipal ventanaPrincipal) {
+    public VentanaAltaCliente(ventanaPrincipal ventanaPrincipal) {
         this.setLayout(new FlowLayout());
         this.bordeFormularioAltaCliente = new BordeFormulario(ventanaPrincipal);
         this.add(this.bordeFormularioAltaCliente);
