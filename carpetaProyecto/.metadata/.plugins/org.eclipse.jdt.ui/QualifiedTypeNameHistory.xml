@@ -16,8 +16,6 @@
     <fullyQualifiedTypeName name="escuchaEquipamiento"/>
     <fullyQualifiedTypeName name="ParteMario.parteEquipamiento"/>
     <fullyQualifiedTypeName name="javax.swing.SwingConstants"/>
-    <fullyQualifiedTypeName name="ParteMario.latizq"/>
-    <fullyQualifiedTypeName name="ParteMario.latderch"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="javax.swing.JTextField"/>
     <fullyQualifiedTypeName name="java.awt.GridLayout"/>
@@ -29,4 +27,6 @@
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
     <fullyQualifiedTypeName name="java.awt.GridBagLayout"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="ParteMario.latizq"/>
+    <fullyQualifiedTypeName name="ParteMario.latderch"/>
 </qualifiedTypeNameHistroy>

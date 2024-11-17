@@ -1,6 +1,8 @@
 package ParteMario;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -8,7 +10,6 @@ import javax.swing.*;
 public class latderch extends JPanel{
 	private JPanel p1, p2;
 	private JButton insertar, borrar;
-	private latizq latizq;
 	latderch(){
 		 this.setLayout(new GridLayout(2, 1));
 	     p1 = new JPanel(new GridLayout(2, 2));
@@ -54,8 +55,6 @@ public class latderch extends JPanel{
 	     JPanel borrarPanel = new JPanel(new GridBagLayout()); //boton borrar
 	     borrarPanel.setBackground(new Color(240, 240, 230)); 
 	     borrar = new JButton("Borrar");
-	     borrar.setActionCommand("botonBorrar");
-	     borrar.addActionListener(new accionEquipamiento(this));
 	     borrar.setPreferredSize(new Dimension(120, 30));
 	     borrarPanel.add(borrar);
 	     
@@ -72,35 +71,5 @@ public class latderch extends JPanel{
   
 	     this.add(p1);
 	     this.add(p2);
-	}
-	public latizq getLatizq() {
-		return latizq;
-	}
-	public void setLatizq(latizq latizq) {
-		this.latizq = latizq;
-	}
-	public JPanel getP1() {
-		return p1;
-	}
-	public void setP1(JPanel p1) {
-		this.p1 = p1;
-	}
-	public JPanel getP2() {
-		return p2;
-	}
-	public void setP2(JPanel p2) {
-		this.p2 = p2;
-	}
-	public JButton getInsertar() {
-		return insertar;
-	}
-	public void setInsertar(JButton insertar) {
-		this.insertar = insertar;
-	}
-	public JButton getBorrar() {
-		return borrar;
-	}
-	public void setBorrar(JButton borrar) {
-		this.borrar = borrar;
 	}	
 }
