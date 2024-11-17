@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +19,8 @@ public class MenuAccion implements ActionListener {
 		if(comando.equals("pedido")) {
 			Pedidos pedido=new Pedidos();
 			ven.removeAll();
-			ven.
+			ven.getContentPane().add(ven.getBarra(), BorderLayout.NORTH);
+			ven.getContentPane().add(pedido);
 
 			pedido.setVisible(true);
 		}
