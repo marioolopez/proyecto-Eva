@@ -1,0 +1,14 @@
+package ParteMario;
+import javax.swing.JPanel;
+import javax.swing.*;
+public class latizq extends JPanel{
+	private JPanel p;
+	latizq(){
+		p = new JPanel();
+		
+		
+		
+		this.add(p);
+	}
+
+}

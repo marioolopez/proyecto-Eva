@@ -1,34 +1,122 @@
 package ParteMario;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.*;
-import javax.swing.JInternalFrame;
 public class parteEquipamiento extends JInternalFrame {
-	private JPanel p;
-	private JLabel NomId, NomNombre, NomDescrp, NomIdAct, NomIdMant;
-	private JTextField Txtid, Txtnombre, Txtdescripcion, TxtidAct, TxtidMant;
-	public parteEquipamiento() {
-		super("EQUIPAMIENTOS GIMNASIO DAM");
-		p = new JPanel(new GridLayout(2,1));
+	private JPanel p, p1, p2;
+	public parteEquipamiento() { //hay que hacer publico  el constructor cuando quieres usar otro PACKAGE
+		 p = new JPanel(new BorderLayout());
+		 
+		 latizq izquierda = new latizq();
+	     latderch derecha = new latderch();
+		 
+	     p.add(izquierda, BorderLayout.WEST); //panel izquierdo a la izquierda en otro panel
+	     p.add(derecha, BorderLayout.CENTER); //panel derecho a la derecha en otro panel
+	     this.add(p); 
+	     this.setVisible(true); 
+	}
 	
-		JPanel p1 = new JPanel(new GridLayout(3,2));
-		NomId = new JLabel("Id Equipamiento:");
-		Txtid = new JTextField();
-		NomNombre = new JLabel("Nombre del Equipamiento: ");
-	    Txtnombre = new JTextField();
-	    NomDescrp = new JLabel("Descripcion del Equipamiento:");
-	    Txtdescripcion = new JTextField();
-		p1.add(NomId);
-		p1.add(Txtid);
-		p1.add(NomNombre);
-		p1.add(Txtnombre);
-		p1.add(NomDescrp);
-		p1.add(Txtdescripcion);
-		
-		JPanel p2 = new JPanel(new GridLayout());
-		
-		
-		p.add(p1);
-		p.add(p2);
-		this.add(p);
+	public JPanel getP() {
+		return p;
+	}
+	public void setP(JPanel p) {
+		this.p = p;
+	}
+	public JPanel getP1() {
+		return p1;
+	}
+	public void setP1(JPanel p1) {
+		this.p1 = p1;
+	}
+	public JPanel getP2() {
+		return p2;
+	}
+	public void setP2(JPanel p2) {
+		this.p2 = p2;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* p = new JPanel(new GridLayout(2,2));
+	
+		 p1 = new JPanel(); //hacer esta parte mañana
+		
+		 
+		 
+		 
+		 p2 = new JPanel(new GridLayout(2,2));
+		 ImageIcon img1 = new ImageIcon(new ImageIcon("img/pesa.jpg").getImage().getScaledInstance(190, 130, Image.SCALE_SMOOTH));
+		 JLabel im1 = new JLabel(img1);
+		 ImageIcon img2 = new ImageIcon(new ImageIcon("img/pesa2.jpg").getImage().getScaledInstance(190, 130, Image.SCALE_SMOOTH));
+		 JLabel im2 = new JLabel(img2);
+		 ImageIcon img3 = new ImageIcon(new ImageIcon("img/cuerda.jpg").getImage().getScaledInstance(190, 130, Image.SCALE_SMOOTH));
+		 JLabel im3 = new JLabel(img3);
+		 ImageIcon img4 = new ImageIcon(new ImageIcon("img/bola.jpg").getImage().getScaledInstance(190, 130, Image.SCALE_SMOOTH));
+		 JLabel im4 = new JLabel(img4);
+		 p2.add(im1);
+		 p2.add(im2);
+		 p2.add(im3);
+		 p2.add(im4);
+		 
+		 
+		 
+		 p3 = new JPanel(); //hacer esta parte mañana
+	
+		 
+		 
+		 
+		 
+		 
+		 p4 = new JPanel(); //meter un JAR MediaPlayer
+		 
+		 
+		 
+		 
+		 
+		 
+		 p.add(p1);
+		 p.add(p2);
+		 p.add(p3);
+		 p.add(p4);
+
+	     this.add(p); 
+	     this.setVisible(true); */
+
+

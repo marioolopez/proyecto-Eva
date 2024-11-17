@@ -1,0 +1,13 @@
+package ParteMario;
+import java.awt.GridLayout;
+import javax.swing.JPanel;
+public class ladoizq extends JPanel{
+	private JPanel p, p1, p2, p3;
+	ladoizq(){
+		p = new JPanel(new GridLayout(3,2));
+		
+		
+		
+		this.add(p);
+	}	
+}

@@ -1,0 +1,16 @@
+package ParteMario;
+import javax.swing.JPanel;
+import java.awt.GridLayout;
+import javax.swing.*;
+public class latizq extends JPanel{
+	private JPanel p, p1, p2;
+	latizq(){
+		p = new JPanel(new GridLayout(2,1));
+		
+		JLabel l = new JLabel("Hola");
+		p.add(l);
+		
+		this.add(p);
+	}
+
+}

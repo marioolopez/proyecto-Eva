@@ -1,0 +1,25 @@
+package ParteMario;
+import java.awt.GridLayout;
+import java.awt.Image;
+
+import javax.swing.*;
+public class latderch extends JPanel{
+	private JPanel p, p1, p2;
+	latderch(){
+		p = new JPanel(new GridLayout(2,1));
+
+		p1 = new JPanel(new GridLayout(2,2));
+        ImageIcon im1 = new ImageIcon(new ImageIcon("img/pesa.jpg").getImage().getScaledInstance(330, 200, Image.SCALE_SMOOTH));
+        ImageIcon im2 = new ImageIcon(new ImageIcon("img/pesa2.jpg").getImage().getScaledInstance(330, 200, Image.SCALE_SMOOTH));
+        ImageIcon im3 = new ImageIcon(new ImageIcon("img/bola.jpg").getImage().getScaledInstance(330, 200, Image.SCALE_SMOOTH));
+        ImageIcon im4 = new ImageIcon(new ImageIcon("img/cuerda.jpg").getImage().getScaledInstance(330, 200, Image.SCALE_SMOOTH));
+
+		
+		p2 = new JPanel(); //intentar meter el video
+		
+		p.add(p1);
+		p.add(p2);
+		this.add(p);
+	}
+	
+}

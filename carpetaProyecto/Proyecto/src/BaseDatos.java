@@ -11,26 +11,32 @@ public class BaseDatos {
 		c = DriverManager.getConnection(url, "root","");
 		System.out.println("Conexion realidada!");
 	}
+	
 	public Connection getC() {
 		return c;
 	}
+	
 	public void setC(Connection c) {
 		this.c = c;
 	}
+	
 	public void cerrarConex() throws SQLException {
 		c.close();
 	}
+	
 	public Statement crearStm() throws SQLException{
 		Statement stm;
 		stm = c.createStatement();
 		return stm;
 	}
+	
 	//sacar info
 	public ResultSet ejecutarSQL1(String cad) throws SQLException{
 		Statement stm = crearStm();
 		ResultSet rs = stm.executeQuery(cad);
 		return rs;
 	}
+	
 	//modificar, eliminar e insertar info
 	public void ejecutarSQL2(String cad) throws SQLException{
 		Statement stm = crearStm();

@@ -1,0 +1,14 @@
+package ParteMario;
+import javax.swing.JPanel;
+import javax.swing.*;
+public class latderch extends JPanel{
+	private JPanel p;
+	latderch(){
+		p = new JPanel();
+		
+		JLabel l = new JLabel("Hola");
+		
+		this.add(p);
+	}
+	
+}
