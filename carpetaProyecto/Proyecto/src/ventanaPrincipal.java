@@ -107,9 +107,7 @@ public class ventanaPrincipal extends JFrame{
         
         
         
-        
-        
-        
+       
         
         
         //------------------------------------------------------------
@@ -178,19 +176,21 @@ public class ventanaPrincipal extends JFrame{
         
         
         
-        
-        
-        
         //-----------------------------------------------------------------
         //este es el panel centro que tiene las fotos y demás
         JPanel panelCentro = new JPanel(new GridLayout(2, 2));
        
-        JPanel p1 = new JPanel(new GridBagLayout());
+        JPanel p1 = new JPanel();
         p1.setBackground(new Color(240, 240, 230)); 
+        
+        JLabel msj = new JLabel("¡De Lunes a Viernes Abrimos!");
+        msj.setFont(new Font("Arial Black", Font.BOLD, 13));
+        
         JCalendar calendario = new JCalendar();
         calendario.setBackground(Color.white); 
         calendario.setPreferredSize(new Dimension(200, 150));  // Ajustar el tamaño
         calendario.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 2));  // Borde para hacerlo más profesiona
+        p1.add(msj,BorderLayout.NORTH);
         p1.add(calendario); 
         
  
@@ -239,13 +239,6 @@ public class ventanaPrincipal extends JFrame{
         //------------------------------------------------------------------------
         
 
-        
-        
-        
-        
-        
-        
-        
         
         
         
