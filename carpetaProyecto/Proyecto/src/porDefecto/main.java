@@ -7,5 +7,6 @@ public class main {
 		// TODO Auto-generated method stub
 //		BaseDatos bd  = new BaseDatos();
 		ventanaPrincipal vp = new ventanaPrincipal();
+		System.out.println("HOKA");
 	}
 }
