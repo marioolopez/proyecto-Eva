@@ -1,5 +1,6 @@
 package Yoel;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -9,11 +10,13 @@ import javax.swing.*;
 
 public class Altatarifas extends JInternalFrame{
 private PanelParaContenidoAltas pa;
-public Altatarifas() {
-	this.setLayout(new GridLayout(3,3));
-	
+private PanelParaBotones pb;
+public Altatarifas(ventanaPrincipal v) {
+	this.setLayout(new BorderLayout());
 pa=new PanelParaContenidoAltas();
-this.add(pa);
+pb=new PanelParaBotones(v);
+this.getContentPane().add(pa,BorderLayout.CENTER);
+this.getContentPane().add(pb,BorderLayout.SOUTH);
 this.setVisible(true);
 }
 }

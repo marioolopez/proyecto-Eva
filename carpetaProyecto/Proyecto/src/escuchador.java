@@ -4,17 +4,27 @@ import java.awt.event.ActionListener;
 import Yoel.Altatarifas;
 
 public class escuchador implements ActionListener {
-private ventanaPrincipal vp;
-escuchador(ventanaPrincipal v) 
+private static ventanaPrincipal vp;
+public escuchador(ventanaPrincipal v) 
 {
 vp=v;
+}
+public static boolean compvacio()
+{
+	if()
 }
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		Altatarifas at=new Altatarifas();
+		switch(e.getActionCommand())
+		{
+		case "Tarifa":Altatarifas at=new Altatarifas(vp);
 		vp.getContentPane().removeAll();
 		vp.getContentPane().add(at);
+		break;
+		case "Aceptar":
+		}
+		
 	}
 
 }

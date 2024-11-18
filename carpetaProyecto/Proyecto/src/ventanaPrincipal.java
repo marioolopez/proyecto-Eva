@@ -10,7 +10,7 @@ public class ventanaPrincipal extends JFrame{
     private JMenuBar barra;
     private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3, equip1, prod1, act1, tar1;
     private JMenu menu1, menu2, menu3, menu4, menu5, menu6;
-    ventanaPrincipal() {
+    public ventanaPrincipal() {
         setTitle("BIENVENIDO A NUESTRA WEB");
         this.setBounds(600, 200, 800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

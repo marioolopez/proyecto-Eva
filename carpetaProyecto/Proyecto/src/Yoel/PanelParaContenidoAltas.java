@@ -8,14 +8,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 public class PanelParaContenidoAltas extends JPanel{
 	private JLabel []lb;
 	private JTextArea ta;
 	private JTextField []tx;
+	private TitledBorder border;
 PanelParaContenidoAltas()
 {
 	this.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+	border=new TitledBorder("Datos de tarifa");
+	this.setBorder(border);
+	this.setPreferredSize(new Dimension(200,120));
 		lb=new JLabel[3];
 		ta=new JTextArea();
 		tx=new JTextField[2];

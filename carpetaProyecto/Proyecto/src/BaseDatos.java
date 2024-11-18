@@ -7,8 +7,10 @@ public class BaseDatos {
 	private Connection c;
 	BaseDatos() throws SQLException, ClassNotFoundException{
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		String url = "jdbc:mysql://localhost/gimnasio";
-		c = DriverManager.getConnection(url, "root","");
+		//String url = "jdbc:mysql://localhost/gimnasio";//xamp
+		String url = "jdbc:mysql://localhost/Tienda?serverTimezone=Europe/Madrid";//uniserver
+		//c = DriverManager.getConnection(url, "root","");//xamp
+		c = DriverManager.getConnection(url, "root","12345");//uniserver
 		System.out.println("Conexion realidada!");
 	}
 

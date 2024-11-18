@@ -1,0 +1,14 @@
+package Yoel;
+
+import javax.swing.*;
+
+public class PanelParaBotones extends JPanel{
+private JButton btaceptar,btcancelar;
+PanelParaBotones()
+{
+	btaceptar=new JButton("Aceptar");
+	btcancelar=new JButton("Cancelar");
+	this.add(btaceptar);
+	this.add(btcancelar);
+}
+}
