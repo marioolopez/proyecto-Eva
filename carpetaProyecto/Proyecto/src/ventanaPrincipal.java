@@ -1,3 +1,5 @@
+
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -111,7 +113,7 @@ public class ventanaPrincipal extends JFrame{
         barra.add(menu5);
         barra.add(menu6);
         barra.add(menu7);
-        this.add(barra, BorderLayout.NORTH); //Hasta aqui todo son opciones en el JMenuBar
+        this.setJMenuBar(barra); //Hasta aqui todo son opciones en el JMenuBar
         //-----------------------------------------------------------
        
         
