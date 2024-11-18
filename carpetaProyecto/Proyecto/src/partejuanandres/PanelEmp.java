@@ -2,7 +2,13 @@ package partejuanandres;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+import paqueteprincipal.BaseDatos;
+import paqueteprincipal.ClickEmpleados;
+import paqueteprincipal.ventanaPrincipal;
+
 import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 public class PanelEmp extends JInternalFrame{
 
 	private int identificador;
@@ -12,7 +18,7 @@ public class PanelEmp extends JInternalFrame{
 	private JButton buscar;
 	private JButton accion;
 	
-	public PanelEmp (int i){
+	public PanelEmp (int i,ventanaPrincipal v) throws ClassNotFoundException, SQLException{
 		this.getContentPane().setLayout(new GridLayout(5,2));
 		
 		
@@ -45,6 +51,8 @@ public class PanelEmp extends JInternalFrame{
 		buscar.setForeground(Color.white);
 		
 		buscar.setBackground(new Color(122, 108, 67));
+		buscar.setActionCommand("search");
+		buscar.addActionListener(new ClickEmpleados(v,this));
 		pbuscar.add(buscar);
 		pbuscar.setBackground(new Color(211, 211, 190));
 		
@@ -55,8 +63,10 @@ public class PanelEmp extends JInternalFrame{
 
 		accion.setPreferredSize(new Dimension(200,50));
 		accion.setForeground(Color.white);
-		
+		accion.setFont(new Font("Arial Black",Font.BOLD,15));
 		accion.setBackground(new Color(122, 108, 67));
+		accion.setActionCommand("acciones");
+		accion.addActionListener(new ClickEmpleados(v,this));
 		paccion.add(accion);
 		paccion.setBackground(new Color(211, 211, 190));
 		
@@ -73,8 +83,10 @@ public class PanelEmp extends JInternalFrame{
 		this.setVisible(true);
 		
 	}
-
-	private void modTextoBotton() {
+	public int getIdentificador () {
+		return identificador;
+	}
+	private void modTextoBotton() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		switch (identificador) {
 		case 1:accion.setText("Insertar Empleado");
@@ -83,6 +95,7 @@ public class PanelEmp extends JInternalFrame{
 			   buscar.setVisible(false);
 			   buscar.setEnabled(false);
 			   activarcampos();
+			   ultimoCodigo();
 			   
 		break;
 		case 2:accion.setText("Borrar Empleado");
@@ -108,5 +121,100 @@ public class PanelEmp extends JInternalFrame{
 	public void activarcampos () {
 		for (int i=1;i<campos.length;i++)
 			campos[i].setEnabled(true);
+	}
+	public void vaciarcampos () {
+		for (JTextField i:campos)
+			i.setText("");
+	}
+	public void verificarcampos () throws ClassNotFoundException, SQLException {
+		
+		if (campos[0].getText().isEmpty()||
+				campos[1].getText().isEmpty()||
+				campos[2].getText().isEmpty()||
+				campos[3].getText().isEmpty())
+		{
+			JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
+		}
+		else {
+			if (!esDecimal(campos[3].getText()))
+				JOptionPane.showMessageDialog(this, "El campo SALARIO debe ser un numero");
+			else {insertarEmpleado();
+				  vaciarcampos();
+				  modTextoBotton();
+				  
+			}
+		}
+		
+	}
+	public boolean esDecimal (String n) {
+		try {
+			Double.parseDouble(n);
+			return true;
+		}catch(NumberFormatException e) {
+			return false;
+		}
+		
+	}
+	public boolean esEntero (String n) {
+		try {
+			Integer.parseInt(n);
+			return true;
+		}catch(NumberFormatException e) {
+			return false;
+		}
+		
+	}
+	
+	public void ultimoCodigo () throws ClassNotFoundException, SQLException {
+		int lastid=0;
+		
+		BaseDatos bd=new BaseDatos();
+		ResultSet rs=bd.ejecutarSQL1("SELECT * FROM empleado ORDER BY id DESC LIMIT 1");
+		if (rs.next())
+			lastid=rs.getInt(1);
+		
+		lastid++;
+		campos[0].setText(String.valueOf(lastid));
+		bd.cerrarConex();
+		
+	}
+	public void insertarEmpleado () throws ClassNotFoundException, SQLException {
+		BaseDatos bd=new BaseDatos();
+		bd.ejecutarSQL2("INSERT INTO empleado VALUES ("+Integer.parseInt(campos[0].getText().toString())+",'"+campos[1].getText().toString()+"','"+campos[2].getText().toString()+"',"+Double.parseDouble(campos[3].getText().toString())+")");
+		bd.cerrarConex();
+	}
+	public boolean buscarempleado () throws ClassNotFoundException, SQLException {
+		
+		if (campos[0].getText().isEmpty())
+			{JOptionPane.showMessageDialog(this,"El campo CODIGO no puede estar vacio");
+			return false;}
+		else if (!esEntero(campos[0].getText().toString()))
+			{JOptionPane.showMessageDialog(this,"El campo CODIGO debe ser un numero");
+			return false;}
+		else {
+
+			BaseDatos bd=new BaseDatos();
+			ResultSet rs=bd.ejecutarSQL1("SELECT * FROM empleado WHERE id = "+Integer.parseInt(campos[0].getText().toString())+"");
+			if (rs.next())
+				{rellenarcampos(rs);
+				return true;
+				}
+			else {JOptionPane.showMessageDialog(this,"No existe un Empleado con ese codigo");
+				return false;}
+			
+
+		}
+				
+		
+	}
+	public void rellenarcampos(ResultSet rs) throws SQLException {
+		
+		campos[1].setText(rs.getString(2));
+		campos[2].setText(rs.getString(3));
+		campos[3].setText(String.valueOf(rs.getDouble(4)) );
+		
+		
+		// TODO Auto-generated method stub
+		
 	}
 }
