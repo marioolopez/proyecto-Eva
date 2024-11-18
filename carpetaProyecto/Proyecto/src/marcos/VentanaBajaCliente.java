@@ -1,15 +1,19 @@
 package marcos;
 
 import java.awt.FlowLayout;
+import java.sql.SQLException;
+
 import javax.swing.JPanel;
+
+import porDefecto.ventanaPrincipal;
 
 public class VentanaBajaCliente extends JPanel {
     private BordeFormulario bordeFormularioBajaCliente;
 
-    public VentanaBajaCliente(VentanaPrincipal ventanaPrincipal) {
+    public VentanaBajaCliente(ventanaPrincipal ventanaPrincipal) throws ClassNotFoundException, SQLException {
         this.setLayout(new FlowLayout());
-        this.bordeFormularioBajaCliente = new BordeFormulario(ventanaPrincipal);
-        this.add(this.bordeFormularioBajaCliente);
+        bordeFormularioBajaCliente = new BordeFormulario(ventanaPrincipal);
+        this.add(bordeFormularioBajaCliente);
     }
 
     public BordeFormulario getBordeFormularioBajaCliente() {

@@ -1,17 +1,24 @@
 package marcos;
 
+import java.sql.SQLException;
+
 import javax.swing.JTabbedPane;
+
+import porDefecto.cambiarVentanaCliente;
+import porDefecto.ventanaPrincipal;
 
 public class VentanaMultipleCliente extends JTabbedPane {
     private VentanaAltaCliente ventanaAltaCliente;
     private VentanaBajaCliente ventanaBajaCliente;
-
-    public VentanaMultipleCliente(ventanaPrincipal ventanaPrincipal) {
-        this.ventanaAltaCliente = new VentanaAltaCliente(ventanaPrincipal);
-        this.ventanaBajaCliente = new VentanaBajaCliente(ventanaPrincipal);
-        this.addTab("ALTA CLIENTE", this.ventanaAltaCliente);
-        this.addTab("BAJA CLIENTE", this.ventanaBajaCliente);
-        this.addChangeListener(new cambiarVentanaCliente(ventanaPrincipal));
+    private VentanaModificacionCliente ventanaModificacionCliente;
+    public VentanaMultipleCliente(ventanaPrincipal ventanaPrincipal) throws SQLException, ClassNotFoundException {
+    	ventanaAltaCliente = new VentanaAltaCliente(ventanaPrincipal);
+        ventanaBajaCliente = new VentanaBajaCliente(ventanaPrincipal);
+        ventanaModificacionCliente = new VentanaModificacionCliente(ventanaPrincipal);
+        this.addTab("ALTA CLIENTE", ventanaAltaCliente);
+        this.addTab("BAJA CLIENTE", ventanaBajaCliente);
+        this.addTab("MODIFICACIÓN CLIENTE", ventanaModificacionCliente);
+        this.addChangeListener(new cambiarVentanaCliente(ventanaPrincipal));//hacer escuchador a la ventana, para que cuando cambie de ventana se cambien ciertas propiedades.
     }
 
     public VentanaAltaCliente getVentanaAltaCliente() {
@@ -29,5 +36,15 @@ public class VentanaMultipleCliente extends JTabbedPane {
     public void setVentanaBajaCliente(VentanaBajaCliente ventanaBajaCliente) {
         this.ventanaBajaCliente = ventanaBajaCliente;
     }
+
+	public VentanaModificacionCliente getVentanaModificacionCliente() {
+		return ventanaModificacionCliente;
+	}
+
+	public void setVentanaModificacionCliente(VentanaModificacionCliente ventanaModificacionCliente) {
+		this.ventanaModificacionCliente = ventanaModificacionCliente;
+	}
+    
+    
 }
 

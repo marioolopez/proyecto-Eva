@@ -1,9 +1,19 @@
+package porDefecto;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URI;
+import java.sql.SQLException;
+
 import javax.swing.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+
 import com.toedter.calendar.JCalendar;
 
 import marcos.*;
@@ -15,7 +25,7 @@ public class ventanaPrincipal extends JFrame{
     private JMenu menu1, menu2, menu3, menu4, menu5, menu6;
     
     private VentanaCliente ventanaCliente;
-    public ventanaPrincipal() {
+    public ventanaPrincipal() throws SQLException, ClassNotFoundException {
         setTitle("BIENVENIDO A NUESTRA WEB");
         this.setBounds(300, 300, 800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,9 +47,9 @@ public class ventanaPrincipal extends JFrame{
         menu1.setFont(new Font("Arial Black", Font.BOLD, 12));
         cli1 = new JMenuItem("Clientes");
         cli1.setFont(new Font("Arial Black", Font.BOLD, 12));
-        cli1.addActionListener(new onClick(this));
         menu1.add(cli1);
-
+        
+       
         
         
         menu2 = new JMenu("EMPLEADOS");
@@ -95,7 +105,7 @@ public class ventanaPrincipal extends JFrame{
         barra.add(menu4);
         barra.add(menu5);
         barra.add(menu6);
-        this.add(barra, BorderLayout.NORTH); //Hasta aqui todo son opciones en el JMenuBar
+        this.setJMenuBar(barra); //Hasta aqui todo son opciones en el JMenuBar
         //-----------------------------------------------------------
        
         
@@ -292,21 +302,90 @@ public class ventanaPrincipal extends JFrame{
         JLabel titTwitter = new JLabel(iconTwi);
         panelLogos.add(titTwitter, gbc);
         
+        cli1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	instanciarVentanaCliente();
+            }
+        });
+        
+        
+        
         conInf.add(panelLogos);
         derechos.add(conInf);
         this.add(derechos, BorderLayout.SOUTH);
+        
+        ventanaCliente = new VentanaCliente(this);//lo instancio aqui para que ventana cliente no este NULL.
+        ventanaCliente.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//no hacer nada al cerrar por defecto, porque lo configuro yo dependiendo de si le da a que si o no.
+        ventanaCliente.addInternalFrameListener(new InternalFrameAdapter() {//hacer escuchador a la ventanaCliente, para que cuando se cierre, reactive otra vez la ventanaPrincipal.
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {//cuando le des al boton de cerrar, que te salga un JOptionPane con opciones de si o no.
+                int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de que deseas cerrar esta ventana?","Confirmar cierre",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+
+                if (opcion == JOptionPane.YES_OPTION) {//si el usuario selecciona si, se cierra la ventana
+                    ventanaCliente.dispose();//cerrar ventana
+                    //RESETEAR EL TODO LO DE LAS VENTANAS DEL CLIENTE
+                    ventanaCliente.getVentanaMultipleCliente().getVentanaAltaCliente().getBordeFormularioAltaCliente().resetearVentanaAlta();
+                	ventanaCliente.getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().resetearVentanaBaja();
+                	ventanaCliente.getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().resetearVentanaModificacion();
+                }
+            }
+
+            @Override
+            public void internalFrameClosed(InternalFrameEvent e) {//cuando la ventana del menu del cliente este cerrada, añadir todos los elementos antes removidos.
+            	reactivarVentanaPrincipal();
+                panelIzquierda.add(uno);
+                panelIzquierda.add(dos);
+                panelIzquierda.add(tres);
+                panelIzquierda.add(cuatro);
+                panelIzquierda.add(cinco);
+                panelIzquierda.add(seis);
+                panelIzquierda.add(siete);
+                panelIzquierda.add(ocho);
+                panelIzquierda.add(nueve);
+                panelIzquierda.add(diez);
+                panelIzquierda.add(once);
+                panelIzquierda.add(doce);
+                add(panelIzquierda, BorderLayout.WEST);
+                p1.add(calendario);
+                p2.add(t2, BorderLayout.NORTH);
+                p2.add(labelEntrenamiento2);
+                p3.add(t, BorderLayout.NORTH);
+                p3.add(labelEntrenamiento1);
+                p4.add(imgmapa, BorderLayout.CENTER);
+                panelCentro.add(p1);
+                panelCentro.add(p2);
+                panelCentro.add(p3);
+                panelCentro.add(p4);
+                add(panelCentro, BorderLayout.CENTER);
+                conInf.add(derch);
+                conInf.add(nom);
+                panelLogos.add(titFacebook, gbc);
+                panelLogos.add(titInstagram, gbc);
+                panelLogos.add(titYoutube, gbc);
+                panelLogos.add(titTwitter, gbc);
+                conInf.add(panelLogos);
+                derechos.add(conInf);
+                add(derechos, BorderLayout.SOUTH);
+            }
+        });
+        
         this.setResizable(false);
         this.setVisible(true);
     }
     
-    public void instanciarVentanaCliente() {//AQUI INSTANCIO LA VENTANA CLIENTE Y LE DOY UN CAMBIO EL TAMAÑO PARA QUE SE HAGA MAS GRANDE, ESTE METODO ESTA EN EL ONCLICK.
-		ventanaCliente = new VentanaCliente(this);
-		this.setSize(500,500);
-		this.getContentPane().add(ventanaCliente);
-		ventanaCliente.setVisible(true);
-	}
+    public void instanciarVentanaCliente() {
+        this.getContentPane().removeAll();
+        this.setSize(800, 600);
+        this.getContentPane().add(ventanaCliente);
+        ventanaCliente.setClosable(true);
+        ventanaCliente.setVisible(true);
+    }
     
-    
+    public void reactivarVentanaPrincipal() {
+    	this.setJMenuBar(barra);
+    	
+    }
     
 	public VentanaCliente getVentanaCliente() {
 		return ventanaCliente;
