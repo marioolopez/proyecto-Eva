@@ -21,11 +21,11 @@ PanelParaContenidoAltas()
 
 	border=new TitledBorder("Datos de tarifa");
 	this.setBorder(border);
-	this.setPreferredSize(new Dimension(200,120));
+this.setPreferredSize(new Dimension(5,5));
 		lb=new JLabel[3];
 		ta=new JTextArea();
 		tx=new JTextField[2];
-		String []titulos= {"Nombre:","Descrpcion:","Precio:"};
+		String []titulos= {"Nombre:","Descripcion:","Precio:"};
 		for (int i = 0; i < lb.length; i++) {
 			lb[i]=new JLabel(titulos[i]);
 		}
@@ -40,4 +40,33 @@ PanelParaContenidoAltas()
 		this.add(lb[2]);
 		this.add(tx[1]);
 }
+public String gettext(int pos)
+{
+	return tx[pos].getText();
+}
+public JLabel[] getLb() {
+	return lb;
+}
+public void setLb(JLabel[] lb) {
+	this.lb = lb;
+}
+public JTextArea getTa() {
+	return ta;
+}
+public void setTa(JTextArea ta) {
+	this.ta = ta;
+}
+public JTextField[] getTx() {
+	return tx;
+}
+public void setTx(JTextField[] tx) {
+	this.tx = tx;
+}
+public TitledBorder getBorder() {
+	return border;
+}
+public void setBorder(TitledBorder border) {
+	this.border = border;
+}
+
 }

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 4 elements to &apos;Proyecto/src/PaquetePrincipal&apos;&#x0D;&#x0A;- Original project: &apos;Proyecto&apos;&#x0D;&#x0A;- Destination element: &apos;Proyecto/src/PaquetePrincipal&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     BaseDatos.java&#x0D;&#x0A;     escuchador.java&#x0D;&#x0A;     main.java&#x0D;&#x0A;     ventanaPrincipal.java&#x0D;&#x0A;- Update references to refactored element" description="Move compilation units" destination="/src&lt;PaquetePrincipal" element1="/src&lt;{BaseDatos.java" element2="/src&lt;{escuchador.java" element3="/src&lt;{main.java" element4="/src&lt;{ventanaPrincipal.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1731957961506" units="4" version="1.0"/>
+</session>

@@ -13,14 +13,12 @@
     <fullyQualifiedTypeName name="java.util.Calendar"/>
     <fullyQualifiedTypeName name="java.awt.GridBagLayout"/>
     <fullyQualifiedTypeName name="javax.swing.JInternalFrame"/>
-    <fullyQualifiedTypeName name="Yoel.Altatarifas"/>
     <fullyQualifiedTypeName name="ventanaPrincipal"/>
     <fullyQualifiedTypeName name="javax.swing.JTextArea"/>
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="javax.swing.JTextField"/>
     <fullyQualifiedTypeName name="java.awt.FlowLayout"/>
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
-    <fullyQualifiedTypeName name="Yoel.PanelParaContenidoAltas"/>
     <fullyQualifiedTypeName name="java.awt.GridLayout"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="javax.swing.border.TitledBorder"/>
@@ -28,4 +26,8 @@
     <fullyQualifiedTypeName name="Yoel.PanelParaBotones"/>
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
+    <fullyQualifiedTypeName name="Yoel.PanelParaContenidoAltas"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="Yoel.Altatarifas"/>
+    <fullyQualifiedTypeName name="PaquetePrincipal.BaseDatos"/>
 </qualifiedTypeNameHistroy>
