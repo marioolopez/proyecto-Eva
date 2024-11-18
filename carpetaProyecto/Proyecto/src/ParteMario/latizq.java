@@ -1,4 +1,5 @@
 package ParteMario;
+import ParteMario.*;
 import Conexiones.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -11,6 +12,7 @@ public class latizq extends JPanel{
 	private JLabel NomId, NomNom, NomDescr, NomIdAct, NomIdMant;
 	private JTextField TxId, TxNom, TxDescr, TxIdAct, TxIdMant;
 	private BaseDatos bd;
+	private accionEquipamiento eq;
 	public latizq() throws ClassNotFoundException, SQLException {	
 		this.setLayout(new GridLayout(2, 1));
         p1 = new JPanel(new GridLayout(3,2));
@@ -48,10 +50,12 @@ public class latizq extends JPanel{
         
         NomIdAct = new JLabel("Id Actividad:");
         NomIdAct.setFont(new Font("Arial Black", Font.BOLD, 12));
+       // int idA = eq.incrementarActividad();
         TxIdAct = new JTextField();
         
-        NomIdMant = new JLabel("Id Equipamiento:");
+        NomIdMant = new JLabel("Id Mantenimiento:");
         NomIdMant.setFont(new Font("Arial Black", Font.BOLD, 12));
+       // int idM = eq.incrementarMantenimiento();
         TxIdMant = new JTextField();
         
         p2.add(l);
@@ -142,4 +146,10 @@ public class latizq extends JPanel{
 	public void setBd(BaseDatos bd) {
 		this.bd = bd;
 	}
+	public accionEquipamiento getEq() {
+		return eq;
+	}
+	public void setEq(accionEquipamiento eq) {
+		this.eq = eq;
+	}	
 }

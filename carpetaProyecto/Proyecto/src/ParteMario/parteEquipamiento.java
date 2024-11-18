@@ -1,8 +1,6 @@
 package ParteMario;
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.sql.SQLException;
-
 import javax.swing.*;
 public class parteEquipamiento extends JInternalFrame{
 	private JPanel p, p1, p2;

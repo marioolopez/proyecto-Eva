@@ -11,9 +11,7 @@ public class latderch extends JPanel{
 	private JButton insertar, borrar;
 	private latizq latizq;
 	public latderch(latizq izq) throws ClassNotFoundException, SQLException{
-		
 		 this.latizq = izq; //uso la instancia pasada		 
-		 
 		 this.setLayout(new GridLayout(2, 1));
 	     p1 = new JPanel(new GridLayout(2, 2));
 	     p1.setBackground(new Color(240, 240, 230)); 

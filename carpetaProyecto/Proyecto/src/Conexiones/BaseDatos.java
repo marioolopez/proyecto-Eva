@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 public class BaseDatos {
 	private Connection c;
-	public BaseDatos() throws SQLException, ClassNotFoundException {
+	public BaseDatos() throws SQLException, ClassNotFoundException {}
+	
+	public void conexionBD() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		String url = "jdbc:mysql://localhost/gimnasio";
 		c = DriverManager.getConnection(url, "root","");
@@ -43,4 +45,5 @@ public class BaseDatos {
 		Statement stm = crearStm();
 		stm.executeUpdate(cad);
 	}
+
 }
