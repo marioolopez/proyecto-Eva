@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URI;
+import java.sql.SQLException;
 import javax.swing.*;
 import com.toedter.calendar.JCalendar;
 public class ventanaPrincipal extends JFrame{
@@ -10,7 +11,7 @@ public class ventanaPrincipal extends JFrame{
     private JMenuBar barra;
     private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3, equip1, prod1, act1, tar1;
     private JMenu menu1, menu2, menu3, menu4, menu5, menu6;
-    ventanaPrincipal() {
+    ventanaPrincipal() throws ClassNotFoundException, SQLException {
         setTitle("BIENVENIDO A NUESTRA WEB");
         this.setBounds(200, 200, 800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -250,16 +251,17 @@ public class ventanaPrincipal extends JFrame{
         
         
         //-----------------------------------------------------------------------
-        //pie de pagina con los logos de las redes sociales 
-        JPanel derechos = new JPanel(new GridBagLayout());
+        //logos de las redes sociales 
+        JPanel derechos = new JPanel(new GridBagLayout()); //utilizo esto para que dentro del panel los componentes esten alineados naturalmente
         derechos.setBackground(new Color(50, 50, 50));
+        
         JLabel derch = new JLabel("© 2024 Gimnasio DAM. Todos los derechos reservados --");
         JLabel nom = new JLabel("Calle del Deporte, Nº23 -- Nuestras Redes Sociales:");
         derch.setForeground(Color.WHITE);
         nom.setForeground(Color.WHITE);
 
         
-        //panel contenedor para el texto y logos
+        //panel para el texto y logos
         JPanel conInf = new JPanel();
         conInf.setBackground(new Color(50, 50, 50));
         conInf.add(derch);

@@ -1,14 +1,17 @@
 package ParteMario;
+import Conexiones.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.sql.SQLException;
 import javax.swing.*;
 public class latizq extends JPanel{
 	private JPanel p1, p2;
 	private JLabel NomId, NomNom, NomDescr, NomIdAct, NomIdMant;
 	private JTextField TxId, TxNom, TxDescr, TxIdAct, TxIdMant;
-	latizq(){
+	private BaseDatos bd;
+	public latizq() throws ClassNotFoundException, SQLException {	
 		this.setLayout(new GridLayout(2, 1));
         p1 = new JPanel(new GridLayout(3,2));
 	    p1.setBackground(new Color(240, 240, 230)); 
@@ -132,5 +135,11 @@ public class latizq extends JPanel{
 	}
 	public void setTxIdMant(JTextField txIdMant) {
 		TxIdMant = txIdMant;
+	}
+	public BaseDatos getBd() {
+		return bd;
+	}
+	public void setBd(BaseDatos bd) {
+		this.bd = bd;
 	}
 }

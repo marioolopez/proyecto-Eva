@@ -1,0 +1,39 @@
+package ParteMario;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+public class accionEquipamiento implements ActionListener{
+	private latderch d;
+	accionEquipamiento(latderch de){
+		d = de;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		switch(e.getActionCommand()) {
+		case "botonBorrar":
+			d.getLatizq().getTxDescr().setText("");
+			d.getLatizq().getTxNom().setText("");
+			break;
+		case "botonInsertar":
+			
+			boolean enc = false;
+			
+			
+			try {
+				d.getLatizq().getBd().ejecutarSQL1("");
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			break;
+		}
+	}
+	public latderch getD() {
+		return d;
+	}
+	public void setD(latderch d) {
+		this.d = d;
+	}
+}

@@ -1,13 +1,15 @@
 package ParteMario;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.sql.SQLException;
+
 import javax.swing.*;
-public class parteEquipamiento extends JInternalFrame {
+public class parteEquipamiento extends JInternalFrame{
 	private JPanel p, p1, p2;
-	public parteEquipamiento() { //hay que hacer publico  el constructor cuando quieres usar otro PACKAGE
+	public parteEquipamiento() throws ClassNotFoundException, SQLException { //hacer publico
 		 p = new JPanel(new GridLayout(1, 2));
 	     latizq izquierda = new latizq(); 
-	     latderch derecha = new latderch(); 
+	     latderch derecha = new latderch(izquierda); //le paso izquierda
 	     p.add(izquierda); 
 	     p.add(derecha);
 	     this.add(p);

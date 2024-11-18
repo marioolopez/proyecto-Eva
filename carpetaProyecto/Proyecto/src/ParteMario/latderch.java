@@ -4,12 +4,16 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.sql.SQLException;
 import javax.swing.*;
 public class latderch extends JPanel{
 	private JPanel p1, p2;
 	private JButton insertar, borrar;
 	private latizq latizq;
-	latderch(){
+	public latderch(latizq izq) throws ClassNotFoundException, SQLException{
+		
+		 this.latizq = izq; //uso la instancia pasada		 
+		 
 		 this.setLayout(new GridLayout(2, 1));
 	     p1 = new JPanel(new GridLayout(2, 2));
 	     p1.setBackground(new Color(240, 240, 230)); 
@@ -44,6 +48,8 @@ public class latderch extends JPanel{
 	     JPanel insertarPanel = new JPanel(new GridBagLayout()); //boton insertar
 	     insertarPanel.setBackground(new Color(240, 240, 230)); 
 	     insertar = new JButton("Insertar");
+	     insertar.setActionCommand("botonInsertar");
+	     insertar.addActionListener(new accionEquipamiento(this));
 	     insertar.setPreferredSize(new Dimension(120, 30));
 	     insertarPanel.add(insertar);
 	     
