@@ -2,7 +2,7 @@ package ParteMario;
 import java.awt.GridLayout;
 import java.sql.SQLException;
 import javax.swing.*;
-public class parteEquipamiento extends JInternalFrame{
+public class parteEquipamiento extends JInternalFrame {
 	private JPanel p, p1, p2;
 	public parteEquipamiento() throws ClassNotFoundException, SQLException { //hacer publico
 		 p = new JPanel(new GridLayout(1, 2));

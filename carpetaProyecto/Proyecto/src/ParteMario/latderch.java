@@ -52,8 +52,8 @@ public class latderch extends JPanel{
 	     insertarPanel.add(insertar);
 	     
 	    
-	     JLabel l = new JLabel("cx"); //vacio
-	     
+	     JLabel l = new JLabel(""); //vacio
+
 	     
 	     JPanel borrarPanel = new JPanel(new GridBagLayout()); //boton borrar
 	     borrarPanel.setBackground(new Color(240, 240, 230)); 
@@ -64,7 +64,7 @@ public class latderch extends JPanel{
 	     borrarPanel.add(borrar);
 	     
 	     
-	     JLabel ls = new JLabel("fd"); //vacio
+	     JLabel ls = new JLabel(""); //vacio
 	     
 	        
 	     p2.add(l1);
@@ -77,6 +77,8 @@ public class latderch extends JPanel{
 	     this.add(p1);
 	     this.add(p2);
 	}
+	
+	
 	public latizq getLatizq() {
 		return latizq;
 	}

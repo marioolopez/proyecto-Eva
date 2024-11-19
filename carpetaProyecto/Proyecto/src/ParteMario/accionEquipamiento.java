@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 public class accionEquipamiento implements ActionListener {
 	private latderch d;
-	accionEquipamiento(latderch de) throws ClassNotFoundException, SQLException{
+	accionEquipamiento(latderch de) throws ClassNotFoundException, SQLException {
 		d = de;
 	}
 	@Override
@@ -17,7 +17,7 @@ public class accionEquipamiento implements ActionListener {
 			d.getLatizq().getTxDescr().setText("");
 			d.getLatizq().getTxNom().setText("");
 			break;
-		case "botonInsertar":
+		case "botonInsertar":			
 			boolean enc = false;
 			if(d.getLatizq().getTxDescr().getText().isEmpty() || d.getLatizq().getTxNom().getText().isEmpty()) {
 				enc = true;
@@ -26,47 +26,20 @@ public class accionEquipamiento implements ActionListener {
 				JOptionPane.showMessageDialog(d, "Porfavor, rellene los campos");
 			}
 			else {
-                JOptionPane.showMessageDialog(d, "Datos insertados correctamente");
-                try {
-					d.getLatizq().getBd().ejecutarSQL2("INSERT INTO");
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
+                try {        	
+                	int idE = d.getLatizq().incrementarEquipamiento();
+    				int idA = d.getLatizq().incrementarActividad();
+    				int idM = d.getLatizq().incrementarMantenimiento();
+    				d.getLatizq().getBd().ejecutarSQL2("INSERT INTO equipamiento(id, nombre, descripcion, idactividad, idmantenimiento) VALUES('"+idE+"', '"+d.getLatizq().getTxNom().getText()+"', '"+d.getLatizq().getTxDescr().getText()+"', '"+idA+"', '"+idM+"')");
+					//d.getLatizq().getBd().ejecutarSQL2("INSERT INTO mantenimiento(id, nombre) VALUES('"+idM+"', '"++"')");
+                } catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+                JOptionPane.showMessageDialog(d, "Datos insertados correctamente");
 			}
 			break;
 		}
 	}
-	
-	/*public int incrementarEquipamiento() throws SQLException {
-		ResultSet rs = d.getLatizq().getBd().ejecutarSQL1("SELECT MAX(id) AS id_Eq FROM equipamiento");
-		if(rs.next()) {
-			return rs.getInt("id_Eq") + 1;
-		}
-		else {
-			return 1;
-		}
-	}
-	
-	public int incrementarMantenimiento() throws SQLException {
-		ResultSet rs = d.getLatizq().getBd().ejecutarSQL1("SELECT MAX(id) AS id_Ma FROM mantenimiento");
-		if(rs.next()) {
-			return rs.getInt("id_Ma") + 1;
-		}
-		else {
-			return 1;
-		}
-	}
-	
-	public int incrementarActividad() throws SQLException {
-		ResultSet rs = d.getLatizq().getBd().ejecutarSQL1("SELECT MAX(id) AS id_Act FROM actividad");
-		if(rs.next()) {
-			return rs.getInt("id_Act") + 1;
-		}
-		else {
-			return 1;
-		}
-	} 	*/
 	
 	public latderch getD() {
 		return d;
