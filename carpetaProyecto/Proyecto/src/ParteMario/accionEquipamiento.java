@@ -1,7 +1,6 @@
 package ParteMario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 public class accionEquipamiento implements ActionListener {
@@ -16,6 +15,7 @@ public class accionEquipamiento implements ActionListener {
 		case "botonBorrar":
 			d.getLatizq().getTxDescr().setText("");
 			d.getLatizq().getTxNom().setText("");
+			d.getNomMant().setText("");
 			break;
 		case "botonInsertar":			
 			boolean enc = false;
@@ -30,8 +30,10 @@ public class accionEquipamiento implements ActionListener {
                 	int idE = d.getLatizq().incrementarEquipamiento();
     				int idA = d.getLatizq().incrementarActividad();
     				int idM = d.getLatizq().incrementarMantenimiento();
+    				int idMI = d.getLatizq().incrementarMantenimientoTablaMantenimiento();
+    				String nomManten = d.getNomMant().getText();
     				d.getLatizq().getBd().ejecutarSQL2("INSERT INTO equipamiento(id, nombre, descripcion, idactividad, idmantenimiento) VALUES('"+idE+"', '"+d.getLatizq().getTxNom().getText()+"', '"+d.getLatizq().getTxDescr().getText()+"', '"+idA+"', '"+idM+"')");
-					//d.getLatizq().getBd().ejecutarSQL2("INSERT INTO mantenimiento(id, nombre) VALUES('"+idM+"', '"++"')");
+					d.getLatizq().getBd().ejecutarSQL2("INSERT INTO mantenimiento(id, nombre) VALUES('"+idMI+"', '"+nomManten+"')");
                 } catch (SQLException e1) {
 					e1.printStackTrace();
 				}

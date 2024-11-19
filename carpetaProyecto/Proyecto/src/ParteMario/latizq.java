@@ -7,7 +7,7 @@ import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.*;
-public class latizq extends JPanel{
+public class latizq extends JPanel {
 	private JPanel p1, p2;
 	private JLabel NomId, NomNom, NomDescr, NomIdAct, NomIdMant;
 	private JTextField TxId, TxNom, TxDescr, TxIdAct, TxIdMant;
@@ -93,27 +93,37 @@ public class latizq extends JPanel{
 			else {
 				return 1;
 			}
-		}
+	}
 		
 	public int incrementarMantenimiento() throws SQLException {
 			ResultSet rs = bd.ejecutarSQL1("SELECT MAX(id) AS id_Ma FROM mantenimiento");
 			if(rs.next()) {
-				return rs.getInt("id_Ma") + 1;
+				return rs.getInt("id_Ma");
 			}
 			else {
 				return 1;
 			}
-		}
+	}
 		
 	public int incrementarActividad() throws SQLException {
 			ResultSet rs = bd.ejecutarSQL1("SELECT MAX(id) AS id_Act FROM actividad");
 			if(rs.next()) {
-				return rs.getInt("id_Act") + 1;
+				return rs.getInt("id_Act");
 			}
 			else {
 				return 1;
 			}
+	}
+	
+	public int incrementarMantenimientoTablaMantenimiento() throws SQLException {
+		ResultSet rs = bd.ejecutarSQL1("SELECT MAX(id) AS id_Ma FROM mantenimiento");
+		if(rs.next()) {
+			return rs.getInt("id_Ma") + 1;
 		}
+		else {
+			return 1;
+		}
+	}
 	
 	public JPanel getP1() {
 		return p1;

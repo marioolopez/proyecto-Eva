@@ -17,7 +17,6 @@
     <fullyQualifiedTypeName name="ParteMario.parteEquipamiento"/>
     <fullyQualifiedTypeName name="javax.swing.SwingConstants"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
-    <fullyQualifiedTypeName name="javax.swing.JTextField"/>
     <fullyQualifiedTypeName name="java.awt.GridLayout"/>
     <fullyQualifiedTypeName name="java.awt.GridBagConstraints"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
@@ -35,4 +34,5 @@
     <fullyQualifiedTypeName name="ParteMario.latderch"/>
     <fullyQualifiedTypeName name="Conexiones.BaseDatos"/>
     <fullyQualifiedTypeName name="ParteMario.accionEquipamiento"/>
+    <fullyQualifiedTypeName name="javax.swing.JTextField"/>
 </qualifiedTypeNameHistroy>

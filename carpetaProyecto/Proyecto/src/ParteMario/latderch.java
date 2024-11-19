@@ -10,6 +10,7 @@ public class latderch extends JPanel{
 	private JPanel p1, p2;
 	private JButton insertar, borrar;
 	private latizq latizq;
+	private JTextField nomMant;
 	public latderch(latizq izq) throws ClassNotFoundException, SQLException{
 		 this.latizq = izq; //uso la instancia pasada		 
 		 this.setLayout(new GridLayout(2, 1));
@@ -30,7 +31,7 @@ public class latderch extends JPanel{
 	     p1.add(img3);
 	     p1.add(img4);
 
-	     //------------------------------------------------------------------------------------------------------------------------
+	     //-----------------------------------------------------------------------------------------------------------------------------
 	        
 	     p2 = new JPanel(new GridLayout(3, 2));  //panel para los botones y etiquetas
 	     p2.setBackground(new Color(240, 240, 230)); 
@@ -52,8 +53,8 @@ public class latderch extends JPanel{
 	     insertarPanel.add(insertar);
 	     
 	    
-	     JLabel l = new JLabel(""); //vacio
-
+	     JLabel l = new JLabel("Persona del Mantenimiento:"); 
+	     
 	     
 	     JPanel borrarPanel = new JPanel(new GridBagLayout()); //boton borrar
 	     borrarPanel.setBackground(new Color(240, 240, 230)); 
@@ -64,7 +65,7 @@ public class latderch extends JPanel{
 	     borrarPanel.add(borrar);
 	     
 	     
-	     JLabel ls = new JLabel(""); //vacio
+	     nomMant = new JTextField(); 
 	     
 	        
 	     p2.add(l1);
@@ -72,7 +73,7 @@ public class latderch extends JPanel{
 	     p2.add(insertarPanel);
 	     p2.add(l);
 	     p2.add(borrarPanel);
-	     p2.add(ls);
+	     p2.add(nomMant);
   
 	     this.add(p1);
 	     this.add(p2);
@@ -108,5 +109,11 @@ public class latderch extends JPanel{
 	}
 	public void setBorrar(JButton borrar) {
 		this.borrar = borrar;
-	}	
+	}
+	public JTextField getNomMant() {
+		return nomMant;
+	}
+	public void setNomMant(JTextField nomMant) {
+		this.nomMant = nomMant;
+	}
 }
