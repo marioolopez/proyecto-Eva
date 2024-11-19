@@ -14,23 +14,20 @@ public class PanelParaContenidoAltas extends JPanel{
 	private JLabel []lb;
 	private JTextArea ta;
 	private JTextField []tx;
-	private TitledBorder border;
 PanelParaContenidoAltas()
 {
-	this.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-	border=new TitledBorder("Datos de tarifa");
-	this.setBorder(border);
-this.setPreferredSize(new Dimension(5,5));
+	this.setLayout(new GridLayout(3,3));
 		lb=new JLabel[3];
 		ta=new JTextArea();
 		tx=new JTextField[2];
 		String []titulos= {"Nombre:","Descripcion:","Precio:"};
 		for (int i = 0; i < lb.length; i++) {
 			lb[i]=new JLabel(titulos[i]);
+			lb[i].setPreferredSize(new Dimension(200,20));
 		}
 		for (int i = 0; i < tx.length; i++) {
-			tx[i]=new JTextField(20);
+			tx[i]=new JTextField();
+			tx[i].setPreferredSize(new Dimension(150,20));
 		}
 		ta.setPreferredSize(new Dimension(400,200));
 		this.add(lb[0]);
@@ -61,12 +58,6 @@ public JTextField[] getTx() {
 }
 public void setTx(JTextField[] tx) {
 	this.tx = tx;
-}
-public TitledBorder getBorder() {
-	return border;
-}
-public void setBorder(TitledBorder border) {
-	this.border = border;
 }
 
 }

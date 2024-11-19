@@ -16,4 +16,13 @@ public PanelParaBotones(Altatarifas at)
 	this.add(btaceptar);
 	this.add(btcancelar);
 }
+public PanelParaBotones(AltaActividades aa)
+{
+	btaceptar=new JButton("Aceptar");
+	btcancelar=new JButton("Cancelar");
+	btaceptar.setActionCommand("Aceptar");
+	btaceptar.addActionListener(new escuchador(aa));
+	this.add(btaceptar);
+	this.add(btcancelar);
+}
 }

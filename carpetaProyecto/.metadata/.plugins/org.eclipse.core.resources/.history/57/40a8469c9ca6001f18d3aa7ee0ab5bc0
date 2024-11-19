@@ -1,0 +1,27 @@
+package Yoel;
+
+import javax.swing.JInternalFrame;
+
+public class AltaActividades extends JInternalFrame{
+private PanelParaContenidoActividades ppa;
+private PanelParaBotones pb;
+AltaActividades()
+{
+	ppa=new PanelParaContenidoActividades(this);
+	pb=new PanelParaBotones(this);
+	this.setVisible(true);
+}
+public PanelParaContenidoActividades getPpa() {
+	return ppa;
+}
+public void setPpa(PanelParaContenidoActividades ppa) {
+	this.ppa = ppa;
+}
+public PanelParaBotones getPb() {
+	return pb;
+}
+public void setPb(PanelParaBotones pb) {
+	this.pb = pb;
+}
+
+}

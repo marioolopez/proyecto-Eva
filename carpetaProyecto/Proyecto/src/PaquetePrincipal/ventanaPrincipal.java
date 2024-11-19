@@ -82,6 +82,8 @@ public class ventanaPrincipal extends JFrame{
         act1 = new JMenuItem("Agegar Nueva Actividad");
         act1.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu5.add(act1);
+        act1.setActionCommand("Actividades");
+        act1.addActionListener(new escuchador(this));
         
         
         
