@@ -1,3 +1,4 @@
+package Main;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +8,7 @@ import java.sql.Statement;
 public class BaseDatos {
 	private Connection c;
 	
-	BaseDatos() throws SQLException, ClassNotFoundException{
+	public BaseDatos() throws SQLException, ClassNotFoundException{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		String url = "jdbc:mysql://localhost/gimnasio";
 		c = DriverManager.getConnection(url, "root","");

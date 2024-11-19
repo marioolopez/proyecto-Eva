@@ -1,11 +1,11 @@
 package Pedidos;
 
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -16,6 +16,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JCalendar;
+
+import Main.BaseDatos;
+import Main.ventanaPrincipal;
 
 public class Pedidos extends JInternalFrame{
 	private ventanaPrincipal ven;
@@ -28,6 +31,8 @@ public class Pedidos extends JInternalFrame{
 	private JButton[] boton;
 	private String[] botonesNom= {"Añadir", "mostrar", "modificar", "eliminar"};
 	private BaseDatos baseDatos;
+	private Compras compra;
+	
 
 	
 	public Pedidos(ventanaPrincipal ven) {
@@ -38,20 +43,17 @@ public class Pedidos extends JInternalFrame{
 		//Metodo que añade los elementos
 		datosMe();
 		botonesMe();
+		compra=new Compras();
+		compra.setPreferredSize(new Dimension(700,150));
+		compra.setVisible(true);
+		this.add(compra);
 		
-		try {
-			baseDatos=new BaseDatos();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public void datosMe() {
 		datos=new JPanel();
 		
-		datos.setLayout(new GridLayout(1,3));
+		datos.setLayout(new GridLayout(1,3,10,10));
 			izq=new JPanel();
 			izq.setLayout(new BorderLayout());
 				izqArr=new JPanel();
@@ -89,7 +91,7 @@ public class Pedidos extends JInternalFrame{
 				barra2=new JScrollPane(listaCompras,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 				der.add(barra2, BorderLayout.CENTER);
 		datos.add(der);
-		datos.setPreferredSize(new Dimension(750,350));
+		datos.setPreferredSize(new Dimension(750,250));
 		this.add(datos);
 
 	}
@@ -109,11 +111,13 @@ public class Pedidos extends JInternalFrame{
 	}
 	
 	public void anadirMe() {
-		
 	}
 	
 	public void idMax() {
 		String sql="SELECT MAX(idpedido) AS \"idMax\" FROM compra";
+		Statement stmt;
+		int result;
+		
 		
 	}
 
