@@ -1,5 +1,3 @@
-
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -15,7 +13,7 @@ public class ventanaPrincipal extends JFrame{
 
 	private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3, equip1, prod1, act1, tar1, ped1;
     private JMenu menu1, menu2, menu3, menu4, menu5, menu6, menu7;
-    ventanaPrincipal() {
+    public ventanaPrincipal() {
         setTitle("BIENVENIDO A NUESTRA WEB");
         this.setBounds(300, 300, 800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

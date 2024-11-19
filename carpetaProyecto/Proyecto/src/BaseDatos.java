@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 public class BaseDatos {
-	
-	
 	private Connection c;
 	
 	BaseDatos() throws SQLException, ClassNotFoundException{
@@ -15,6 +13,8 @@ public class BaseDatos {
 		c = DriverManager.getConnection(url, "root","");
 		System.out.println("Conexion realidada!");
 	}
+	
+	
 
 	public Connection getC() {
 		return c;
