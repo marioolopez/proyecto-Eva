@@ -9,7 +9,7 @@ public class ventanaPrincipal extends JFrame{
     private JLabel fotoGym;
     private ImageIcon img;
     private JMenuBar barra;
-    private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3, equip1, prod1, act1, tar1;
+    private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3,emp4, equip1, prod1, act1, tar1;
     private JMenu menu1, menu2, menu3, menu4, menu5, menu6;
     ventanaPrincipal() {
         setTitle("BIENVENIDO A NUESTRA WEB");
@@ -59,11 +59,17 @@ public class ventanaPrincipal extends JFrame{
         emp3.setActionCommand("mod");
         emp3.addActionListener(new ClickEmpleados(this));
         emp3.setFont(new Font("Arial Black", Font.BOLD, 12));
+        emp4=new JMenuItem("Mostrar lista de Empleados");
+        emp4.setFont(new Font("Arial Black",Font.BOLD,12));
+        emp4.setActionCommand("showlistemp");
+        emp4.addActionListener(new ClickEmpleados(this));
         menu2.add(emp1);
         menu2.addSeparator();
         menu2.add(emp2);
         menu2.addSeparator();
         menu2.add(emp3);
+        menu2.addSeparator();
+        menu2.add(emp4);
 
         
         

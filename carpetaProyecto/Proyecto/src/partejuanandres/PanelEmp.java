@@ -28,6 +28,8 @@ public class PanelEmp extends JInternalFrame{
 		buscar=new JButton("Buscar");
 		accion=new JButton("");
 		
+		
+		
 		etiquetas[0]=new JLabel("Codigo: ");
 		campos[0]=new JTextField();
 		this.getContentPane().add(etiquetas[0]);
@@ -53,6 +55,7 @@ public class PanelEmp extends JInternalFrame{
 		buscar.setBackground(new Color(122, 108, 67));
 		buscar.setActionCommand("search");
 		buscar.addActionListener(new ClickEmpleados(v,this));
+		buscar.setFont(new Font("Arial Black",Font.BOLD,15));
 		pbuscar.add(buscar);
 		pbuscar.setBackground(new Color(211, 211, 190));
 		
@@ -61,7 +64,7 @@ public class PanelEmp extends JInternalFrame{
 		JPanel paccion=new JPanel(new FlowLayout());
 		
 
-		accion.setPreferredSize(new Dimension(200,50));
+		accion.setPreferredSize(new Dimension(250,50));
 		accion.setForeground(Color.white);
 		accion.setFont(new Font("Arial Black",Font.BOLD,15));
 		accion.setBackground(new Color(122, 108, 67));
@@ -74,7 +77,7 @@ public class PanelEmp extends JInternalFrame{
 		
 		
 		for (JLabel x:etiquetas)
-			{x.setFont(new Font("Arial Black",Font.BOLD,14));
+			{x.setFont(new Font("Arial Black",Font.BOLD,17));
 			x.setHorizontalAlignment(JLabel.CENTER);
 			}
 		
@@ -105,7 +108,7 @@ public class PanelEmp extends JInternalFrame{
 		   buscar.setEnabled(true);
 		   desactivarcampos();
 		break;
-		case 3:accion.setText("Modificar Empleado");
+		case 3:accion.setText("Actualizar Datos");
 		this.setTitle("Panel - Modificar datos de Empleado");
 		campos[0].setEnabled(true);
 		buscar.setVisible(true);
@@ -113,6 +116,9 @@ public class PanelEmp extends JInternalFrame{
 		   desactivarcampos();
 		break;
 		}
+	}
+	public JTextField CampoCodigo () {
+		return campos[0];
 	}
 	public void desactivarcampos () {
 		for (int i=1;i<campos.length;i++)
@@ -138,7 +144,12 @@ public class PanelEmp extends JInternalFrame{
 		else {
 			if (!esDecimal(campos[3].getText()))
 				JOptionPane.showMessageDialog(this, "El campo SALARIO debe ser un numero");
-			else {insertarEmpleado();
+			else {
+				if (identificador==1)
+				insertarEmpleado();
+				else if (identificador==3)
+					actualizarEmpleado();
+					
 				  vaciarcampos();
 				  modTextoBotton();
 				  
@@ -182,6 +193,7 @@ public class PanelEmp extends JInternalFrame{
 		BaseDatos bd=new BaseDatos();
 		bd.ejecutarSQL2("INSERT INTO empleado VALUES ("+Integer.parseInt(campos[0].getText().toString())+",'"+campos[1].getText().toString()+"','"+campos[2].getText().toString()+"',"+Double.parseDouble(campos[3].getText().toString())+")");
 		bd.cerrarConex();
+		JOptionPane.showMessageDialog(this, "Empleado Insertado Correctamente");
 	}
 	public boolean buscarempleado () throws ClassNotFoundException, SQLException {
 		
@@ -197,12 +209,13 @@ public class PanelEmp extends JInternalFrame{
 			ResultSet rs=bd.ejecutarSQL1("SELECT * FROM empleado WHERE id = "+Integer.parseInt(campos[0].getText().toString())+"");
 			if (rs.next())
 				{rellenarcampos(rs);
+				bd.cerrarConex();
 				return true;
 				}
 			else {JOptionPane.showMessageDialog(this,"No existe un Empleado con ese codigo");
 				return false;}
 			
-
+			
 		}
 				
 		
@@ -211,10 +224,23 @@ public class PanelEmp extends JInternalFrame{
 		
 		campos[1].setText(rs.getString(2));
 		campos[2].setText(rs.getString(3));
-		campos[3].setText(String.valueOf(rs.getDouble(4)) );
+		campos[3].setText(String.valueOf(rs.getDouble(4)) );		
+	}
+	public void borrarEmpleado () throws ClassNotFoundException, SQLException {
+		BaseDatos bd=new BaseDatos();
+	
+		bd.ejecutarSQL2("DELETE FROM empleado WHERE id = "+Integer.parseInt(campos[0].getText().toString())+"");
 		
 		
-		// TODO Auto-generated method stub
+		bd.cerrarConex();
+	}
+	public void actualizarEmpleado () throws SQLException, ClassNotFoundException {
+		BaseDatos bd=new BaseDatos();
 		
+		bd.ejecutarSQL2("UPDATE empleado SET nombre = '"+campos[1].getText().toString()+"', "
+				+ "dni = '"+campos[2].getText().toString()+"', salario = "+Double.parseDouble(campos[3].getText().toString())+" WHERE id = "+Integer.parseInt(campos[0].getText().toString())+"");
+		
+		bd.cerrarConex();
+		JOptionPane.showMessageDialog(this, "Datos Actualizados Correctamente");
 	}
 }

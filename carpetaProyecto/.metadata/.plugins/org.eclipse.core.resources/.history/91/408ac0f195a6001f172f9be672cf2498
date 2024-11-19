@@ -1,0 +1,15 @@
+package partejuanandres;
+import javax.swing.*;
+import java.awt.*;
+public class EmpList extends JInternalFrame{
+
+	
+	private JTable listado;
+	
+	public EmpList (){
+		super();
+		this.getContentPane().setLayout(new FlowLayout());
+		
+	}
+	
+}

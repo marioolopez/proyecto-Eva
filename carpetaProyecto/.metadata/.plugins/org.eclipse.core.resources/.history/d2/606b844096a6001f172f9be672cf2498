@@ -1,0 +1,26 @@
+package partejuanandres;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.*;
+public class EmpList extends JInternalFrame{
+
+	
+	private JTable listado;
+	
+	public EmpList (){
+		super();
+		this.getContentPane().setLayout(new FlowLayout());
+		
+		
+		listado=new JTable();
+		DefaultTableModel dtm=new DefaultTableModel();
+		
+		
+		
+		
+		this.setVisible(true);
+		
+	}
+	
+}

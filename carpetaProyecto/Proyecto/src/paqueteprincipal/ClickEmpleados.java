@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import partejuanandres.EmpList;
 import partejuanandres.PanelEmp;
 
 public class ClickEmpleados implements ActionListener {
@@ -60,6 +61,15 @@ public class ClickEmpleados implements ActionListener {
 			}
 			
 			break;
+		case "showlistemp": try {
+				EmpList listaempleados=new EmpList();
+				v.getContentPane().removeAll();
+				v.getContentPane().add(listaempleados);
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break; 
 		case "acciones":  int identi=pel.getIdentificador();
 					switch (identi) {
 					
@@ -72,6 +82,21 @@ public class ClickEmpleados implements ActionListener {
 						break;
 					case 2:
 						int opcionuser=JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este Empleado de la Base de Datos?","Escoja una opcion",JOptionPane.YES_NO_CANCEL_OPTION);
+						if (opcionuser==0)
+							try {
+								pel.borrarEmpleado();
+								pel.vaciarcampos();
+							} catch (ClassNotFoundException | SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						break;
+					case 3: try {
+							pel.verificarcampos();
+						} catch (ClassNotFoundException | SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						
 						break;
 					
@@ -81,7 +106,12 @@ public class ClickEmpleados implements ActionListener {
 			break;
 		case "search":  try {
 				if (pel.buscarempleado())
+				{
+					pel.activarcampos();
+					pel.CampoCodigo().setEnabled(false);
 					JOptionPane.showMessageDialog(pel, "Se han cargado los datos del Empleado");
+				}
+					
 			} catch (HeadlessException | ClassNotFoundException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
