@@ -29,8 +29,8 @@ public class PanelEmp extends JInternalFrame{
 		buscar=new JButton("Buscar");
 		accion=new JButton("");
 		confirmacion=new JCheckBox("Los datos son correctos");
-		confirmacion.setBackground(new Color(211, 211, 190));
-		confirmacion.addItemListener(new Confirmado(this));
+		
+		
 		etiquetas[0]=new JLabel("Codigo: ");
 		campos[0]=new JTextField();
 		this.getContentPane().add(etiquetas[0]);
@@ -65,7 +65,7 @@ public class PanelEmp extends JInternalFrame{
 		buscar.addActionListener(new ClickEmpleados(v,this));
 		buscar.setFont(new Font("Arial Black",Font.BOLD,15));
 		pbuscar.add(buscar);
-		pbuscar.add(confirmacion);
+		
 		pbuscar.setBackground(new Color(211, 211, 190));
 		
 		this.getContentPane().add(pbuscar);
@@ -108,20 +108,15 @@ public class PanelEmp extends JInternalFrame{
 				campos[0].setEnabled(false);
 			   buscar.setVisible(false);
 			   buscar.setEnabled(false);
-			   confirmacion.setEnabled(false);
-			   confirmacion.setVisible(false);
 			   activarcampos();
 			   ultimoCodigo();
 			   
 		break;
 		case 2:accion.setText("Borrar Empleado");
-			   accion.setEnabled(false);
 	this.setTitle("Panel - Borrar Empleado");
 	campos[0].setEnabled(true);
 		 buscar.setVisible(true);
 		   buscar.setEnabled(true);
-		   confirmacion.setEnabled(true);
-		   confirmacion.setVisible(true);
 		   desactivarcampos();
 		break;
 		case 3:accion.setText("Actualizar Datos");
@@ -129,14 +124,9 @@ public class PanelEmp extends JInternalFrame{
 		campos[0].setEnabled(true);
 		buscar.setVisible(true);
 		   buscar.setEnabled(true);
-		   confirmacion.setEnabled(false);
-		   confirmacion.setVisible(false);
 		   desactivarcampos();
 		break;
 		}
-	}
-	public JButton activarbtnborrar () {
-		return accion;
 	}
 	public JTextField CampoCodigo () {
 		return campos[0];

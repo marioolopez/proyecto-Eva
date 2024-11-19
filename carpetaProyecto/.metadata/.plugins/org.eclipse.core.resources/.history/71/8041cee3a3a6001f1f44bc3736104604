@@ -1,0 +1,28 @@
+package partejuanandres;
+
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+public class FocoEnTextos implements FocusListener {
+
+	
+	private PanelEmp  pe;
+	
+	FocoEnTextos (PanelEmp e)
+	{
+		pe=e;
+	}
+	
+	@Override
+	public void focusGained(FocusEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

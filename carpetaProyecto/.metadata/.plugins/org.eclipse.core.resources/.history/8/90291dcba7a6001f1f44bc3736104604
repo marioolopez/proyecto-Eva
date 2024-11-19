@@ -30,7 +30,7 @@ public class PanelEmp extends JInternalFrame{
 		accion=new JButton("");
 		confirmacion=new JCheckBox("Los datos son correctos");
 		confirmacion.setBackground(new Color(211, 211, 190));
-		confirmacion.addItemListener(new Confirmado(this));
+		
 		etiquetas[0]=new JLabel("Codigo: ");
 		campos[0]=new JTextField();
 		this.getContentPane().add(etiquetas[0]);
@@ -115,7 +115,6 @@ public class PanelEmp extends JInternalFrame{
 			   
 		break;
 		case 2:accion.setText("Borrar Empleado");
-			   accion.setEnabled(false);
 	this.setTitle("Panel - Borrar Empleado");
 	campos[0].setEnabled(true);
 		 buscar.setVisible(true);
@@ -134,9 +133,6 @@ public class PanelEmp extends JInternalFrame{
 		   desactivarcampos();
 		break;
 		}
-	}
-	public JButton activarbtnborrar () {
-		return accion;
 	}
 	public JTextField CampoCodigo () {
 		return campos[0];

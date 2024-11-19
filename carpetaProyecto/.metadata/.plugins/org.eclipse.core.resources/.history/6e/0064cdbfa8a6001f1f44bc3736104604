@@ -135,9 +135,6 @@ public class PanelEmp extends JInternalFrame{
 		break;
 		}
 	}
-	public JButton activarbtnborrar () {
-		return accion;
-	}
 	public JTextField CampoCodigo () {
 		return campos[0];
 	}
