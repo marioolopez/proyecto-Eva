@@ -13,31 +13,43 @@ public class accionEquipamiento implements ActionListener {
 		// TODO Auto-generated method stub
 		switch(e.getActionCommand()) {
 		case "botonBorrar":
-			d.getLatizq().getTxDescr().setText("");
-			d.getLatizq().getTxNom().setText("");
-			d.getNomMant().setText("");
-			break;
-		case "botonInsertar":			
+		    d.getIzq().getTxNom().setText("");  
+		    d.getIzq().getArea().setText(""); 
+		    d.getNomMantTx().setText("");
+		    break;
+		case "botonInsertar":	 //MIRAR EL TEMA DE LAS VALIDACIONES PORQUE SE INSERTA TODO		
 			boolean enc = false;
-			if(d.getLatizq().getTxDescr().getText().isEmpty() || d.getLatizq().getTxNom().getText().isEmpty()) {
+			if(d.getIzq().getArea().getText().isEmpty() || d.getIzq().getTxNom().getText().isEmpty()) {
+				enc = true;
+			}
+			if(d.getNombreMant().getText().isEmpty()) {
 				enc = true;
 			}
 			if(enc) {
 				JOptionPane.showMessageDialog(d, "Porfavor, rellene los campos");
 			}
 			else {
-                try {        	
-                	int idE = d.getLatizq().incrementarEquipamiento();
-    				int idA = d.getLatizq().incrementarActividad();
-    				int idM = d.getLatizq().incrementarMantenimiento();
-    				int idMI = d.getLatizq().incrementarMantenimientoTablaMantenimiento();
-    				String nomManten = d.getNomMant().getText();
-    				d.getLatizq().getBd().ejecutarSQL2("INSERT INTO equipamiento(id, nombre, descripcion, idactividad, idmantenimiento) VALUES('"+idE+"', '"+d.getLatizq().getTxNom().getText()+"', '"+d.getLatizq().getTxDescr().getText()+"', '"+idA+"', '"+idM+"')");
-					d.getLatizq().getBd().ejecutarSQL2("INSERT INTO mantenimiento(id, nombre) VALUES('"+idMI+"', '"+nomManten+"')");
+				
+                try {     
+                	
+                	int idE = d.getIzq().incrementarEquipamiento();
+    				int idA = d.getIzq().incrementarActividad();
+    				int idM = d.getIzq().incrementarMantenimiento();
+    				int idMI = d.getIzq().incrementarMantenimientoTablaMantenimiento();
+    				
+    				d.getIzq().getBd().ejecutarSQL2("INSERT INTO equipamiento(id, nombre, descripcion, idactividad, idmantenimiento) VALUES('"+idE+"', '"+d.getIzq().getTxNom().getText()+"', '"+d.getIzq().getArea().getText()+"', '"+idA+"', '"+idM+"')");
+    				d.getIzq().getBd().ejecutarSQL2("INSERT INTO mantenimiento(id, nombre) VALUES('"+idMI+"', '"+d.getNomMantTx().getText()+"')");
+    				
+    				d.getIzq().getTxNom().setText("");  
+    	    		d.getIzq().getArea().setText(""); 
+    	    		d.getNomMantTx().setText("");
+    	    		 
+    	    		JOptionPane.showMessageDialog(d, "Datos insertados correctamente");
+    	    		 
                 } catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-                JOptionPane.showMessageDialog(d, "Datos insertados correctamente");
+          
 			}
 			break;
 		}

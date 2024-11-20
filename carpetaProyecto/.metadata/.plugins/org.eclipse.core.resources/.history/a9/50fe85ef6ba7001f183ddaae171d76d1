@@ -1,0 +1,19 @@
+package ParteMario;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class escuchaLista implements ActionListener {
+	private latizq latizq;
+	escuchaLista(latizq lz){
+		latizq = lz;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
+		switch() {
+		
+		}
+		
+	}
+
+}

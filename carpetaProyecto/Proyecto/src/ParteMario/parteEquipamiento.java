@@ -2,13 +2,14 @@ package ParteMario;
 import java.awt.GridLayout;
 import java.sql.SQLException;
 import javax.swing.*;
-public class parteEquipamiento extends JInternalFrame {
+public class parteEquipamiento extends JInternalFrame{
 	private JPanel p, p1, p2;
 	public parteEquipamiento() throws ClassNotFoundException, SQLException { //hacer publico
-		 p = new JPanel(new GridLayout(1, 2));
+		 p = new JPanel(new GridLayout(1,2));
+		 p.setBorder(BorderFactory.createTitledBorder("ALTA DE EQUIPAMIENTO"));
 	     latizq izquierda = new latizq(); 
-	     latderch derecha = new latderch(izquierda); //le paso izquierda
-	     p.add(izquierda); 
+	     latderch derecha = new latderch(izquierda);
+	     p.add(izquierda);
 	     p.add(derecha);
 	     this.add(p);
 	     this.setVisible(true); 

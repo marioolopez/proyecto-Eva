@@ -5,7 +5,7 @@ import java.net.URI;
 import java.sql.SQLException;
 import javax.swing.*;
 import com.toedter.calendar.JCalendar;
-public class ventanaPrincipal extends JFrame{
+public class ventanaPrincipal extends JFrame {
     private JLabel fotoGym;
     private ImageIcon img;
     private JMenuBar barra;
@@ -63,7 +63,7 @@ public class ventanaPrincipal extends JFrame{
         
         menu3 = new JMenu("EQUIPAMIENTO");
         menu3.setFont(new Font("Arial Black", Font.BOLD, 12));
-        equip1 = new JMenuItem("Alta de Equipamiento");
+        equip1 = new JMenuItem("Alta Equipamiento y Mantenimiento");
         equip1.addActionListener(new escuchaEquipamiento(this));
         equip1.setActionCommand("escuchaEquipamiento");
         equip1.setFont(new Font("Arial Black", Font.BOLD, 12));
@@ -105,10 +105,7 @@ public class ventanaPrincipal extends JFrame{
        
         
         
-        
-        
-        
-       
+   
         
         
         //------------------------------------------------------------
@@ -171,11 +168,7 @@ public class ventanaPrincipal extends JFrame{
         
         
         
-        
-        
-        
-        
-        
+
         
         //-----------------------------------------------------------------
         //este es el panel centro que tiene las fotos y demás
@@ -183,22 +176,27 @@ public class ventanaPrincipal extends JFrame{
        
         JPanel p1 = new JPanel();
         p1.setBackground(new Color(240, 240, 230)); 
+  
+        JLabel msj2 = new JLabel("¡Le dejamos nuestro calendario!");
+        msj2.setFont(new Font("Arial Black", Font.BOLD, 13));
         
-        JLabel msj = new JLabel("¡De Lunes a Viernes Abrimos!");
+        JLabel msj = new JLabel("¡De Lunes a Viernes!");
         msj.setFont(new Font("Arial Black", Font.BOLD, 13));
+  
         
         JCalendar calendario = new JCalendar();
         calendario.setBackground(Color.white); 
         calendario.setPreferredSize(new Dimension(200, 150));  // Ajustar el tamaño
         calendario.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 2));  // Borde para hacerlo más profesiona
-        p1.add(msj,BorderLayout.NORTH);
+        p1.add(msj2,BorderLayout.NORTH);
+        p1.add(msj);
         p1.add(calendario); 
         
  
         JPanel p2 = new JPanel();
         p2.setBackground(new Color(240, 240, 230)); 
         JLabel t2 = new JLabel("CON NUEVOS EQUIPAMIENTOS!");
-        t2.setFont(new Font("Arial Black", Font.BOLD, 11));
+        t2.setFont(new Font("Arial Black", Font.BOLD, 12));
         ImageIcon imgEntrenamiento2 = new ImageIcon(new ImageIcon("img/img2.jpg").getImage().getScaledInstance(330, 200, Image.SCALE_SMOOTH));
         JLabel labelEntrenamiento2 = new JLabel(imgEntrenamiento2);
         p2.add(t2, BorderLayout.NORTH);
@@ -209,7 +207,7 @@ public class ventanaPrincipal extends JFrame{
         JPanel p3 = new JPanel();
         p3.setBackground(new Color(240, 240, 230)); 
         JLabel t = new JLabel("PRUEBA NUESTRAS ACTIVIDADES!");
-        t.setFont(new Font("Arial Black", Font.BOLD, 11));
+        t.setFont(new Font("Arial Black", Font.BOLD, 12));
         ImageIcon imgEntrenamiento1 = new ImageIcon(new ImageIcon("img/img1.jpg").getImage().getScaledInstance(330, 200, Image.SCALE_SMOOTH));
         JLabel labelEntrenamiento1 = new JLabel(imgEntrenamiento1);
         p3.add(t, BorderLayout.NORTH);
@@ -241,11 +239,7 @@ public class ventanaPrincipal extends JFrame{
         
 
         
-        
-        
-        
-        
-        
+     
         
         
         
