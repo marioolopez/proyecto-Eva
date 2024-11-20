@@ -26,10 +26,19 @@ public escuchador(AltaActividades aa)
 {
 	altaA=aa;
 }
-public static boolean compvacio(Altatarifas at)
+public static boolean compvaciotar(Altatarifas at)
 {
 	boolean f=true;
 	if(at.getPa().gettext(0).trim().isEmpty()||at.getPa().gettext(1).trim().isEmpty()||at.getPa().getTa().getText().trim().isEmpty())
+{
+	f=false;
+}
+	return f;
+}
+public static boolean compvacioact(AltaActividades aa)
+{
+	boolean f=true;
+	if(aa.getPpa().gettext(0).trim().isEmpty()||aa.getPpa().gettext(1).trim().isEmpty()||aa.getPpa().getCbidsala().getSelectedItem()==null||aa.getPpa().getCbidemple().getSelectedItem()==null)
 {
 	f=false;
 }
@@ -49,11 +58,31 @@ public static void insertartarifa(Altatarifas at) throws ClassNotFoundException,
 		id=1;
 	}
 	b.ejecutarSQL2("Insert into tarifa values("+id+",'"+at.getPa().gettext(0)+"','"+at.getPa().getTa().getText()+"',"+Double.parseDouble(at.getPa().gettext(1))+")");
+	at.getPa().settext(0);
+	at.getPa().settext(1);
 	b.cerrarConex();
 }
-public static void insertaractividad(AltaActividades aa)
+public static void insertaractividad(AltaActividades aa) throws SQLException, ClassNotFoundException
 {
-	
+	BaseDatos b=new BaseDatos();
+	b.abrircon();
+	int id,idsala,idemple;
+	idsala=Integer.parseInt(aa.getPpa().getCbidsala().getSelectedItem().toString());
+	idemple=Integer.parseInt(aa.getPpa().getCbidemple().getSelectedItem().toString());
+	ResultSet res;
+	res=b.ejecutarSQL1("Select id from actividad order by id desc limit 1");
+	if(res.next())
+	{
+		id=res.getInt("id")+1;
+	}else {
+		id=1;
+	}
+	b.ejecutarSQL2("Insert into actividad values("+id+",'"+aa.getPpa().gettext(0)+"','"+aa.getPpa().gettext(1)+"',"+idsala+","+idemple+")");
+	aa.getPpa().settext(0);
+	aa.getPpa().settext(1);
+	aa.getPpa().getCbidsala().setSelectedIndex(-1);
+	aa.getPpa().getCbidemple().setSelectedIndex(-1);
+	b.cerrarConex();
 }
 public static void ids(AltaActividades aa,int pos) throws ClassNotFoundException, SQLException
 {
@@ -62,19 +91,19 @@ public static void ids(AltaActividades aa,int pos) throws ClassNotFoundException
 	if(pos==1)
 	{
 		ResultSet res;
-		res=b.ejecutarSQL1("Select idsala from actividad ");
+		res=b.ejecutarSQL1("Select id from sala ");
 		while(res.next())
 		{
 		
-			aa.getPpa().getCbidsala().addItem(res.getInt("idsala"));
+			aa.getPpa().getCbidsala().addItem(res.getInt("id"));
 		}
 	}else if(pos==2)
 	{
 		ResultSet res;
-		res=b.ejecutarSQL1("Select idempleado from actividad ");
+		res=b.ejecutarSQL1("Select id from empleado ");
 		while(res.next())
 		{
-			aa.getPpa().getCbidemple().addItem(res.getInt("idempleado"));
+			aa.getPpa().getCbidemple().addItem(res.getInt("id"));
 		}
 	}
 	b.cerrarConex();
@@ -106,8 +135,8 @@ public static void ids(AltaActividades aa,int pos) throws ClassNotFoundException
 				e1.printStackTrace();
 			}
 			break;
-		case "Aceptar":
-			if(compvacio(at)==false)
+		case "Aceptartar":
+			if(compvaciotar(at)==false)
 			{
 				JOptionPane.showMessageDialog(null, "Los campos no han sido rellenados","error",JOptionPane.ERROR_MESSAGE);
 			}else {
@@ -119,7 +148,29 @@ public static void ids(AltaActividades aa,int pos) throws ClassNotFoundException
 				}
 			}
 			break;
-		
+		case "Aceptaract":
+			if(compvacioact(altaA)==false)
+			{
+				JOptionPane.showMessageDialog(null, "Los campos no han sido rellenados correctamente","error",JOptionPane.ERROR_MESSAGE);
+			}else {
+				try {
+					insertaractividad(altaA);
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			break;
+		case "Cancelartar":
+			at.getPa().settext(0);
+			at.getPa().getTa().setText(" ");
+			at.getPa().settext(1);
+			break;
+		case "Cancelaract":
+			altaA.getPpa().settext(0);
+			altaA.getPpa().settext(1);
+			altaA.getPpa().getCbidsala().setSelectedIndex(-1);
+			altaA.getPpa().getCbidemple().setSelectedIndex(-1);
 		}
 		
 	}

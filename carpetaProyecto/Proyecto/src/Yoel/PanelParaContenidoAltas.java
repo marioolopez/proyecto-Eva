@@ -41,6 +41,10 @@ public String gettext(int pos)
 {
 	return tx[pos].getText();
 }
+public void settext(int pos)
+{
+	 tx[pos].setText(" ");
+}
 public JLabel[] getLb() {
 	return lb;
 }

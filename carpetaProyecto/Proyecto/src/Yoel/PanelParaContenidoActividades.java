@@ -38,6 +38,14 @@ this.add(cbidemple);
 cbidemple.setActionCommand("idemple");
 cbidemple.addActionListener(new escuchador(a));
 }
+ public String gettext(int pos)
+ {
+	 return tx[pos].getText();
+ }
+ public void settext(int pos)
+ {
+	 tx[pos].setText(" ");
+ }
 public JLabel[] getLbs() {
 	return lbs;
 }

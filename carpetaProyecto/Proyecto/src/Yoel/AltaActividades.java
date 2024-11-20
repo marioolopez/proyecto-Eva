@@ -6,12 +6,12 @@ import javax.swing.JInternalFrame;
 
 public class AltaActividades extends JInternalFrame{
 private PanelParaContenidoActividades ppa;
-private PanelParaBotones pb;
+private PanelParaBotonestar pb;
 public AltaActividades()
 {
 	this.setLayout(new BorderLayout());
 	ppa=new PanelParaContenidoActividades(this);
-	pb=new PanelParaBotones(this);
+	pb=new PanelParaBotonestar(this);
 	this.getContentPane().add(ppa,BorderLayout.CENTER);
 	this.getContentPane().add(pb,BorderLayout.SOUTH);
 	this.setVisible(true);
@@ -22,10 +22,10 @@ public PanelParaContenidoActividades getPpa() {
 public void setPpa(PanelParaContenidoActividades ppa) {
 	this.ppa = ppa;
 }
-public PanelParaBotones getPb() {
+public PanelParaBotonestar getPb() {
 	return pb;
 }
-public void setPb(PanelParaBotones pb) {
+public void setPb(PanelParaBotonestar pb) {
 	this.pb = pb;
 }
 

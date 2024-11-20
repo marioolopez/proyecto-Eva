@@ -27,7 +27,8 @@
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
     <fullyQualifiedTypeName name="Yoel.PanelParaContenidoAltas"/>
-    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="Yoel.Altatarifas"/>
     <fullyQualifiedTypeName name="PaquetePrincipal.BaseDatos"/>
+    <fullyQualifiedTypeName name="Yoel.AltaActividades"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 </qualifiedTypeNameHistroy>

@@ -12,11 +12,11 @@ import PaquetePrincipal.ventanaPrincipal;
 
 public class Altatarifas extends JInternalFrame{
 private PanelParaContenidoAltas pa;
-private PanelParaBotones pb;
+private PanelParaBotonestar pb;
 public Altatarifas() {
 	this.setLayout(new BorderLayout());
 pa=new PanelParaContenidoAltas();
-pb=new PanelParaBotones(this);
+pb=new PanelParaBotonestar(this);
 this.getContentPane().add(pa,BorderLayout.CENTER);
 this.getContentPane().add(pb,BorderLayout.SOUTH);
 this.setVisible(true);
@@ -27,10 +27,10 @@ public PanelParaContenidoAltas getPa() {
 public void setPa(PanelParaContenidoAltas pa) {
 	this.pa = pa;
 }
-public PanelParaBotones getPb() {
+public PanelParaBotonestar getPb() {
 	return pb;
 }
-public void setPb(PanelParaBotones pb) {
+public void setPb(PanelParaBotonestar pb) {
 	this.pb = pb;
 }
 

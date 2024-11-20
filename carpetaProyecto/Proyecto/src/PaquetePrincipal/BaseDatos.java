@@ -11,10 +11,10 @@ public class BaseDatos {
 public void abrircon() throws ClassNotFoundException, SQLException
 {
 	Class.forName("com.mysql.cj.jdbc.Driver");
-	String url = "jdbc:mysql://localhost/gimnasio";//xamp
-	//String url = "jdbc:mysql://localhost/Tienda?serverTimezone=Europe/Madrid";//uniserver
-	c = DriverManager.getConnection(url, "root","");//xamp
-	//c = DriverManager.getConnection(url, "root","12345");//uniserver
+	//String url = "jdbc:mysql://localhost/gimnasio";//xamp
+	String url = "jdbc:mysql://localhost/Gimnasio?serverTimezone=Europe/Madrid";//uniserver
+	//c = DriverManager.getConnection(url, "root","");//xamp
+	c = DriverManager.getConnection(url, "root","12345");//uniserver
 	System.out.println("Conexion realidada!");
 }
 	public Connection getC() {
