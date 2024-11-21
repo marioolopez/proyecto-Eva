@@ -1,0 +1,37 @@
+package ParteMario;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+public class accionEquipamiento2 implements ActionListener {
+	private latizq izq;
+	public accionEquipamiento2(latizq i) {
+	this.izq = i;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		switch(e.getActionCommand()) {
+		
+		case "botonEquip":
+            if (d.getIzq().getTxNom().getText().isEmpty()) {
+                JOptionPane.showMessageDialog(lizq, "Rellene los campos de Equipamiento");
+            } else {
+                try {
+                    int idE = d.getIzq().incrementarEquipamiento();
+                    int idA = d.getIzq().incrementarActividad();
+                    int idMI = d.getIzq().maxMantenimiento();
+                    izq.getBd().ejecutarSQL2("INSERT INTO equipamiento(id, nombre, descripcion, idactividad, idmantenimiento) VALUES('"+idE+"', '"+d.getIzq().getTxNom().getText()+"', '"+d.getIzq().getArea().getText()+"', '"+idA+"', '"+idMI+"')");
+                    izq.getTxNom().setText("");
+                    izq.getArea().setText("");
+                    izq.getNomMantTx().setText("");
+                    JOptionPane.showMessageDialog(d, "Datos insertados correctamente");
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            break;
+			
+		}
+	}
+
+}

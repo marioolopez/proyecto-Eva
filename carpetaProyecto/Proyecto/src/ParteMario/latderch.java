@@ -16,7 +16,8 @@ public class latderch extends JPanel {
 	public latderch(latizq latizq) throws ClassNotFoundException, SQLException{
 		 this.setLayout(new GridLayout(2, 1));
 		 this.izq = latizq;
-	     p1 = new JPanel(new GridLayout(2, 2));
+
+		 p1 = new JPanel(new GridLayout(2, 2));
 	     p1.setBackground(new Color(240, 240, 230)); 
 	     
 	     ImageIcon im1 = new ImageIcon(new ImageIcon("img/pesa.jpg").getImage().getScaledInstance(120, 100, Image.SCALE_SMOOTH));
@@ -58,10 +59,10 @@ public class latderch extends JPanel {
 	     
 	     JPanel pabajo = new JPanel(new GridBagLayout());
 	     pabajo.setBackground(new Color(240, 240, 230)); 
-	     insertar = new JButton("Insertar Todo");
+	     insertar = new JButton("Insertar Mantenedor");
 	     insertar.setActionCommand("botonInsertar");
-	     insertar.setPreferredSize(new Dimension(120, 40));
-	     insertar.addActionListener(new accionEquipamiento(this));
+	     insertar.setPreferredSize(new Dimension(150, 40));
+	     insertar.addActionListener(new accionMantenimiento(this));
 	     pabajo.add(insertar);
 	     p2.add(pabajo);
 	     
@@ -72,7 +73,7 @@ public class latderch extends JPanel {
 	     borrar = new JButton("Borrar Todo");
 	     borrar.setActionCommand("botonBorrar");
 	     borrar.setPreferredSize(new Dimension(120, 40));
-	     borrar.addActionListener(new accionEquipamiento(this));
+	     borrar.addActionListener(new accionMantenimiento(this));
 	     pabajo2.add(borrar);
 	     p2.add(pabajo2);
 	     

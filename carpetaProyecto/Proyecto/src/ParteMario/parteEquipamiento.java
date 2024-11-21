@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import javax.swing.*;
 public class parteEquipamiento extends JInternalFrame{
 	private JPanel p, p1, p2;
-	public parteEquipamiento() throws ClassNotFoundException, SQLException { //hacer publico
+	public parteEquipamiento() throws ClassNotFoundException, SQLException {
 		 p = new JPanel(new GridLayout(1,2));
 		 p.setBorder(BorderFactory.createTitledBorder("ALTA DE EQUIPAMIENTO"));
 	     latizq izquierda = new latizq(); 
