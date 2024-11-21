@@ -44,7 +44,6 @@ public class Compras extends JPanel{
 		//cargar lista productos
 		listaProductosTotal=new ArrayList<ObjeCompra>();
 		listaProductosMet();
-
 		
 		//Cargar interfaz
 		datosMe();

@@ -45,6 +45,7 @@ public class Pedidos extends JInternalFrame{
 	public Pedidos(ventanaPrincipal ven) {
 		super();
 		this.ven=ven;
+		this.setClosable(true);;
 		this.setLayout(new FlowLayout());
 		//INICIALIZA
 		listaObjetosCompras=new DefaultListModel<String>();
@@ -168,7 +169,7 @@ public class Pedidos extends JInternalFrame{
 		}
 	}
 	
-	public void anadirMetPedido() {
+	public void anadirMetPedido() {//Crea el pedido
 		java.util.Date fecha = calendario.getDate();
 		// Luego conviértelo a java.sql.Date
 		java.sql.Date fechaSql = new java.sql.Date(fecha.getTime());
@@ -188,7 +189,7 @@ public class Pedidos extends JInternalFrame{
 		anadirMetCompra();
 	}
 	
-	public void anadirMetCompra() {
+	public void anadirMetCompra() { //Añade las compras despues de crear el pedido
 
 		BaseDatos bs=null;
 		try {
@@ -208,6 +209,7 @@ public class Pedidos extends JInternalFrame{
 			System.out.println("Error con el idMax");
 			e.printStackTrace();
 		}
+		reseteoMet();
 	}
 	
 	//FUNCIONALIDAD
