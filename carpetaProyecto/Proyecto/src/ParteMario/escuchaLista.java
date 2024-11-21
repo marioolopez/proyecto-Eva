@@ -13,7 +13,6 @@ public class escuchaLista implements ActionListener {
 		// TODO Auto-generated method stub
 		switch(e.getActionCommand()) {
 		case "lista":
-			
 			try {
 				ListadoEquipMant em = new ListadoEquipMant();
 				em.setBounds(200, 200, 600, 200);

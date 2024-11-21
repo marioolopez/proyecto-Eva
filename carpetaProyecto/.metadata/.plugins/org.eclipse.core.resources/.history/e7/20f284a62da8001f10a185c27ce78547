@@ -1,0 +1,9 @@
+package ParteMario;
+import javax.swing.JInternalFrame;
+public class PDFEquipamiento extends JInternalFrame{
+
+	public PDFEquipamiento() {
+		// TODO Auto-generated constructor stub
+	}
+	
+}

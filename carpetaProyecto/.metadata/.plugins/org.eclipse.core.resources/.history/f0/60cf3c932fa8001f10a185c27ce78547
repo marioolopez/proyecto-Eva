@@ -1,0 +1,9 @@
+package ParteMario;
+import javax.swing.JDialog;
+public class PDFEquipamiento extends JDialog {
+
+	PDFEquipamiento() {
+
+	}
+	
+}
