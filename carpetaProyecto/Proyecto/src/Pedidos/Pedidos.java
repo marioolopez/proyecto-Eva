@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -35,9 +36,9 @@ public class Pedidos extends JInternalFrame{
 	private DefaultListModel<String> listaObjetosCompras; //Muestra el nombre por la lista
 	private ArrayList<ObjeCompra> listaObjetosComprasTotal; //Almacena los objetos con el id, nombre y cantidad seleccionada por el usuario
 	private DefaultListModel<String> listaClientes; //Muestra nombres
-	//private ArrayList<Cliente> listaClientesTotal;
+	private ArrayList<Cliente> listaClientesTotal; //Almacena todos los clientes
 	private JButton[] boton;
-	private String[] botonesNom= {"Añadir", "mostrar", "modificar", "eliminar"};
+	private String[] botonesNom= {"Añadir", "eliminar", "modificar", "mostrar"};
 	private Compras compra;
 	
 
@@ -51,6 +52,7 @@ public class Pedidos extends JInternalFrame{
 		listaObjetosCompras=new DefaultListModel<String>();
 		listaObjetosComprasTotal=new ArrayList<ObjeCompra>();
 		listaClientes=new DefaultListModel<String>();
+		listaClientesTotal=new ArrayList<Cliente>();
 
 		datosMe();//Dibuja
 		botonesMe();//Dibuja
@@ -101,6 +103,7 @@ public class Pedidos extends JInternalFrame{
 				txt4=new JLabel("Id Compras");
 				der.add(txt4, BorderLayout.NORTH);
 				listaCompras=new JList<String>(listaObjetosCompras);
+				listaCompras.addMouseListener(new AccionListaPedidos(this));
 				barra2=new JScrollPane(listaCompras,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 				der.add(barra2, BorderLayout.CENTER);
 		datos.add(der);
@@ -119,6 +122,8 @@ public class Pedidos extends JInternalFrame{
 			botones.add(boton[i]);
 		}
 		boton[0].setEnabled(false);
+		boton[1].setEnabled(false);
+		boton[1].addActionListener(new PedidosAccion(this));
 		boton[2].setEnabled(false);
 		boton[3].setEnabled(false);
 		this.add(botones);
@@ -143,21 +148,23 @@ public class Pedidos extends JInternalFrame{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error con el idMa 2x");
+			System.out.println("Error con el idMax");
 			e.printStackTrace();
 		}
 		id.setText(String.valueOf(idMax + 1));
 	}
 	
 	public void clientesNombre() {
-		String sql="SELECT nombre FROM cliente";
+		String sql="SELECT nombre, id FROM cliente";
 		BaseDatos bs=null;
 		ResultSet result=null;
 		try {
 			bs=new BaseDatos();
 			result=bs.ejecutarSQL1(sql);
 			while(result.next()) {
-				listaClientes.addElement(result.getString("nombre"));
+				Cliente cliente=new Cliente(result.getString("nombre"), result.getInt("id"));
+				listaClientesTotal.add(cliente);
+				listaClientes.addElement(cliente.getNombre());
 			}
 			bs.cerrarConex();
 		} catch (ClassNotFoundException e) {
@@ -170,27 +177,34 @@ public class Pedidos extends JInternalFrame{
 	}
 	
 	public void anadirMetPedido() {//Crea el pedido
-		java.util.Date fecha = calendario.getDate();
-		// Luego conviértelo a java.sql.Date
-		java.sql.Date fechaSql = new java.sql.Date(fecha.getTime());
-		String sql="INSERT INTO pedido (id, fecha) VALUES ('" + Integer.parseInt(id.getText()) + "','" + fechaSql+ "')";
-		BaseDatos bs=null;
-		try {
-			bs=new BaseDatos();
-			bs.ejecutarSQL2(sql);
-			bs.cerrarConex();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			System.out.println("Error con el idMax");
-			e.printStackTrace();
+		if(validar()) {
+			String cliente= (String) listaCliente.getSelectedValue();
+			int idCliente=0;
+			for(Cliente a:listaClientesTotal) {
+				if(listaCliente.getSelectedValue().equals(a.getNombre())) {
+					idCliente=a.getId();
+				}
+			}
+			java.util.Date fecha = calendario.getDate();
+			java.sql.Date fechaSql = new java.sql.Date(fecha.getTime());
+			String sql="INSERT INTO pedido (id, fecha,idCliente) VALUES ('" + Integer.parseInt(id.getText()) + "','" + fechaSql+ "','" + idCliente + "')";
+			BaseDatos bs=null;
+			try {
+				bs=new BaseDatos();
+				bs.ejecutarSQL2(sql);
+				bs.cerrarConex();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				System.out.println("Error con el idMax");
+				e.printStackTrace();
+			}
+			anadirMetCompra();
 		}
-		anadirMetCompra();
 	}
 	
 	public void anadirMetCompra() { //Añade las compras despues de crear el pedido
-
 		BaseDatos bs=null;
 		try {
 			bs=new BaseDatos();
@@ -212,20 +226,52 @@ public class Pedidos extends JInternalFrame{
 		reseteoMet();
 	}
 	
+	
 	//FUNCIONALIDAD
 	public void listaComprasMet() { //Actualiza y si hay algo activa el botón añadir
 		listaObjetosCompras.removeAllElements();
 		for(ObjeCompra a: listaObjetosComprasTotal) {
 			listaObjetosCompras.addElement(a.getNombre());
 		}
-		boton[0].setEnabled(true);
+		if(listaObjetosComprasTotal.isEmpty()) {
+			boton[0].setEnabled(false);
+		}else {
+			boton[0].setEnabled(true);
+		}
+
 	}
+	
+	public Boolean validar() {
+		if(listaCliente.getSelectedValue()==null) {
+			JOptionPane.showMessageDialog(compra, "Selecciona un cliente");
+			return false;
+		}
+		return true;
+	}
+	
+
 	
 	//Reseteo
 	public void reseteoMet() {
-		listaCliente.clearSelection();
-		calendario.setDate(null);
+		listaObjetosCompras.clear();
+		listaObjetosComprasTotal.clear();
 		id.setText(String.valueOf(Integer.parseInt(id.getText())+1));
+	}
+	//Elimina la compra de la lista
+	public void eliminarCompra() {
+		if(listaCompras.getSelectedValue()!=null) {
+			h
+			//Hay q hacer q desde esta clase se busque los productos y se pasen al hijo, para poder modificar el
+			//tamaño del stock, hay q quitar la opcion modificar, y quitar los demas botones en el panel abajo
+			listaObjetosComprasTotal.remove(listaCompras.getSelectedIndex());
+			listaComprasMet();
+			listaCompras.clearSelection();
+			boton[1].setEnabled(false);
+		}
+	}
+	//Se activa el boton cuando se selecciona algo en la lista compra
+	public void eliminarBoton() {
+		boton[1].setEnabled(true);
 	}
 	
 	
@@ -249,6 +295,7 @@ public class Pedidos extends JInternalFrame{
 	public void setListaObjetosComprasTotal(ArrayList<ObjeCompra> listaObjetosComprasTotal) {
 		this.listaObjetosComprasTotal = listaObjetosComprasTotal;
 	}
+
 	
 	
 	

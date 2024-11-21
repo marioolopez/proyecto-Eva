@@ -17,6 +17,8 @@ public class PedidosAccion implements ActionListener {
 		
 		if(comando.equals("Añadir")) {
 			pedidos.anadirMetPedido();
+		}else if(comando.equals("eliminar")) {
+			pedidos.eliminarCompra();
 		}
 
 	}

@@ -139,17 +139,20 @@ public class Compras extends JPanel{
 		for(ObjeCompra a:listaProductosTotal) {
 			if(a.getNombre().equals(producto)) { //Encontrado
 				int stock=a.getCantidad();
-				
-				cantidad.setEnabled(true);
-				// Max/min
-				cantidad.setMinimum(0);
-				cantidad.setMaximum(stock);
-				//Lineas menores
-				cantidad.setMinorTickSpacing(1);
-				cantidad.setMajorTickSpacing(stock); //Max
+				if(stock==0) {
+					JOptionPane.showMessageDialog(datos, "No hay stock");
+				}else {
+					cantidad.setEnabled(true);
+					// Max/min
+					cantidad.setMinimum(0);
+					cantidad.setMaximum(stock);
+					//Lineas menores
+					cantidad.setMinorTickSpacing(1);
+					cantidad.setMajorTickSpacing(stock); //Max
 
-				cantidad.setPaintTicks(true);
-				cantidad.setPaintLabels(true);
+					cantidad.setPaintTicks(true);
+					cantidad.setPaintLabels(true);
+				}
 			}
 		}
 	}
@@ -175,9 +178,6 @@ public class Compras extends JPanel{
 	        objeCompra =new ObjeCompra(nombreProducto, idProducto, cantidadSeleccionada);
 	        pedidos.getListaObjetosComprasTotal().add(objeCompra);
 	        pedidos.listaComprasMet();
-	        
-	        //Quuito del total
-	        
 		}
 	}
 	

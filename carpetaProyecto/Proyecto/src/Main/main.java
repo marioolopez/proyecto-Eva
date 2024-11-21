@@ -2,7 +2,7 @@ package Main;
 
 import java.sql.SQLException;
 
-public class Main {
+public class main {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		//BaseDatos bd  = new BaseDatos();

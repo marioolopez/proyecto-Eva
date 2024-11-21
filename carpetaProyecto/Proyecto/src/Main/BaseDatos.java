@@ -11,7 +11,7 @@ public class BaseDatos {
 	public BaseDatos() throws SQLException, ClassNotFoundException{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		String url = "jdbc:mysql://localhost:3306/gimnasio?useSSL=false&serverTimezone=Europe/Madrid";
-		c = DriverManager.getConnection(url, "root","root");
+		c = DriverManager.getConnection(url, "root","");
 		System.out.println("Conexion realidada!");
 	}
 	
