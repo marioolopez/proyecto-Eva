@@ -57,6 +57,7 @@ public class latderch extends JPanel {
 	     p2.add(l3);
 	     p2.add(l4);
 	     
+	     
 	     JPanel pabajo = new JPanel(new GridBagLayout());
 	     pabajo.setBackground(new Color(240, 240, 230)); 
 	     insertar = new JButton("Insertar Mantenedor");
@@ -64,8 +65,7 @@ public class latderch extends JPanel {
 	     insertar.setPreferredSize(new Dimension(150, 40));
 	     insertar.addActionListener(new accionMantenimiento(this));
 	     pabajo.add(insertar);
-	     p2.add(pabajo);
-	     
+	     p2.add(pabajo);    
 	     
 	     
 	     JPanel pabajo2 = new JPanel(new GridBagLayout());
