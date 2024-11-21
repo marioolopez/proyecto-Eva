@@ -1,10 +1,16 @@
 package PaquetePrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import Yoel.AltaActividades;
 import Yoel.Altatarifas;
@@ -84,6 +90,14 @@ public static void insertaractividad(AltaActividades aa) throws SQLException, Cl
 	aa.getPpa().getCbidemple().setSelectedIndex(-1);
 	b.cerrarConex();
 }
+public static boolean compnomb(String nombre)
+{boolean f=true;
+	for (int i = 0; i < nombre.length()&&f==true; i++) {
+		if(Character.isDigit(nombre.charAt(i)))
+			f=false;
+	}
+	return f;
+}
 public static void ids(AltaActividades aa,int pos) throws ClassNotFoundException, SQLException
 {
 	BaseDatos b=new BaseDatos();
@@ -107,6 +121,26 @@ public static void ids(AltaActividades aa,int pos) throws ClassNotFoundException
 		}
 	}
 	b.cerrarConex();
+}
+public static void pdf(int pos)
+{
+	JFileChooser elegir=new JFileChooser();
+	elegir.setDialogTitle("Guardar PDF como...");
+	elegir.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	if(pos==1)
+	{
+		elegir.setSelectedFile(new File("Tarifas.pdf"));
+	}else {
+		elegir.setSelectedFile(new File("Salas.pdf"));
+	}
+	int seleccion=elegir.showSaveDialog(null);
+	if(seleccion==JFileChooser.APPROVE_OPTION)
+	{
+		File guardar=elegir.getSelectedFile();
+	}
+	Document doc=new Document();
+	PdfWriter.getInstance(doc,new FileOutputStream(pdfPath));
+	doc.open();
 }
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -139,6 +173,10 @@ public static void ids(AltaActividades aa,int pos) throws ClassNotFoundException
 			if(compvaciotar(at)==false)
 			{
 				JOptionPane.showMessageDialog(null, "Los campos no han sido rellenados","error",JOptionPane.ERROR_MESSAGE);
+			}else if(compnomb(at.getPa().gettext(0))==false)
+			{
+				JOptionPane.showMessageDialog(null, "El nombre no puede tener numeros","error",JOptionPane.ERROR_MESSAGE);
+				at.getPa().settext(0);
 			}else {
 				try {
 					insertartarifa(at);
@@ -152,18 +190,24 @@ public static void ids(AltaActividades aa,int pos) throws ClassNotFoundException
 			if(compvacioact(altaA)==false)
 			{
 				JOptionPane.showMessageDialog(null, "Los campos no han sido rellenados correctamente","error",JOptionPane.ERROR_MESSAGE);
-			}else {
-				try {
-					insertaractividad(altaA);
-				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			}else if(compnomb(altaA.getPpa().gettext(0))==false)
+				{
+					JOptionPane.showMessageDialog(null, "El nombre no puede tener numeros","error",JOptionPane.ERROR_MESSAGE);
+					altaA.getPpa().settext(0);
+				}else {
+					try {
+						insertaractividad(altaA);
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
-			}
+				
+			
 			break;
 		case "Cancelartar":
 			at.getPa().settext(0);
-			at.getPa().getTa().setText(" ");
+			at.getPa().getTa().setText(	" ");
 			at.getPa().settext(1);
 			break;
 		case "Cancelaract":
