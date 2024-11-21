@@ -1,5 +1,7 @@
 package partejuanandres;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import paqueteprincipal.BaseDatos;
@@ -20,7 +22,10 @@ public class PanelEmp extends JInternalFrame{
 	private JCheckBox confirmacion;
 	
 	public PanelEmp (int i,ventanaPrincipal v) throws ClassNotFoundException, SQLException{
-		this.getContentPane().setLayout(new GridLayout(5,2));
+		this.getContentPane().setLayout(new GridLayout(5,2,5,5));
+		
+		
+		
 		
 		
 		identificador=i;
@@ -33,24 +38,35 @@ public class PanelEmp extends JInternalFrame{
 		confirmacion.addItemListener(new Confirmado(this));
 		etiquetas[0]=new JLabel("Codigo: ");
 		campos[0]=new JTextField();
+		campos[0].setBorder(new LineBorder(new Color(122, 108, 67), 5));
+		
 		this.getContentPane().add(etiquetas[0]);
 		this.getContentPane().add(campos[0]);
+		
 		etiquetas[1]=new JLabel("Nombre: ");
 		campos[1]=new JTextField();
+		campos[1].setBorder(new LineBorder(new Color(122, 108, 67), 5));
+		
 		this.getContentPane().add(etiquetas[1]);
 		this.getContentPane().add(campos[1]);
+		
 		etiquetas[2]=new JLabel("DNI: ");
 		campos[2]=new JTextField();
+		campos[2].setBorder(new LineBorder(new Color(122, 108, 67), 5));
+		
 		this.getContentPane().add(etiquetas[2]);
 		this.getContentPane().add(campos[2]);
+		
 		etiquetas[3]=new JLabel("Salario");
 		campos[3]=new JTextField();
+		campos[3].setBorder(new LineBorder(new Color(122, 108, 67), 5));
 		this.getContentPane().add(etiquetas[3]);
 		this.getContentPane().add(campos[3]);
 		
 		for (JTextField x:campos) {
 			x.setFont(new Font("Arial Black",Font.PLAIN,15));
 			x.addFocusListener(new FocoEnTextos(this));
+			
 		}
 		
 		
@@ -120,7 +136,7 @@ public class PanelEmp extends JInternalFrame{
 	campos[0].setEnabled(true);
 		 buscar.setVisible(true);
 		   buscar.setEnabled(true);
-		   confirmacion.setEnabled(true);
+		   confirmacion.setEnabled(false);
 		   confirmacion.setVisible(true);
 		   desactivarcampos();
 		break;
@@ -239,8 +255,11 @@ public class PanelEmp extends JInternalFrame{
 			BaseDatos bd=new BaseDatos();
 			ResultSet rs=bd.ejecutarSQL1("SELECT * FROM empleado WHERE id = "+Integer.parseInt(campos[0].getText().toString())+"");
 			if (rs.next())
-				{rellenarcampos(rs);
+				{
+				rellenarcampos(rs);
 				bd.cerrarConex();
+				confirmacion.setEnabled(true);
+				
 				return true;
 				}
 			else {JOptionPane.showMessageDialog(this,"No existe un Empleado con ese codigo");
@@ -249,6 +268,15 @@ public class PanelEmp extends JInternalFrame{
 			
 		}
 				
+		
+	}
+	public void deshabilitar () {
+		for (JTextField i:campos)
+			i.setEditable(false);
+	}
+	public void habilitar () {
+		for (JTextField i:campos)
+			i.setEditable(true);
 		
 	}
 	public void rellenarcampos(ResultSet rs) throws SQLException {

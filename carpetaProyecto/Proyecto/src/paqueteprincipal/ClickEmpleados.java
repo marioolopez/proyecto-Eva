@@ -93,6 +93,7 @@ public class ClickEmpleados implements ActionListener {
 						break;
 					case 3: try {
 							pel.verificarcampos();
+							
 						} catch (ClassNotFoundException | SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -107,7 +108,16 @@ public class ClickEmpleados implements ActionListener {
 		case "search":  try {
 				if (pel.buscarempleado())
 				{
-					pel.activarcampos();
+					if (pel.getIdentificador()==2)
+					{
+						System.out.println("Estoy buscando para borrar");
+						pel.deshabilitar();
+					}
+					else if (pel.getIdentificador()==3)
+					{
+						System.out.println("Estoy buscando para modificar");
+						pel.activarcampos();
+					}
 					pel.CampoCodigo().setEnabled(false);
 					JOptionPane.showMessageDialog(pel, "Se han cargado los datos del Empleado");
 				}
