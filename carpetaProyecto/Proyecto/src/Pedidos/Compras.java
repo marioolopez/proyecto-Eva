@@ -23,9 +23,9 @@ import Main.BaseDatos;
 
 public class Compras extends JPanel{
 	private Pedidos pedidos;
-	private JLabel txt1,txt2,txt3;
+	private JLabel txt1,txt2;
 
-	private JPanel datos, izq, centro, dere, botones;
+	private JPanel datos, izq, dere, botones;
 	private JButton boton[];
 	private String[] botonesNom= {"Añadir", "modificar", "eliminar"};
 	
@@ -54,27 +54,23 @@ public class Compras extends JPanel{
 	public void datosMe() {
 		this.setLayout(new BorderLayout());
 		datos=new JPanel();
-		datos.setLayout(new GridLayout(1,3));
+		datos.setLayout(new GridLayout(1,2));
+
+		
 			izq=new JPanel();
 			izq.setLayout(new BorderLayout());
-			txt1=new JLabel("Id compra");
+			txt1=new JLabel("Seleccionar productos");
 			izq.add(txt1, BorderLayout.NORTH);
-		datos.add(izq);
-		
-			centro=new JPanel();
-			centro.setLayout(new BorderLayout());
-			txt2=new JLabel("Seleccionar productos");
-			centro.add(txt2, BorderLayout.NORTH);
 			productos=new JList(listaProductos);
 			productos.addMouseListener(new AccionLista(this));
 			barra=new JScrollPane(productos, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			centro.add(barra, BorderLayout.CENTER);
-		datos.add(centro);
+			izq.add(barra, BorderLayout.CENTER);
+		datos.add(izq);
 		
 			dere=new JPanel();
 			dere.setLayout(new BorderLayout());
-			txt3=new JLabel("Cantidad");
-			dere.add(txt3, BorderLayout.NORTH);
+			txt2=new JLabel("Cantidad");
+			dere.add(txt2, BorderLayout.NORTH);
 			cantidad=new JSlider();
 			cantidad.setEnabled(false);
 			dere.add(cantidad,BorderLayout.CENTER);                
