@@ -1,22 +1,21 @@
 package Pedidos;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PedidosAccion implements ActionListener {
-
-	private Pedidos pedidos;
+public class ComprasAccion implements ActionListener {
+	private Compras compras;
 	
-	public PedidosAccion(Pedidos pedidos) {
-		this.pedidos=pedidos;
+	public ComprasAccion(Compras compras) {
+		this.compras=compras;
 	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String comando=e.getActionCommand();
 		
+		//Compras
 		if(comando.equals("Añadir")) {
-			pedidos.anadirMetPedido();
+			compras.compraRealizadaMet();
+			compras.reseteoMet();
 		}
 
 	}

@@ -1,10 +1,13 @@
 package Main;
+
 import java.sql.SQLException;
 
-public class main {
+public class Main {
+
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 		//BaseDatos bd  = new BaseDatos();
-		ventanaPrincipal vp = new ventanaPrincipal();
+		ventanaPrincipal ven=new ventanaPrincipal();
+
 	}
+
 }
