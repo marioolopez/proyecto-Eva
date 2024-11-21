@@ -3,6 +3,14 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="cambiar"/>
+		<item value="validar"/>
 		<item value="cli1"/>
 	</list>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="arioBajaCliente()"/>
+		<list key="findhistory">
+			<item value="arioBajaCliente()"/>
+		</list>
+	</section>
 </section>

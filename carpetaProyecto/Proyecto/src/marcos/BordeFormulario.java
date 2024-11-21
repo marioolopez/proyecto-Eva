@@ -7,10 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -35,6 +37,9 @@ public class BordeFormulario extends JPanel {
     private JSlider barraEdadCliente;
     private JLabel labelIdTarifaCliente;
     private JTextField cajaIdTarifaCliente;
+    private JLabel lblSexo;
+    private JRadioButton BtnHombre,BtnMujer;
+    private ButtonGroup grupoBtns;
     private JButton botonAltaCliente;
     private JButton botonBajaCliente;
     private JButton botonModificacionCliente;
@@ -63,6 +68,12 @@ public class BordeFormulario extends JPanel {
         barraEdadCliente.setPaintLabels(true);//Habilita los numeros.
         labelIdTarifaCliente = new JLabel("introduzca su tarifa:");
         cajaIdTarifaCliente = new JTextField();
+        lblSexo = new JLabel("Sexo:");
+        BtnHombre = new JRadioButton("Hombre");
+        BtnMujer = new JRadioButton("Mujer");
+        grupoBtns = new ButtonGroup();
+        grupoBtns.add(BtnHombre);
+        grupoBtns.add(BtnMujer);
         botonAltaCliente = new JButton("ALTA");
         botonBajaCliente = new JButton("BAJA");
         botonModificacionCliente = new JButton("MODIFICACION");
@@ -83,6 +94,9 @@ public class BordeFormulario extends JPanel {
         barraEdadCliente.setPreferredSize(new Dimension(300, 50));
         labelIdTarifaCliente.setPreferredSize(new Dimension(150, 25));
         cajaIdTarifaCliente.setPreferredSize(new Dimension(150, 25));
+        lblSexo.setPreferredSize(new Dimension(150, 25));
+        BtnHombre.setPreferredSize(new Dimension(75, 25));
+        BtnMujer.setPreferredSize(new Dimension(75, 25));
         botonAltaCliente.setPreferredSize(new Dimension(150, 25));
         botonBajaCliente.setPreferredSize(new Dimension(150, 25));
         botonModificacionCliente.setPreferredSize(new Dimension(150, 25));
@@ -107,10 +121,16 @@ public class BordeFormulario extends JPanel {
         cajaDniCliente.setBackground(Color.LIGHT_GRAY);
         cajaIdTarifaCliente.setBackground(Color.LIGHT_GRAY);
         
+        cajaIdCliente.setForeground(Color.BLACK);
+        cajaNombreCliente.setForeground(Color.BLACK);
+        cajaTelefonoCliente.setForeground(Color.BLACK);
+        cajaDniCliente.setForeground(Color.BLACK);
+        cajaIdTarifaCliente.setForeground(Color.BLACK);
+        
         
         cajaIdCliente.setText(sacarUltimoId() + "");//poner el id de la caja de texto
-        cajaIdCliente.setEnabled(false);
-        
+        cajaIdCliente.setEditable(false);
+        cajaIdCliente.setForeground(Color.BLACK);
         //añadir todos mis componentes
         this.setBorder(bordeFormularioCliente);
         this.add(labelIdCliente);
@@ -125,6 +145,9 @@ public class BordeFormulario extends JPanel {
         this.add(barraEdadCliente);
         this.add(labelIdTarifaCliente);
         this.add(cajaIdTarifaCliente);
+        this.add(lblSexo);
+        this.add(BtnHombre);
+        this.add(BtnMujer);
         this.add(botonAltaCliente);
     }
     
@@ -296,6 +319,11 @@ public class BordeFormulario extends JPanel {
 					cajaDniCliente.setText(rs.getString(4));
 					barraEdadCliente.setValue(rs.getInt(5));
 					cajaIdTarifaCliente.setText(rs.getInt(6) + "");
+					if(rs.getInt(7) == 1) {//el sexo es hombre.
+						BtnHombre.setSelected(true);
+					}else {//el sexo es mujer.
+						BtnMujer.setSelected(true);
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -360,6 +388,11 @@ public class BordeFormulario extends JPanel {
 					cajaDniCliente.setText(rs.getString(4));
 					barraEdadCliente.setValue(rs.getInt(5));
 					cajaIdTarifaCliente.setText(rs.getInt(6) + "");
+					if(rs.getInt(7) == 1) {//el sexo es hombre.
+						BtnHombre.setSelected(true);
+					}else {//el sexo es mujer.
+						BtnMujer.setSelected(true);
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -433,13 +466,22 @@ public class BordeFormulario extends JPanel {
     }
     
     public void cambiarVentanaModificacion() {//cuando cambias a modificacion
-      	cajaIdCliente.setEnabled(true);
-    	cajaNombreCliente.setEnabled(true);
-        cajaTelefonoCliente.setEnabled(true);
-        cajaDniCliente.setEnabled(true);
-        barraEdadCliente.setEnabled(true);
-        cajaIdTarifaCliente.setEnabled(true);
+    	cajaIdCliente.setEditable(true);
+    	cajaNombreCliente.setEditable(false);
+        cajaTelefonoCliente.setEditable(false);
+        cajaDniCliente.setEditable(false);
+        barraEdadCliente.setEnabled(false);
+        cajaIdTarifaCliente.setEditable(false);
+        grupoBtns.clearSelection();
         botonModificacionCliente.setEnabled(false);
+        
+        cajaIdCliente.setForeground(Color.BLACK);
+        cajaNombreCliente.setForeground(Color.BLACK);
+        cajaTelefonoCliente.setForeground(Color.BLACK);
+        cajaDniCliente.setForeground(Color.BLACK);
+        cajaIdTarifaCliente.setForeground(Color.BLACK);
+        botonBajaCliente.setForeground(Color.BLACK);
+        
         cajaNombreCliente.setBackground(Color.RED);
         cajaTelefonoCliente.setBackground(Color.RED);
         cajaDniCliente.setBackground(Color.RED);
@@ -454,18 +496,27 @@ public class BordeFormulario extends JPanel {
     }
 
     public void cambiarVentanaBaja() {//cuando cambias a baja
-      	cajaIdCliente.setEnabled(true);
-    	cajaNombreCliente.setEnabled(false);
-        cajaTelefonoCliente.setEnabled(false);
-        cajaDniCliente.setEnabled(false);
+      	cajaIdCliente.setEditable(true);
+    	cajaNombreCliente.setEditable(false);
+        cajaTelefonoCliente.setEditable(false);
+        cajaDniCliente.setEditable(false);
         barraEdadCliente.setEnabled(false);
-        cajaIdTarifaCliente.setEnabled(false);
+        cajaIdTarifaCliente.setEditable(false);
         botonBajaCliente.setEnabled(false);
         cajaNombreCliente.setBackground(Color.RED);
         cajaTelefonoCliente.setBackground(Color.RED);
         cajaDniCliente.setBackground(Color.RED);
         cajaIdTarifaCliente.setBackground(Color.RED);
+        grupoBtns.clearSelection();
         botonBajaCliente.setBackground(Color.RED);
+        
+        cajaIdCliente.setForeground(Color.BLACK);
+        cajaNombreCliente.setForeground(Color.BLACK);
+        cajaTelefonoCliente.setForeground(Color.BLACK);
+        cajaDniCliente.setForeground(Color.BLACK);
+        cajaIdTarifaCliente.setForeground(Color.BLACK);
+        botonBajaCliente.setForeground(Color.BLACK);
+        
         cajaIdCliente.setText("");
         this.remove(botonBuscarCliente);
         this.add(botonBuscarCliente);
@@ -475,7 +526,23 @@ public class BordeFormulario extends JPanel {
     }
     
     public void cambiarVentanaAlta() {//cuando cambias a alta
-       	this.cajaIdCliente.setEnabled(false);
+     	cajaIdCliente.setEditable(true);
+     	cajaIdCliente.setEditable(true);
+    	cajaNombreCliente.setEditable(false);
+        cajaTelefonoCliente.setEditable(false);
+        cajaDniCliente.setEditable(false);
+        barraEdadCliente.setEnabled(false);
+        cajaIdTarifaCliente.setEditable(false);
+        grupoBtns.clearSelection();
+        botonBajaCliente.setEnabled(false);
+        
+        cajaIdCliente.setForeground(Color.BLACK);
+     	cajaNombreCliente.setForeground(Color.BLACK);
+        cajaTelefonoCliente.setForeground(Color.BLACK);
+        cajaDniCliente.setForeground(Color.BLACK);
+        cajaIdTarifaCliente.setForeground(Color.BLACK);
+        botonBajaCliente.setForeground(Color.BLACK);
+        
     	try {
 			cajaIdCliente.setText(sacarUltimoId() + "");
 		} catch (ClassNotFoundException | SQLException e) {
@@ -526,12 +593,13 @@ public class BordeFormulario extends JPanel {
     }
     
     public void resetearVentanaBaja() {//una vez ya se haya dado de baja
-    	cajaIdCliente.setEnabled(true);
-    	cajaNombreCliente.setEnabled(false);
-        cajaTelefonoCliente.setEnabled(false);
-        cajaDniCliente.setEnabled(false);
+    	cajaIdCliente.setEditable(true);
+    	cajaNombreCliente.setEditable(false);
+        cajaTelefonoCliente.setEditable(false);
+        cajaDniCliente.setEditable(false);
         barraEdadCliente.setEnabled(false);
-        cajaIdTarifaCliente.setEnabled(false);
+        cajaIdTarifaCliente.setEditable(false);
+        grupoBtns.clearSelection();
         cajaIdCliente.setBackground(Color.LIGHT_GRAY);
         cajaNombreCliente.setBackground(Color.RED);
         cajaTelefonoCliente.setBackground(Color.RED);
@@ -546,12 +614,13 @@ public class BordeFormulario extends JPanel {
     }
     
     public void resetearVentanaModificacion() {//una vez ya se haya modificado
-    	cajaIdCliente.setEnabled(true);
-    	cajaNombreCliente.setEnabled(false);
-        cajaTelefonoCliente.setEnabled(false);
-        cajaDniCliente.setEnabled(false);
+    	cajaIdCliente.setEditable(true);
+    	cajaNombreCliente.setEditable(false);
+        cajaTelefonoCliente.setEditable(false);
+        cajaDniCliente.setEditable(false);
         barraEdadCliente.setEnabled(false);
-        cajaIdTarifaCliente.setEnabled(false);
+        cajaIdTarifaCliente.setEditable(false);
+        grupoBtns.clearSelection();
         cajaIdCliente.setBackground(Color.LIGHT_GRAY);
         cajaNombreCliente.setBackground(Color.RED);
         cajaTelefonoCliente.setBackground(Color.RED);
@@ -574,7 +643,41 @@ public class BordeFormulario extends JPanel {
          cajaIdTarifaCliente.setText("");
     }
     
-    public Border getBordeFormularioCliente2() {
+    
+    
+    public JLabel getLblSexo() {
+		return lblSexo;
+	}
+
+	public void setLblSexo(JLabel lblSexo) {
+		this.lblSexo = lblSexo;
+	}
+
+	public JRadioButton getBtnHombre() {
+		return BtnHombre;
+	}
+
+	public void setBtnHombre(JRadioButton btnHombre) {
+		BtnHombre = btnHombre;
+	}
+
+	public JRadioButton getBtnMujer() {
+		return BtnMujer;
+	}
+
+	public void setBtnMujer(JRadioButton btnMujer) {
+		BtnMujer = btnMujer;
+	}
+
+	public ButtonGroup getGrupoBtns() {
+		return grupoBtns;
+	}
+
+	public void setGrupoBtns(ButtonGroup grupoBtns) {
+		this.grupoBtns = grupoBtns;
+	}
+
+	public Border getBordeFormularioCliente2() {
 		return bordeFormularioCliente2;
 	}
 

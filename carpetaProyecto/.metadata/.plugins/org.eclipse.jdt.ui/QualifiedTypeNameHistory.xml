@@ -21,5 +21,6 @@
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="ventanaPrincipal"/>
     <fullyQualifiedTypeName name="onClick"/>
+    <fullyQualifiedTypeName name="porDefecto.ventanaPrincipal"/>
     <fullyQualifiedTypeName name="marcos.VentanaCliente"/>
 </qualifiedTypeNameHistroy>

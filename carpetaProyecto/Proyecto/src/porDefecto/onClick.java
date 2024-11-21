@@ -40,8 +40,14 @@ public class onClick implements ActionListener {
     	String dni = ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaAltaCliente().getBordeFormularioAltaCliente().getCajaDniCliente().getText();
     	int edad = ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaAltaCliente().getBordeFormularioAltaCliente().getBarraEdadCliente().getValue();
     	int idtarifa = Integer.parseInt(ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaAltaCliente().getBordeFormularioAltaCliente().getCajaIdTarifaCliente().getText());
+    	boolean sexo;
+    	if(ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaAltaCliente().getBordeFormularioAltaCliente().getBtnHombre().isSelected()) {
+    		sexo = true;
+    	}else {
+    		sexo = false;
+    	}
     	try {
-			bd.ejecutarSQL2("INSERT INTO cliente VALUES('"+id+"','"+nombre+"','"+telefono+"','"+dni.toUpperCase()+"','"+edad+"','"+idtarifa+"')");
+			bd.ejecutarSQL2("INSERT INTO cliente VALUES('"+id+"','"+nombre+"','"+telefono+"','"+dni.toUpperCase()+"','"+edad+"','"+idtarifa+"','"+sexo+"')");
 			JOptionPane.showMessageDialog(null, "se ha dado de alta correctamente","correcto",JOptionPane.INFORMATION_MESSAGE);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "no se ha podido dar de alta a este cliente","error",JOptionPane.INFORMATION_MESSAGE);
@@ -77,9 +83,9 @@ public class onClick implements ActionListener {
     	idTexto = ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getCajaIdCliente().getText();
     	if (!idTexto.isEmpty()) {
     	   try {
-    	       id = Integer.parseInt(idTexto);
+    	       	id = Integer.parseInt(idTexto);
     	   } catch (NumberFormatException e) {
-    	        	JOptionPane.showMessageDialog(null, "El texto en la caja de ID no es un número válido", "error", JOptionPane.ERROR_MESSAGE);
+    	        JOptionPane.showMessageDialog(null, "El texto en la caja de ID no es un número válido", "error", JOptionPane.ERROR_MESSAGE);
     	   }
     	} else {
     	    JOptionPane.showMessageDialog(null, "La caja de ID está vacía en la pestaña Baja Cliente", "error", JOptionPane.ERROR_MESSAGE);
@@ -214,9 +220,14 @@ public class onClick implements ActionListener {
     	String dni = ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getCajaDniCliente().getText();
     	int edad = ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getBarraEdadCliente().getValue();
     	int idtarifa = Integer.parseInt(ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getCajaIdTarifaCliente().getText());
-    	
-		try {
-			bd.ejecutarSQL2("UPDATE cliente SET nombre = '"+nombre+"',telefono = '"+telefono+"',dni = '"+dni+"',edad = '"+edad+"', idtarifa = '"+idtarifa+"' WHERE id = '"+buscarPorIdModificacion()+"'");
+    	int sexo = 100;
+    	if(ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getBtnHombre().isSelected()) {
+			sexo = 1;
+		}else if(ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getBtnMujer().isSelected()){
+			sexo = 0;
+		}
+    	try {
+			bd.ejecutarSQL2("UPDATE cliente SET nombre = '"+nombre+"',telefono = '"+telefono+"',dni = '"+dni+"',edad = '"+edad+"', idtarifa = '"+idtarifa+"', sexo = '"+sexo+"' WHERE id = '"+buscarPorIdModificacion()+"'");
 			JOptionPane.showMessageDialog(null, "se ha modificado correctamente","correcto",JOptionPane.INFORMATION_MESSAGE);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "no se ha podido modificar a este cliente","error",JOptionPane.INFORMATION_MESSAGE);
@@ -251,7 +262,8 @@ public class onClick implements ActionListener {
             	if(pestañaActiva == 1) {
             		if(buscarPorIdBaja() != 0) {//si el id no es 0(es decir, si el id existe en la base de datos). EN BAJA Y MODFIFICACION
                 		//BAJA
-                		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getCajaIdCliente().setEnabled(false);//DESACTIVAR LA CAJA DEL ID
+            			ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getCajaIdCliente().setForeground(Color.BLACK);
+                		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getCajaIdCliente().setEditable(false);//DESACTIVAR LA CAJA DEL ID
                 		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getBotonBuscarCliente().setEnabled(false);//DESACTIVAR BOTON DE BUSCAR
                 		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getBotonBajaCliente().setEnabled(true);//ACTIVAR BOTON DE BAJA
                 		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().cambiarColoresBaja();//cambiar los colores a verde
@@ -262,7 +274,8 @@ public class onClick implements ActionListener {
             	}else if(pestañaActiva == 2) {
             		if(buscarPorIdModificacion() != 0) {//si el id no es 0(es decir, si el id existe en la base de datos). EN MODFIFICACION
                 		//MODIFICACION.
-                		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getCajaIdCliente().setEnabled(false);//DESACTIVAR LA CAJA DEL ID
+            			ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getCajaIdCliente().setForeground(Color.BLACK);
+                		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getCajaIdCliente().setEditable(false);//DESACTIVAR LA CAJA DEL ID
                 		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getBotonBuscarCliente().setEnabled(false);//DESACTIVAR BOTON DE BUSCAR
                 		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getBotonModificacionCliente().setEnabled(true);//ACTIVAR BOTON DE MODIFICACION
                 		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getBotonModificacionCliente().setBackground(Color.RED);//CAMBIAR COLOR A ROJO OTRA VEZ
@@ -281,15 +294,20 @@ public class onClick implements ActionListener {
             	ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().resetearVentanaBaja();//una vez ya se haya dado de baja
             	ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getBotonBuscarCliente().setEnabled(true);//ACTIVAR BOTON DE BUSCAR
         		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getBotonBajaCliente().setEnabled(false);//DESACTIVAR BOTON DE BAJA
-            break;
+        		//LIMPIAR LOS RADIO BUTTONS
+        		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getGrupoBtns().clearSelection();
+        		break;
             case "botonModificacionCliente":
             	//if todo esta validado que se modifique.
             	if(ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().validarFormulario()) {
             		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getBotonBuscarCliente().setEnabled(true);//ACTIVAR BOTON DE BUSCAR
             		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getBotonModificacionCliente().setEnabled(false);//DESACTIVAR BOTON DE BAJA
             		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getBotonModificacionCliente().setBackground(Color.RED);//CAMBIAR COLOR A ROJO OTRA VEZ
+
             		//MODIFIFACION:
             		modificarCliente();
+            		//LIMPIAR LOS RADIO BUTTONS
+            		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getGrupoBtns().clearSelection();
             		//RESETEAR VENTANA
             		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().resetearVentanaModificacion();
             	}
