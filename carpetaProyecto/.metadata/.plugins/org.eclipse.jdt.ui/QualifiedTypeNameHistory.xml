@@ -44,4 +44,5 @@
     <fullyQualifiedTypeName name="javax.swing.JDialog"/>
     <fullyQualifiedTypeName name="ParteMario.exportarPDFEquip"/>
     <fullyQualifiedTypeName name="ParteMario.PDFEquipamiento"/>
+    <fullyQualifiedTypeName name="com.itextpdf.text.Paragraph"/>
 </qualifiedTypeNameHistroy>

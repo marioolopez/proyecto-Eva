@@ -1,0 +1,74 @@
+package ParteMario;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.PdfPCell;
+import com.itextpdf.text.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+public class exportarPDFEquip implements ActionListener {
+    private ListadoEquipMant listEq;
+
+    public exportarPDFEquip(ListadoEquipMant list) {
+        listEq = list;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()) {
+            case "exportar":
+                exportarTablaAPdf(listEq.getTabla());
+                break;
+        }
+    }
+
+    private void exportarTablaAPdf(JTable tabla) {
+        try {
+            // Crear documento PDF
+            Document documento = new Document();
+            PdfWriter.getInstance(documento, new FileOutputStream("Equipamientos.pdf"));
+            documento.open();
+
+            // Título del PDF
+            documento.add(new Paragraph("LISTADO DE EQUIPAMIENTOS"));
+            documento.add(new Paragraph(" ")); // Espaciado
+
+            // Crear tabla en el PDF
+            TableModel modelo = tabla.getModel();
+            PdfPTable pdfTabla = new PdfPTable(modelo.getColumnCount());
+            pdfTabla.setWidthPercentage(100);
+            pdfTabla.setSpacingBefore(10f);
+
+            // Añadir encabezados de columnas
+            for (int i = 0; i < modelo.getColumnCount(); i++) {
+                PdfPCell celda = new PdfPCell(new Paragraph(modelo.getColumnName(i)));
+                celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+                pdfTabla.addCell(celda);
+            }
+
+            // Añadir datos de las filas
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+                for (int j = 0; j < modelo.getColumnCount(); j++) {
+                    PdfPCell celda = new PdfPCell(new Paragraph(modelo.getValueAt(i, j).toString()));
+                    celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    pdfTabla.addCell(celda);
+                }
+            }
+
+            // Añadir tabla al documento PDF
+            documento.add(pdfTabla);
+            documento.close();
+
+            System.out.println("PDF generado correctamente: Equipamientos.pdf");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+}
