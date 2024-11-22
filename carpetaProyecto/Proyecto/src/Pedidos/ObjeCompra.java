@@ -37,6 +37,12 @@ public class ObjeCompra {
 		this.cantidad = cantidad;
 	}
 
+
+	@Override
+	public String toString() {
+		return "ObjeCompra [nombre=" + nombre + ", id=" + id + ", cantidad=" + cantidad + "]";
+	}
+
 	
 	
 }

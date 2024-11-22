@@ -25,8 +25,7 @@ import com.toedter.calendar.JCalendar;
 import Main.BaseDatos;
 import Main.ventanaPrincipal;
 
-public class Pedidos extends JInternalFrame{
-	private ventanaPrincipal ven;
+public class PedidosAnadir extends JInternalFrame{
 	private JLabel txt1,txt2,txt3,txt4;
 	private JTextField id;
 	private JCalendar calendario;
@@ -41,11 +40,12 @@ public class Pedidos extends JInternalFrame{
 	private String[] botonesNom= {"Añadir", "eliminar", "modificar", "mostrar"};
 	private Compras compra;
 	
+	private ArrayList<ObjeCompra> listaProductosTotal; //Es donde se almacenan todos los productos de la base datos
+	
 
 	//ARRIBA
-	public Pedidos(ventanaPrincipal ven) {
+	public PedidosAnadir() {
 		super();
-		this.ven=ven;
 		this.setClosable(true);;
 		this.setLayout(new FlowLayout());
 		//INICIALIZA
@@ -53,12 +53,14 @@ public class Pedidos extends JInternalFrame{
 		listaObjetosComprasTotal=new ArrayList<ObjeCompra>();
 		listaClientes=new DefaultListModel<String>();
 		listaClientesTotal=new ArrayList<Cliente>();
-
+		
+		listaProductosTotal=new  ArrayList<ObjeCompra>();
 		datosMe();//Dibuja
 		botonesMe();//Dibuja
 		idMax();
 		clientesNombre(); //Muestra los nombres en la lista
-		compra=new Compras(this);
+		
+		compra=new Compras(this,listaProductosTotal);
 		compra.setPreferredSize(new Dimension(700,150));
 		compra.setVisible(true);
 		this.add(compra);
@@ -118,12 +120,12 @@ public class Pedidos extends JInternalFrame{
 		boton=new JButton[botonesNom.length];
 		for(int i=0; i<botonesNom.length; i++) {
 			boton[i]=new JButton(botonesNom[i]);
-			boton[i].addActionListener(new PedidosAccion(this));
+			boton[i].addActionListener(new AccionPedidos(this));
 			botones.add(boton[i]);
 		}
 		boton[0].setEnabled(false);
 		boton[1].setEnabled(false);
-		boton[1].addActionListener(new PedidosAccion(this));
+		boton[1].addActionListener(new AccionPedidos(this));
 		boton[2].setEnabled(false);
 		boton[3].setEnabled(false);
 		this.add(botones);
@@ -248,7 +250,7 @@ public class Pedidos extends JInternalFrame{
 		}
 		return true;
 	}
-	
+		 
 
 	
 	//Reseteo
@@ -257,12 +259,19 @@ public class Pedidos extends JInternalFrame{
 		listaObjetosComprasTotal.clear();
 		id.setText(String.valueOf(Integer.parseInt(id.getText())+1));
 	}
-	//Elimina la compra de la lista
+	//Elimina la compra de la lista y añade el stock restado anteriormente en la clase Compras, METODO compraRealizadaMet
 	public void eliminarCompra() {
 		if(listaCompras.getSelectedValue()!=null) {
-			h
-			//Hay q hacer q desde esta clase se busque los productos y se pasen al hijo, para poder modificar el
-			//tamaño del stock, hay q quitar la opcion modificar, y quitar los demas botones en el panel abajo
+			
+			int index=listaCompras.getSelectedIndex(); //eL INDEX de listaCompras y listaObjetosComprasTotal es el mismo, se añaden en el mismo orden 
+			int cantidad= listaObjetosComprasTotal.get(index).getCantidad();
+			int id=listaObjetosComprasTotal.get(index).getId();
+			for(ObjeCompra a: listaProductosTotal) {
+				if(a.getId()==id) {
+					a.setCantidad(a.getCantidad()+cantidad);
+				}
+			}
+
 			listaObjetosComprasTotal.remove(listaCompras.getSelectedIndex());
 			listaComprasMet();
 			listaCompras.clearSelection();

@@ -22,12 +22,12 @@ import javax.swing.JTextField;
 import Main.BaseDatos;
 
 public class Compras extends JPanel{
-	private Pedidos pedidos;
+	private PedidosAnadir pedidos;
 	private JLabel txt1,txt2;
 
 	private JPanel datos, izq, dere, botones;
 	private JButton boton[];
-	private String[] botonesNom= {"Añadir", "modificar", "eliminar"};
+	private String[] botonesNom= {"Añadir", "modificar"};
 	
 	private ArrayList<ObjeCompra> listaProductosTotal; //Almacena el nombre, su id y stock
 	private DefaultListModel<String> listaProductos;//Solo el nombre del producto q se muesta en la losta
@@ -39,8 +39,9 @@ public class Compras extends JPanel{
 	
 	
 	//ABAJO
-	public Compras(Pedidos pedidos) {
+	public Compras(PedidosAnadir pedidos, ArrayList<ObjeCompra> listaProductosTotal) {
 		this.pedidos=pedidos;
+		this.listaProductosTotal=listaProductosTotal;
 		//cargar lista productos
 		listaProductosTotal=new ArrayList<ObjeCompra>();
 		listaProductosMet();
@@ -84,13 +85,12 @@ public class Compras extends JPanel{
 		boton=new JButton[botonesNom.length];
 		for(int i=0; i<botonesNom.length; i++) {
 			boton[i]=new JButton(botonesNom[i]);
-			boton[i].addActionListener(new ComprasAccion(this));
+			boton[i].addActionListener(new AccionCompras(this));
 			botones.add(boton[i]);
 		}
 		botones.add(new JLabel());
 	
 		boton[1].setEnabled(false);
-		boton[2].setEnabled(false);
 
 		this.add(botones, BorderLayout.SOUTH);
 	}

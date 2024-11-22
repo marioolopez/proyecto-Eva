@@ -3,11 +3,11 @@ package Pedidos;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class AccionListaPedidos implements MouseListener {
-	private PedidosAnadir pedidos;
+public class AccionListaPedidosModificar implements MouseListener {
+	private PedidosModificar ped;
 	
-	public AccionListaPedidos(PedidosAnadir pedidos) {
-		this.pedidos=pedidos;
+	public AccionListaPedidosModificar(PedidosModificar ped) {
+		this.ped=ped;
 	}
 
 	@Override
@@ -18,7 +18,14 @@ public class AccionListaPedidos implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		pedidos.eliminarBoton();
+		Object source = e.getSource();
+		if(source == ped.getListaCliente()){
+			ped.getPanelCompra().setVisible(true);
+			// Actualizar el diseño
+		    ped.revalidate(); 
+		    ped.repaint(); 
+		}
+
 
 	}
 

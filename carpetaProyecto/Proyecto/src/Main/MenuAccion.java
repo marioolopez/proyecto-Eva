@@ -3,7 +3,8 @@ package Main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Pedidos.Pedidos;
+import Pedidos.PedidosAnadir;
+import Pedidos.PedidosModificar;
 
 
 
@@ -21,12 +22,18 @@ public class MenuAccion implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String comando=e.getActionCommand();
 		
-		if(comando.equals("pedido")) {
-			Pedidos pedido=new Pedidos(ven);
+		if(comando.equals("pedidoA")) {
+			PedidosAnadir pedidoA=new PedidosAnadir();
 			
 			ven.getContentPane().removeAll();
-			ven.getContentPane().add(pedido);
-			pedido.setVisible(true);
+			ven.getContentPane().add(pedidoA);
+			pedidoA.setVisible(true);
+		}else if(comando.equals("pedidoM")) {
+			PedidosModificar pedidoM=new PedidosModificar();
+			
+			ven.getContentPane().removeAll();
+			ven.getContentPane().add(pedidoM);
+			pedidoM.setVisible(true);
 		}
 
 	}

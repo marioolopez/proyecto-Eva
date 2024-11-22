@@ -3,11 +3,11 @@ package Pedidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PedidosAccion implements ActionListener {
+public class AccionPedidos implements ActionListener {
 
-	private Pedidos pedidos;
+	private PedidosAnadir pedidos;
 	
-	public PedidosAccion(Pedidos pedidos) {
+	public AccionPedidos(PedidosAnadir pedidos) {
 		this.pedidos=pedidos;
 	}
 	

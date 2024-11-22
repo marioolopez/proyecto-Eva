@@ -13,7 +13,7 @@ public class ventanaPrincipal extends JFrame{
     private JMenuBar barra;
     
 
-	private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3, equip1, prod1, act1, tar1, ped1;
+	private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3, equip1, prod1, act1, tar1, ped1, ped2;
     private JMenu menu1, menu2, menu3, menu4, menu5, menu6, menu7;
     public ventanaPrincipal() {
         setTitle("BIENVENIDO A NUESTRA WEB");
@@ -98,12 +98,17 @@ public class ventanaPrincipal extends JFrame{
         
         
         menu7 = new JMenu("PEDIDOS");
-        ped1 = new JMenuItem("Pedidos");
-        ped1.setActionCommand("pedido");
+        ped1 = new JMenuItem("Pedidos Añandir");
+        ped1.setActionCommand("pedidoA");
         ped1.addActionListener(new MenuAccion(this));
         ped1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        ped2 = new JMenuItem("Pedidos Modificar/Ver");
+        ped2.setActionCommand("pedidoM");
+        ped2.addActionListener(new MenuAccion(this));
+        ped2.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu7.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu7.add(ped1);
+        menu7.add(ped2);
 
         
         barra.add(menu1);
