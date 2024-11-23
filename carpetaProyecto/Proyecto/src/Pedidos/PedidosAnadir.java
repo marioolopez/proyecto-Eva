@@ -33,14 +33,14 @@ public class PedidosAnadir extends JInternalFrame{
 	private JList listaCliente, listaCompras;
 	private JScrollPane barra1,barra2;
 	private DefaultListModel<String> listaObjetosCompras; //Muestra el nombre por la lista
-	private ArrayList<ObjeCompra> listaObjetosComprasTotal; //Almacena los objetos con el id, nombre y cantidad seleccionada por el usuario
+	private ArrayList<ObjCompra> listaObjetosComprasTotal; //Almacena los objetos con el id, nombre y cantidad seleccionada por el usuario
 	private DefaultListModel<String> listaClientes; //Muestra nombres
 	private ArrayList<Cliente> listaClientesTotal; //Almacena todos los clientes
 	private JButton[] boton;
 	private String[] botonesNom= {"Añadir", "eliminar", "modificar", "mostrar"};
 	private Compras compra;
 	
-	private ArrayList<ObjeCompra> listaProductosTotal; //Es donde se almacenan todos los productos de la base datos
+	private ArrayList<ObjCompra> listaProductosTotal; //Es donde se almacenan todos los productos de la base datos
 	
 
 	//ARRIBA
@@ -50,11 +50,11 @@ public class PedidosAnadir extends JInternalFrame{
 		this.setLayout(new FlowLayout());
 		//INICIALIZA
 		listaObjetosCompras=new DefaultListModel<String>();
-		listaObjetosComprasTotal=new ArrayList<ObjeCompra>();
+		listaObjetosComprasTotal=new ArrayList<ObjCompra>();
 		listaClientes=new DefaultListModel<String>();
 		listaClientesTotal=new ArrayList<Cliente>();
 		
-		listaProductosTotal=new  ArrayList<ObjeCompra>();
+		listaProductosTotal=new  ArrayList<ObjCompra>();
 		datosMe();//Dibuja
 		botonesMe();//Dibuja
 		idMax();
@@ -210,7 +210,7 @@ public class PedidosAnadir extends JInternalFrame{
 		BaseDatos bs=null;
 		try {
 			bs=new BaseDatos();
-			for(ObjeCompra a:listaObjetosComprasTotal) {
+			for(ObjCompra a:listaObjetosComprasTotal) {
 				System.out.println(a.getId());
 				int idproducto=a.getId();
 				int cantidad=a.getCantidad();
@@ -232,7 +232,7 @@ public class PedidosAnadir extends JInternalFrame{
 	//FUNCIONALIDAD
 	public void listaComprasMet() { //Actualiza y si hay algo activa el botón añadir
 		listaObjetosCompras.removeAllElements();
-		for(ObjeCompra a: listaObjetosComprasTotal) {
+		for(ObjCompra a: listaObjetosComprasTotal) {
 			listaObjetosCompras.addElement(a.getNombre());
 		}
 		if(listaObjetosComprasTotal.isEmpty()) {
@@ -266,7 +266,7 @@ public class PedidosAnadir extends JInternalFrame{
 			int index=listaCompras.getSelectedIndex(); //eL INDEX de listaCompras y listaObjetosComprasTotal es el mismo, se añaden en el mismo orden 
 			int cantidad= listaObjetosComprasTotal.get(index).getCantidad();
 			int id=listaObjetosComprasTotal.get(index).getId();
-			for(ObjeCompra a: listaProductosTotal) {
+			for(ObjCompra a: listaProductosTotal) {
 				if(a.getId()==id) {
 					a.setCantidad(a.getCantidad()+cantidad);
 				}
@@ -297,11 +297,11 @@ public class PedidosAnadir extends JInternalFrame{
 		this.listaCompras = listaCompras;
 	}
 
-	public ArrayList<ObjeCompra> getListaObjetosComprasTotal() {
+	public ArrayList<ObjCompra> getListaObjetosComprasTotal() {
 		return listaObjetosComprasTotal;
 	}
 
-	public void setListaObjetosComprasTotal(ArrayList<ObjeCompra> listaObjetosComprasTotal) {
+	public void setListaObjetosComprasTotal(ArrayList<ObjCompra> listaObjetosComprasTotal) {
 		this.listaObjetosComprasTotal = listaObjetosComprasTotal;
 	}
 

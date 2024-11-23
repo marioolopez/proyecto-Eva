@@ -29,7 +29,7 @@ public class Compras extends JPanel{
 	private JButton boton[];
 	private String[] botonesNom= {"Añadir", "modificar"};
 	
-	private ArrayList<ObjeCompra> listaProductosTotal; //Almacena el nombre, su id y stock
+	private ArrayList<ObjCompra> listaProductosTotal; //Almacena el nombre, su id y stock
 	private DefaultListModel<String> listaProductos;//Solo el nombre del producto q se muesta en la losta
 	private JScrollPane barra;
 	private JList productos;
@@ -39,11 +39,11 @@ public class Compras extends JPanel{
 	
 	
 	//ABAJO
-	public Compras(PedidosAnadir pedidos, ArrayList<ObjeCompra> listaProductosTotal) {
+	public Compras(PedidosAnadir pedidos, ArrayList<ObjCompra> listaProductosTotal) {
 		this.pedidos=pedidos;
 		this.listaProductosTotal=listaProductosTotal;
 		//cargar lista productos
-		listaProductosTotal=new ArrayList<ObjeCompra>();
+		listaProductosTotal=new ArrayList<ObjCompra>();
 		listaProductosMet();
 		
 		//Cargar interfaz
@@ -109,7 +109,7 @@ public class Compras extends JPanel{
 			result=bs.ejecutarSQL1(sql);
 			
 			while(result.next()) {
-				ObjeCompra objeCompra=new ObjeCompra(result.getString("nombre"), result.getInt("id"), result.getInt("stock"));
+				ObjCompra objeCompra=new ObjCompra(result.getString("nombre"), result.getInt("id"), result.getInt("stock"));
 				listaProductosTotal.add(objeCompra);
 			}
 			bs.cerrarConex();
@@ -125,7 +125,7 @@ public class Compras extends JPanel{
 			
 		}
 		
-		for(ObjeCompra nombres:listaProductosTotal ) {
+		for(ObjCompra nombres:listaProductosTotal ) {
 			listaProductos.addElement(nombres.getNombre());
 		}
 	}
@@ -136,7 +136,7 @@ public class Compras extends JPanel{
 	//Busca el producto seleccionado y mira en el array la cantidad para sl JSlider
 	public void cantidadMet(String producto) { //Se activa desde AccionLista
 		
-		for(ObjeCompra a:listaProductosTotal) {
+		for(ObjCompra a:listaProductosTotal) {
 			if(a.getNombre().equals(producto)) { //Encontrado
 				int stock=a.getCantidad();
 				if(stock==0) {
@@ -159,14 +159,14 @@ public class Compras extends JPanel{
 	
 	 //Cuando se de al boton añadir este objeto se crea y se pasa a la lista listaCompras en Pedidos
 	public void compraRealizadaMet() {
-		ObjeCompra objeCompra=null;
+		ObjCompra objeCompra=null;
 		if(validar()) {
 			String nombreProducto = (String) productos.getSelectedValue();
 	        int cantidadSeleccionada = cantidad.getValue();
 	        //Busco id
-	        ObjeCompra compraRealizada = null;
+	        ObjCompra compraRealizada = null;
 	        int idProducto=0;
-	        for (ObjeCompra producto : listaProductosTotal) {
+	        for (ObjCompra producto : listaProductosTotal) {
 	            if (producto.getNombre().equals(nombreProducto)) {
 	            	idProducto=producto.getId();
 	            	
@@ -175,7 +175,7 @@ public class Compras extends JPanel{
 	                break;
 	            }
 	        }
-	        objeCompra =new ObjeCompra(nombreProducto, idProducto, cantidadSeleccionada);
+	        objeCompra =new ObjCompra(nombreProducto, idProducto, cantidadSeleccionada);
 	        pedidos.getListaObjetosComprasTotal().add(objeCompra);
 	        pedidos.listaComprasMet();
 		}
@@ -219,10 +219,10 @@ public class Compras extends JPanel{
 	public void setProductos(JList productos) {
 		this.productos = productos;
 	}
-	public ArrayList<ObjeCompra> getListaProductosTotal() {
+	public ArrayList<ObjCompra> getListaProductosTotal() {
 		return listaProductosTotal;
 	}
-	public void setListaProductosTotal(ArrayList<ObjeCompra> listaProductosTotal) {
+	public void setListaProductosTotal(ArrayList<ObjCompra> listaProductosTotal) {
 		this.listaProductosTotal = listaProductosTotal;
 	}
 	

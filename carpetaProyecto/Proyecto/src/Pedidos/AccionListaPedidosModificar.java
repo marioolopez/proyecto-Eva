@@ -20,10 +20,10 @@ public class AccionListaPedidosModificar implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		Object source = e.getSource();
 		if(source == ped.getListaCliente()){
-			ped.getPanelCompra().setVisible(true);
-			// Actualizar el diseño
-		    ped.revalidate(); 
-		    ped.repaint(); 
+		    //Busca los pedidos
+		    ped.pedidosCliente();
+		   ¡
+
 		}
 
 

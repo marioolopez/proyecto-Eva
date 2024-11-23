@@ -1,17 +1,17 @@
 package Pedidos;
 
-public class ObjeCompra {
+public class ObjCompra {
 	private String nombre;
 	private int id,cantidad;
 
 	
-	public ObjeCompra(String nombre, int id, int cantidad) {
+	public ObjCompra(String nombre, int id, int cantidad) {
 		super();
 		this.nombre = nombre;
 		this.id = id;
 		this.cantidad = cantidad;
 	}
-
+	
 
 	public String getNombre() {
 		return nombre;
