@@ -17,7 +17,7 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import porDefecto.BaseDatos;
+import Conexiones.BaseDatos;
 import porDefecto.onClick;
 import porDefecto.ventanaPrincipal;
 
@@ -165,7 +165,7 @@ public class BordeFormulario extends JPanel {
     
     public boolean validarFormulario() {
     	
-    	if(!validarNombre() || !validarTelefono() || !validarDni() || !validarIdTarifaCliente()) {
+    	if(!validarNombre() || !validarTelefono() || !validarDni() || !validarIdTarifaCliente() || !validarSexo()) {
     		return false;
     	}
     	
@@ -275,6 +275,15 @@ public class BordeFormulario extends JPanel {
         return validado;
     }
     
+    public boolean validarSexo() {
+    	 boolean validado = true;
+    	 if(!BtnHombre.isSelected() && !BtnMujer.isSelected()) {
+    		 JOptionPane.showMessageDialog(null, "El sexo debes rellenarlo", "Error", JOptionPane.ERROR_MESSAGE);
+    		 validado = false;
+    	 }
+    	 return validado;
+    }
+    
     public void rellenarTextoVentanaBaja() {//autocompleta las cajas de texto si existe el id al darle al boton de buscar.
     	BaseDatos bd = null;
 		try {
@@ -286,6 +295,14 @@ public class BordeFormulario extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try {
+			bd.conexionBD();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
     	try {
 			bd.crearStm();
 		} catch (SQLException e) {
@@ -355,12 +372,19 @@ public class BordeFormulario extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			bd.conexionBD();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     	try {
 			bd.crearStm();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	
     	int id = 0;
     	String idTexto = cajaIdCliente.getText();
  	    if (!idTexto.isEmpty()) {
@@ -423,6 +447,12 @@ public class BordeFormulario extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			bd.conexionBD();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         try {
 			bd.crearStm();
 		} catch (SQLException e) {
@@ -454,6 +484,7 @@ public class BordeFormulario extends JPanel {
     public int sacarUltimoId() throws SQLException, ClassNotFoundException {//busco el ultimo id, para actualizar la caja de texto
     	int id = 0;
     	BaseDatos bd = new BaseDatos();
+		bd.conexionBD();
 		bd.crearStm();
 		ResultSet rs = bd.ejecutarSQL1("SELECT max(id) FROM cliente");
 		if(rs.next()) {
@@ -472,6 +503,8 @@ public class BordeFormulario extends JPanel {
         cajaDniCliente.setEditable(false);
         barraEdadCliente.setEnabled(false);
         cajaIdTarifaCliente.setEditable(false);
+        BtnHombre.setEnabled(false);
+        BtnMujer.setEnabled(false);
         grupoBtns.clearSelection();
         botonModificacionCliente.setEnabled(false);
         
@@ -501,6 +534,8 @@ public class BordeFormulario extends JPanel {
         cajaTelefonoCliente.setEditable(false);
         cajaDniCliente.setEditable(false);
         barraEdadCliente.setEnabled(false);
+        BtnHombre.setEnabled(false);
+        BtnMujer.setEnabled(false);
         cajaIdTarifaCliente.setEditable(false);
         botonBajaCliente.setEnabled(false);
         cajaNombreCliente.setBackground(Color.RED);
@@ -527,21 +562,19 @@ public class BordeFormulario extends JPanel {
     
     public void cambiarVentanaAlta() {//cuando cambias a alta
      	cajaIdCliente.setEditable(true);
-     	cajaIdCliente.setEditable(true);
-    	cajaNombreCliente.setEditable(false);
-        cajaTelefonoCliente.setEditable(false);
-        cajaDniCliente.setEditable(false);
-        barraEdadCliente.setEnabled(false);
-        cajaIdTarifaCliente.setEditable(false);
+    	cajaNombreCliente.setEditable(true);
+        cajaTelefonoCliente.setEditable(true);
+        cajaDniCliente.setEditable(true);
+        barraEdadCliente.setEnabled(true);
+        cajaIdTarifaCliente.setEditable(true);
         grupoBtns.clearSelection();
-        botonBajaCliente.setEnabled(false);
         
         cajaIdCliente.setForeground(Color.BLACK);
      	cajaNombreCliente.setForeground(Color.BLACK);
         cajaTelefonoCliente.setForeground(Color.BLACK);
         cajaDniCliente.setForeground(Color.BLACK);
         cajaIdTarifaCliente.setForeground(Color.BLACK);
-        botonBajaCliente.setForeground(Color.BLACK);
+        botonAltaCliente.setForeground(Color.BLACK);
         
     	try {
 			cajaIdCliente.setText(sacarUltimoId() + "");
@@ -554,7 +587,7 @@ public class BordeFormulario extends JPanel {
          this.remove(botonModificacionCliente);
     }
     
-    public void cambiarColoresBaja() {//si existe un id en la base de datos(al darle al boton buscar).
+    public void cambiarColoresBaja() {//si existe un id en la base de datos(al darle al boton buscar en baja).
     	cajaIdCliente.setBackground(Color.GREEN);
        	cajaNombreCliente.setBackground(Color.GREEN);
      	cajaTelefonoCliente.setBackground(Color.GREEN);
@@ -564,7 +597,7 @@ public class BordeFormulario extends JPanel {
      	botonBuscarCliente.setBackground(Color.RED);
     }
     
-    public void cambiarColoresModificacion() {//si existe un id en la base de datos(al darle al boton buscar).
+    public void cambiarColoresModificacion() {//si existe un id en la base de datos(al darle al boton buscar en modificacion).
     	cajaIdCliente.setBackground(Color.GREEN);
        	cajaNombreCliente.setBackground(Color.GREEN);
      	cajaTelefonoCliente.setBackground(Color.GREEN);
@@ -575,11 +608,11 @@ public class BordeFormulario extends JPanel {
     }
     
     public void activarComponentesModificacion() {
-       	cajaNombreCliente.setEnabled(true);
-     	cajaTelefonoCliente.setEnabled(true);
-     	cajaDniCliente.setEnabled(true);
+       	cajaNombreCliente.setEditable(true);
+     	cajaTelefonoCliente.setEditable(true);
+     	cajaDniCliente.setEditable(true);
      	barraEdadCliente.setEnabled(true);
-     	cajaIdTarifaCliente.setEnabled(true);
+     	cajaIdTarifaCliente.setEditable(true);
     }
     
     public void resetearVentanaAlta() {//una vez ya se haya dado de alta
@@ -599,7 +632,6 @@ public class BordeFormulario extends JPanel {
         cajaDniCliente.setEditable(false);
         barraEdadCliente.setEnabled(false);
         cajaIdTarifaCliente.setEditable(false);
-        grupoBtns.clearSelection();
         cajaIdCliente.setBackground(Color.LIGHT_GRAY);
         cajaNombreCliente.setBackground(Color.RED);
         cajaTelefonoCliente.setBackground(Color.RED);
@@ -620,7 +652,6 @@ public class BordeFormulario extends JPanel {
         cajaDniCliente.setEditable(false);
         barraEdadCliente.setEnabled(false);
         cajaIdTarifaCliente.setEditable(false);
-        grupoBtns.clearSelection();
         cajaIdCliente.setBackground(Color.LIGHT_GRAY);
         cajaNombreCliente.setBackground(Color.RED);
         cajaTelefonoCliente.setBackground(Color.RED);
@@ -640,11 +671,10 @@ public class BordeFormulario extends JPanel {
          cajaTelefonoCliente.setText("");
          cajaDniCliente.setText("");
          barraEdadCliente.setValue(45);//porque es asi por defecto
+         grupoBtns.clearSelection();
          cajaIdTarifaCliente.setText("");
     }
-    
-    
-    
+   
     public JLabel getLblSexo() {
 		return lblSexo;
 	}

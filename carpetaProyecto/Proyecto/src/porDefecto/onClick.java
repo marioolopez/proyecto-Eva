@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+import Conexiones.BaseDatos;
+
 public class onClick implements ActionListener {
     private ventanaPrincipal ventanaPrincipal;
     
@@ -17,6 +19,12 @@ public class onClick implements ActionListener {
     	BaseDatos bd = null;
 		try {
 			bd = new BaseDatos();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			bd.conexionBD();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,11 +48,11 @@ public class onClick implements ActionListener {
     	String dni = ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaAltaCliente().getBordeFormularioAltaCliente().getCajaDniCliente().getText();
     	int edad = ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaAltaCliente().getBordeFormularioAltaCliente().getBarraEdadCliente().getValue();
     	int idtarifa = Integer.parseInt(ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaAltaCliente().getBordeFormularioAltaCliente().getCajaIdTarifaCliente().getText());
-    	boolean sexo;
+    	int sexo;
     	if(ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaAltaCliente().getBordeFormularioAltaCliente().getBtnHombre().isSelected()) {
-    		sexo = true;
+    		sexo = 1;
     	}else {
-    		sexo = false;
+    		sexo = 0;
     	}
     	try {
 			bd.ejecutarSQL2("INSERT INTO cliente VALUES('"+id+"','"+nombre+"','"+telefono+"','"+dni.toUpperCase()+"','"+edad+"','"+idtarifa+"','"+sexo+"')");
@@ -66,6 +74,12 @@ public class onClick implements ActionListener {
     	BaseDatos bd = null;
 		try {
 			bd = new BaseDatos();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			bd.conexionBD();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,6 +132,12 @@ public class onClick implements ActionListener {
     	BaseDatos bd = null;
 		try {
 			bd = new BaseDatos();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			bd.conexionBD();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -176,6 +196,12 @@ public class onClick implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			bd.conexionBD();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	try {
 			bd.crearStm();
 		} catch (SQLException e) {
@@ -204,6 +230,12 @@ public class onClick implements ActionListener {
     	BaseDatos bd = null;
 		try {
 			bd = new BaseDatos();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			bd.conexionBD();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -281,7 +313,10 @@ public class onClick implements ActionListener {
                 		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaBajaCliente().getBordeFormularioBajaCliente().getBotonModificacionCliente().setBackground(Color.RED);//CAMBIAR COLOR A ROJO OTRA VEZ
                 		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().cambiarColoresModificacion();//cambiar los colores a verde
                 		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().rellenarTextoVentanaModificacion();//autocompleto las cajas de texto con lo de la base de datos de ese id
-                		
+                		  
+                		//ACTIVAR RADIO BUTTONS
+                		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getBtnHombre().setEnabled(true);
+                		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().getBtnMujer().setEnabled(true);
                 		//ACTIVAR CAJAS DE TEXTO PARA MODIFICAR MENOS LA DEL ID.
                 		ventanaPrincipal.getVentanaCliente().getVentanaMultipleCliente().getVentanaModificacionCliente().getBordeFormularioModificacionCliente().activarComponentesModificacion();
             		}else {
