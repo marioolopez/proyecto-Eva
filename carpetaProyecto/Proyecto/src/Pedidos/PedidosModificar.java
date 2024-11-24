@@ -124,44 +124,18 @@ public class PedidosModificar extends JInternalFrame{
 	public void pedidosCliente() {		//Saca el id del cliente que se ha seleccionado
 		int index=(int) listaCliente.getSelectedIndex();
 		ObjCliente cliente=gestionClientes.getListaClientesTotal().get(index);
-		int idCliente=cliente.getId();
+		int idCliente=cliente.getId(); //Saca el id
 		
 		gestionPedidos.buscarPedidosCliente(idCliente);
 	}
 	
 
-
-
-	
-
-	
 	public void buscarCompras() {
 		String pedido[]= listaPedido.getSelectedValue().toString().split(" ");
 		int id= Integer.parseInt(pedido[1]);
 		//System.out.println(id);
+		gestionPedidos.buscarCompras(id);
 		
-		String sql="SELECT compra.cantidad, producto.nombre, pedido.fechaEntrega FROM compra JOIN producto ON compra.idProducto = producto.id "
-				+ "JOIN pedido ON pedido.id = compra.idpedido WHERE compra.idpedido = '" + id + "'";
-		BaseDatos bs=null;
-		ResultSet result=null;
-		try {
-			bs=new BaseDatos();
-			result=bs.ejecutarSQL1(sql);
-			while(result.next()) {
-				int cantidad=result.getInt("cantidad");
-				String nombre=result.getString("nombre");
-				Date fechaEntrega=result.getDate("fechaEntrega");
-				ObjCompra objCompra=new ObjCompra(nombre, cantidad, fechaEntrega);
-
-			}
-			bs.cerrarConex();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			System.out.println("Error con buscarCompras");
-			e.printStackTrace();
-		}
 	}
 	
 	

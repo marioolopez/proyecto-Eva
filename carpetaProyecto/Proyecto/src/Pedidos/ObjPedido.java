@@ -14,8 +14,9 @@ public class ObjPedido {
 	private int id;
 	private Date fechaRealizada, fechaEntrega;
 	
-	private ArrayList<ObjPedido> listaPedidosTotal;
+	private ArrayList<ObjPedido> listaPedidosTotal, listaCompraTotal;
 	private DefaultListModel<String> listaPedidos;
+
 	
 	public ObjPedido() {
 		this.listaPedidosTotal=new ArrayList<ObjPedido>();
@@ -125,6 +126,31 @@ public class ObjPedido {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.println("Error con anadirMetCompra");
+			e.printStackTrace();
+		}
+	}
+	
+	public void buscarCompras(int id) {
+		String sql="SELECT compra.cantidad, producto.nombre, pedido.fechaEntrega FROM compra JOIN producto ON compra.idProducto = producto.id "
+				+ "JOIN pedido ON pedido.id = compra.idpedido WHERE compra.idpedido = '" + id + "'";
+		BaseDatos bs=null;
+		ResultSet result=null;
+		try {
+			bs=new BaseDatos();
+			result=bs.ejecutarSQL1(sql);
+			while(result.next()) {
+				int cantidad=result.getInt("cantidad");
+				String nombre=result.getString("nombre");
+				Date fechaEntrega=result.getDate("fechaEntrega");
+				ObjCompra objCompra=new ObjCompra(nombre, cantidad, fechaEntrega);
+
+			}
+			bs.cerrarConex();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error con buscarCompras");
 			e.printStackTrace();
 		}
 	}

@@ -22,6 +22,8 @@ public class AccionListaPedidosModificar implements MouseListener {
 		if(source == ped.getListaCliente()){
 		    //Busca los pedidos
 		    ped.pedidosCliente();
+		}else if(source == ped.getListaPedido()){
+			ped.buscarCompras();
 		}
 
 
