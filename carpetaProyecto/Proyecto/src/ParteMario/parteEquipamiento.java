@@ -2,7 +2,10 @@ package ParteMario;
 import java.awt.GridLayout;
 import java.sql.SQLException;
 import javax.swing.*;
-public class parteEquipamiento extends JInternalFrame{
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+public class parteEquipamiento extends JInternalFrame {
 	private JPanel p, p1, p2;
 	public parteEquipamiento() throws ClassNotFoundException, SQLException {
 		 p = new JPanel(new GridLayout(1,2));
@@ -12,7 +15,8 @@ public class parteEquipamiento extends JInternalFrame{
 	     p.add(izquierda);
 	     p.add(derecha);
 	     this.add(p);
-	     this.setVisible(true); 
+	     this.setVisible(true);
+	     this.setClosable(true);   
 	}
 	public JPanel getP() {
 		return p;

@@ -45,4 +45,7 @@
     <fullyQualifiedTypeName name="ParteMario.exportarPDFEquip"/>
     <fullyQualifiedTypeName name="ParteMario.PDFEquipamiento"/>
     <fullyQualifiedTypeName name="com.itextpdf.text.Paragraph"/>
+    <fullyQualifiedTypeName name="javax.swing.event.InternalFrameListener"/>
+    <fullyQualifiedTypeName name="javax.swing.event.InternalFrameAdapter"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
 </qualifiedTypeNameHistroy>

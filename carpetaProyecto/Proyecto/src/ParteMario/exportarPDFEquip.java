@@ -36,8 +36,8 @@ public class exportarPDFEquip implements ActionListener {
         pdf.add(listados);
         pdf.add(espacio);
 
-        // Crear una tabla en el PDF
-        TableModel modelo = tabla.getModel();
+        
+        TableModel modelo = tabla.getModel(); //creo una tabla en el pdf
         PdfPTable pdfTabla = new PdfPTable(modelo.getColumnCount()); // Igual al número de columnas
 
         // Agregar encabezados de columna
@@ -52,7 +52,7 @@ public class exportarPDFEquip implements ActionListener {
             }
         }
 
-        pdf.add(pdfTabla); //añadimos
+        pdf.add(pdfTabla); //añadimos en el pdf todo lo que le hemos metido a el tableModel
         pdf.close();
     }
 }
