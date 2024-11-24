@@ -1,9 +1,0 @@
-package ParteMario;
-import javax.swing.JPanel;
-public class ladodrch extends JPanel{
-	
-	ladodrch(){
-		
-	}
-
-}
