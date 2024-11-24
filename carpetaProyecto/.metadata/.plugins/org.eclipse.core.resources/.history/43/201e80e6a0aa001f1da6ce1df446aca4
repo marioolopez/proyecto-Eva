@@ -20,19 +20,18 @@ public class accionEquipamiento implements ActionListener {
             }  
             if(enc){
             	JOptionPane.showMessageDialog(izq, "Rellene los campos de Equipamiento");
-            	enc = false;	
+            	enc = false;
+            	
+            	if(izq.getTxNom().getText().matches(".*\\d.*") || izq.getArea().getText().matches(".*\\d.*")) {
+                    JOptionPane.showMessageDialog(izq, "No puedes introducir datos numéricos, solo texto.");
+                    return;
+    			}
             }
             else {
                 try {
                     int idE = izq.incrementarEquipamiento();
                     int idA = izq.incrementarActividad();
                     int idMI = izq.maxMantenimiento();
-                    
-                    if(izq.getTxNom().getText().matches(".*\\d.*") || izq.getArea().getText().matches(".*\\d.*")) {
-                        JOptionPane.showMessageDialog(izq, "No puedes introducir datos numéricos, solo texto.");
-                        return;
-        			}
-                    
                     izq.getBd().ejecutarSQL2("INSERT INTO equipamiento(id, nombre, descripcion, idactividad, idmantenimiento) VALUES('"+idE+"', '"+izq.getTxNom().getText()+"', '"+izq.getArea().getText()+"', '"+idA+"', '"+idMI+"')");
                     JOptionPane.showMessageDialog(izq, "Datos insertados correctamente");
                 } catch (SQLException e1) {

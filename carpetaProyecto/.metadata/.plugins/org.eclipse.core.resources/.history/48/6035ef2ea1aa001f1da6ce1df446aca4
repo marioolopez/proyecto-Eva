@@ -24,6 +24,7 @@ public class accionEquipamiento implements ActionListener {
             }
             else {
                 try {
+                	
                     int idE = izq.incrementarEquipamiento();
                     int idA = izq.incrementarActividad();
                     int idMI = izq.maxMantenimiento();
