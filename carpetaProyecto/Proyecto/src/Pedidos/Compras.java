@@ -22,29 +22,26 @@ import javax.swing.JTextField;
 import Main.BaseDatos;
 
 public class Compras extends JPanel{
-	private PedidosAnadir pedidos;
+	private Pedidos pedidos;
 	private JLabel txt1,txt2;
 
 	private JPanel datos, izq, dere, botones;
 	private JButton boton[];
 	private String[] botonesNom= {"Añadir", "modificar"};
 	
-	private ArrayList<ObjCompra> listaProductosTotal; //Almacena el nombre, su id y stock
-	private DefaultListModel<String> listaProductos;//Solo el nombre del producto q se muesta en la losta
+
 	private JScrollPane barra;
-	private JList productos;
+	private JList listaProducto;
 	private JSlider cantidad;
 	
-
+	private ObjCompra gestionCompras;
 	
 	
 	//ABAJO
-	public Compras(PedidosAnadir pedidos, ArrayList<ObjCompra> listaProductosTotal) {
+	public Compras(Pedidos pedidos, ObjCompra gestionCompras) {
 		this.pedidos=pedidos;
-		this.listaProductosTotal=listaProductosTotal;
-		//cargar lista productos
-		listaProductosTotal=new ArrayList<ObjCompra>();
-		listaProductosMet();
+		this.gestionCompras=gestionCompras;
+		
 		
 		//Cargar interfaz
 		datosMe();
@@ -61,9 +58,9 @@ public class Compras extends JPanel{
 			izq.setLayout(new BorderLayout());
 			txt1=new JLabel("Seleccionar productos");
 			izq.add(txt1, BorderLayout.NORTH);
-			productos=new JList(listaProductos);
-			productos.addMouseListener(new AccionLista(this));
-			barra=new JScrollPane(productos, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			listaProducto=new JList(gestionCompras.getListaProductos());
+			listaProducto.addMouseListener(new AccionListaCompras(this));
+			barra=new JScrollPane(listaProducto, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			izq.add(barra, BorderLayout.CENTER);
 		datos.add(izq);
 		
@@ -97,46 +94,11 @@ public class Compras extends JPanel{
 	
 	
 	
-
-	//BASEDATOS
-	
-	public void listaProductosMet() {
-		String sql="SELECT nombre,id,stock FROM producto WHERE stock>0";
-		BaseDatos bs=null;
-		ResultSet result=null;
-		try {
-			bs=new BaseDatos();
-			result=bs.ejecutarSQL1(sql);
-			
-			while(result.next()) {
-				ObjCompra objeCompra=new ObjCompra(result.getString("nombre"), result.getInt("id"), result.getInt("stock"));
-				listaProductosTotal.add(objeCompra);
-			}
-			bs.cerrarConex();
-		} catch (ClassNotFoundException e) {
-		
-			e.printStackTrace();
-		} catch (SQLException e) {
-			System.out.println("error en listaProductosMet");
-			e.printStackTrace();
-		}
-		listaProductos=new DefaultListModel<String>();
-		for(int i=0; i<listaProductosTotal.size(); i ++) {
-			
-		}
-		
-		for(ObjCompra nombres:listaProductosTotal ) {
-			listaProductos.addElement(nombres.getNombre());
-		}
-	}
-	
-	
-	
 	//FUNCIONALIDAD
 	//Busca el producto seleccionado y mira en el array la cantidad para sl JSlider
 	public void cantidadMet(String producto) { //Se activa desde AccionLista
 		
-		for(ObjCompra a:listaProductosTotal) {
+		for(ObjCompra a:gestionCompras.getListaProductosTotal()) {
 			if(a.getNombre().equals(producto)) { //Encontrado
 				int stock=a.getCantidad();
 				if(stock==0) {
@@ -157,32 +119,32 @@ public class Compras extends JPanel{
 		}
 	}
 	
-	 //Cuando se de al boton añadir este objeto se crea y se pasa a la lista listaCompras en Pedidos
+	 //Cuando se de al boton añadir este objeto se crea y se pasa a la lista listaComprasTotal
 	public void compraRealizadaMet() {
-		ObjCompra objeCompra=null;
+		ObjCompra compraProducto=null;
 		if(validar()) {
-			String nombreProducto = (String) productos.getSelectedValue();
+			String nombreProducto = (String) listaProducto.getSelectedValue(); 
 	        int cantidadSeleccionada = cantidad.getValue();
 	        //Busco id
-	        ObjCompra compraRealizada = null;
 	        int idProducto=0;
-	        for (ObjCompra producto : listaProductosTotal) {
+	        for (ObjCompra producto : gestionCompras.getListaProductosTotal()) {
+	        	System.out.println(producto);
 	            if (producto.getNombre().equals(nombreProducto)) {
-	            	idProducto=producto.getId();
+	            	idProducto=producto.getId(); //Saco la id del producto
 	            	
 	            	int cantidadMax=producto.getCantidad(); //RESTO LA CANTIDAD Q COMPRA
 	            	producto.setCantidad(cantidadMax-cantidadSeleccionada);
 	                break;
 	            }
 	        }
-	        objeCompra =new ObjCompra(nombreProducto, idProducto, cantidadSeleccionada);
-	        pedidos.getListaObjetosComprasTotal().add(objeCompra);
-	        pedidos.listaComprasMet();
+	        compraProducto =new ObjCompra(nombreProducto, idProducto, cantidadSeleccionada); //Compra realizada
+	        gestionCompras.getListaComprasTotal().add(compraProducto);
+	        pedidos.listaComprasMet(); //Actualiza la lista
 		}
 	}
 	
 	public boolean validar() {
-		if(productos.isSelectionEmpty()) {
+		if(listaProducto.isSelectionEmpty()) {
 			JOptionPane.showMessageDialog(botones, "Selecciona un producto");
 		}else if(cantidad.getValue()==0){
 			JOptionPane.showMessageDialog(botones, "Selecciona una cantidad");
@@ -195,8 +157,8 @@ public class Compras extends JPanel{
 	
 	//Reseteo
 	public void reseteoMet() {
-		productos.clearSelection();
-		cantidad.setEnabled(false);
+		listaProducto.clearSelection();
+		cantidad.setEnabled(false); //Oculto el JSpinner
 	}
 	
 	
@@ -214,18 +176,18 @@ public class Compras extends JPanel{
 	
 	
 	public JList getProductos() {
-		return productos;
+		return listaProducto;
 	}
 	public void setProductos(JList productos) {
-		this.productos = productos;
+		this.listaProducto = productos;
 	}
-	public ArrayList<ObjCompra> getListaProductosTotal() {
-		return listaProductosTotal;
+	public JList getListaProducto() {
+		return listaProducto;
 	}
-	public void setListaProductosTotal(ArrayList<ObjCompra> listaProductosTotal) {
-		this.listaProductosTotal = listaProductosTotal;
+	public void setListaProducto(JList listaProducto) {
+		this.listaProducto = listaProducto;
 	}
-	
+
 	
 }
 

@@ -4,10 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AccionPedidos implements ActionListener {
-
-	private PedidosAnadir pedidos;
+	private Pedidos pedidos;
 	
-	public AccionPedidos(PedidosAnadir pedidos) {
+	public AccionPedidos(Pedidos pedidos) {
 		this.pedidos=pedidos;
 	}
 	
@@ -16,7 +15,7 @@ public class AccionPedidos implements ActionListener {
 		String comando=e.getActionCommand();
 		
 		if(comando.equals("Añadir")) {
-			pedidos.anadirMetPedido();
+			pedidos.anadePedidoBD();
 		}else if(comando.equals("eliminar")) {
 			pedidos.eliminarCompra();
 		}

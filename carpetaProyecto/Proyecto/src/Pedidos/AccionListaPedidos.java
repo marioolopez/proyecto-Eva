@@ -4,9 +4,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class AccionListaPedidos implements MouseListener {
-	private PedidosAnadir pedidos;
+	private Pedidos pedidos;
 	
-	public AccionListaPedidos(PedidosAnadir pedidos) {
+	public AccionListaPedidos(Pedidos pedidos) {
 		this.pedidos=pedidos;
 	}
 

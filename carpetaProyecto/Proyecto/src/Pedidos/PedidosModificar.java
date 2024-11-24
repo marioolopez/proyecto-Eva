@@ -27,22 +27,21 @@ import Main.BaseDatos;
 public class PedidosModificar extends JInternalFrame{
 	private JPanel panelCliente, panelCompra, panelArriba, panelAbajo, panelCompras, panelEditar, panelBotones, panelEditarNorte, panelEditarCentro;
 	private JLabel txt1,txt2,txt3,txt4,txt5;
-	private DefaultListModel<String> listaClientes, listaCompras;
-	private ArrayList<Cliente> listaClientesTotal;
-	private ArrayList<ObjPedido> listaComprasTotal;
+	private DefaultListModel<String> listasCompras;
+
+
 	private JList listaCliente, listaPedido, listaCompra;
 	private JScrollPane barra1,barra2,barra3;
 	private JSpinner cantidad;
 	private JComboBox productos;
 	private JButton guardar, eliminar;
+	private ObjCliente gestionClientes;
+	private ObjPedido gestionPedidos;
+	
 	public PedidosModificar() {
 		this.setLayout(new GridLayout(2,1, 15 ,10));
-
-		listaClientes=new DefaultListModel<String>();
-		listaClientesTotal=new ArrayList<Cliente>();
-		listaComprasTotal=new ArrayList<ObjPedido>();
-		listaCompras=new DefaultListModel<String>();
-		clientesNombre();
+		gestionClientes=new ObjCliente();
+		gestionPedidos=new ObjPedido();
 		
 		//DIBUJA
 		dibujoMe1();
@@ -59,7 +58,7 @@ public class PedidosModificar extends JInternalFrame{
 			panelCliente.setLayout(new BorderLayout());
 			txt1=new JLabel("Lista clientes");
 			panelCliente.add(txt1, BorderLayout.NORTH);
-			listaCliente=new JList(listaClientes);
+			listaCliente=new JList(gestionClientes.getListaClientes());
 			listaCliente.addMouseListener(new AccionListaPedidosModificar(this));
 			barra1=new JScrollPane(listaCliente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			panelCliente.add(barra1, BorderLayout.CENTER);
@@ -70,7 +69,7 @@ public class PedidosModificar extends JInternalFrame{
 			panelCompra.setLayout(new BorderLayout());
 			txt2=new JLabel("Lista compras del cliente");
 			panelCompra.add(txt2, BorderLayout.NORTH);
-			listaPedido=new JList<String>(listaCompras);
+			listaPedido=new JList<String>(gestionPedidos.getListaPedidos());
 			listaPedido.addMouseListener(new AccionListaPedidosModificar(this));
 			barra2=new JScrollPane(listaPedido, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			panelCompra.add(barra2, BorderLayout.CENTER);
@@ -122,61 +121,45 @@ public class PedidosModificar extends JInternalFrame{
 		
 	}	
 	
-	
-	
-
-
-	public void clientesNombre() {
-		String sql="SELECT nombre, id FROM cliente";
-		BaseDatos bs=null;
-		ResultSet result=null;
-		try {
-			bs=new BaseDatos();
-			result=bs.ejecutarSQL1(sql);
-			while(result.next()) {
-				Cliente cliente=new Cliente(result.getString("nombre"), result.getInt("id"));
-				listaClientesTotal.add(cliente);
-				listaClientes.addElement(cliente.getNombre());
-			}
-			bs.cerrarConex();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			System.out.println("Error con el idMax");
-			e.printStackTrace();
-		}
+	public void pedidosCliente() {		//Saca el id del cliente que se ha seleccionado
+		int index=(int) listaCliente.getSelectedIndex();
+		ObjCliente cliente=gestionClientes.getListaClientesTotal().get(index);
+		int idCliente=cliente.getId();
+		
+		gestionPedidos.buscarPedidosCliente(idCliente);
 	}
 	
-	//Busca pedidos del cliente seleccionado
-	public void pedidosCliente() { 
-		//Saca el id del cliente que se ha seleccionado
-		int index=(int) listaCliente.getSelectedIndex();
-		Cliente cliente=listaClientesTotal.get(index);
-		int idCliente=cliente.getId();
-		//Limpia
-		listaComprasTotal.clear();
-		listaCompras.clear();
-		//Busca en db
-		String sql="SELECT id, fecha FROM pedido WHERE id= '" + idCliente + "'" ;
+
+
+
+	
+
+	
+	public void buscarCompras() {
+		String pedido[]= listaPedido.getSelectedValue().toString().split(" ");
+		int id= Integer.parseInt(pedido[1]);
+		//System.out.println(id);
+		
+		String sql="SELECT compra.cantidad, producto.nombre, pedido.fechaEntrega FROM compra JOIN producto ON compra.idProducto = producto.id "
+				+ "JOIN pedido ON pedido.id = compra.idpedido WHERE compra.idpedido = '" + id + "'";
 		BaseDatos bs=null;
 		ResultSet result=null;
 		try {
 			bs=new BaseDatos();
 			result=bs.ejecutarSQL1(sql);
 			while(result.next()) {
-				int idPedido=result.getInt("id");
-				Date fecha=result.getDate("fecha");
-				ObjPedido objePedido=new ObjPedido(idPedido,fecha);
-				listaComprasTotal.add(objePedido);
-				listaCompras.addElement(idPedido + " / " + fecha);
+				int cantidad=result.getInt("cantidad");
+				String nombre=result.getString("nombre");
+				Date fechaEntrega=result.getDate("fechaEntrega");
+				ObjCompra objCompra=new ObjCompra(nombre, cantidad, fechaEntrega);
+
 			}
 			bs.cerrarConex();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error con el idMax");
+			System.out.println("Error con buscarCompras");
 			e.printStackTrace();
 		}
 	}
@@ -221,6 +204,16 @@ public class PedidosModificar extends JInternalFrame{
 
 	public void setPanelArriba(JPanel panelArriba) {
 		this.panelArriba = panelArriba;
+	}
+
+
+	public JList getListaPedido() {
+		return listaPedido;
+	}
+
+
+	public void setListaPedido(JList listaPedido) {
+		this.listaPedido = listaPedido;
 	}
 	
 	

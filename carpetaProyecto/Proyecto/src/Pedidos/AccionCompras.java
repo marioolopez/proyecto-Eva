@@ -7,17 +7,18 @@ public class AccionCompras implements ActionListener {
 	
 	public AccionCompras(Compras compras) {
 		this.compras=compras;
+
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String comando=e.getActionCommand();
 		
-		//Compras
 		if(comando.equals("Añadir")) {
 			compras.compraRealizadaMet();
 			compras.reseteoMet();
-		}
 
+	}
 	}
 
 }

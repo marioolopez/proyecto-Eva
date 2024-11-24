@@ -3,24 +3,28 @@ package Pedidos;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class AccionLista implements MouseListener {
+public class AccionListaCompras implements MouseListener {
 	private Compras compras;
 	
-	public AccionLista(Compras compras) {
+	public AccionListaCompras(Compras compras) {
 		this.compras=compras;
+
 	}
 
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
-		
-
 	}
+	
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		String producto=(String) compras.getProductos().getSelectedValue();
-		compras.cantidadMet(producto);
+		Object source = e.getSource();
+
+		if(source == compras.getListaProducto()) {
+			String producto=(String) compras.getProductos().getSelectedValue();
+			compras.cantidadMet(producto);
+		}
 
 	}
 
