@@ -15,7 +15,7 @@ public class latizq extends JPanel {
 	private JTextArea area;
 	private BaseDatos bd;
 	private JScrollPane barraDespliz;
-	private JButton seguimiento, botonEq;
+	private JButton seguimiento, botonEq, modificar;
 	public latizq() throws ClassNotFoundException, SQLException {	
 		bd = new BaseDatos();
 		bd.conexionBD();
@@ -77,9 +77,9 @@ public class latizq extends JPanel {
         p2.add(barraDespliz);
        
         
-        seguimiento = new JButton("Ver listado");
+        seguimiento = new JButton("Listado");
         seguimiento.setActionCommand("lista");
-        seguimiento.setPreferredSize(new Dimension(120, 20));
+        seguimiento.setPreferredSize(new Dimension(100, 20));
         seguimiento.addActionListener(new escuchaLista(this));
         p2.add(seguimiento);
         
@@ -89,6 +89,13 @@ public class latizq extends JPanel {
         botonEq.setPreferredSize(new Dimension(160, 20));
         botonEq.addActionListener(new accionEquipamiento(this));
         p2.add(botonEq);
+        
+        
+        modificar = new JButton("Modificar");
+        modificar.setActionCommand("mod");
+        modificar.setPreferredSize(new Dimension(90, 20));
+        modificar.addActionListener(new accionEquipamiento(this));
+        p2.add(modificar);
         
         this.add(p1);
         this.add(p2);
@@ -135,6 +142,12 @@ public class latizq extends JPanel {
 		}
 	}
 
+	public JButton getModificar() {
+		return modificar;
+	}
+	public void setModificar(JButton modificar) {
+		this.modificar = modificar;
+	}
 	public JScrollPane getBarraDespliz() {
 		return barraDespliz;
 	}

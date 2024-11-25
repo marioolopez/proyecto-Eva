@@ -5,7 +5,7 @@ import ParteMario.parteEquipamiento;
 public class escuchaEquipamiento implements ActionListener {
 	private ventanaPrincipal vp;
 	private parteEquipamiento pe;
-	escuchaEquipamiento(ventanaPrincipal vpp) throws ClassNotFoundException, SQLException{
+	escuchaEquipamiento(ventanaPrincipal vpp) throws ClassNotFoundException, SQLException {
 		vp = vpp;
 		pe = new parteEquipamiento();
 	}

@@ -40,6 +40,20 @@ public class accionEquipamiento implements ActionListener {
                 }
             }
             break;
+            
+            
+		case "mod":
+		
+			try {
+				modificarInformacion modInfo = new modificarInformacion();
+				modInfo.setBounds(200, 200, 600, 400);
+				modInfo.setVisible(true);
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				
+			break;
 		}
 	}
 }

@@ -1,0 +1,65 @@
+package ParteMario;
+import javax.swing.JDialog;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.*;
+public class modificarInformacion extends JDialog {
+	private JPanel p;
+	private JButton modificar, salir;
+	private JTextField id, nombre, descrip, idact, idmante;
+	private JComboBox<String>c;
+	private latizq lizq;
+	modificarInformacion() throws ClassNotFoundException, SQLException{
+		lizq = new latizq();
+		
+		JPanel parriba = new JPanel();
+		ResultSet rs = lizq.getBd().ejecutarSQL1("SELECT * FROM equipamiento");
+		c = new JComboBox<String>();
+		c.setPreferredSize(new Dimension(120, 20));
+		while(rs.next()) {
+			String idnombre = rs.getInt("id") + "-" + rs.getString("nombre");
+			c.addItem(idnombre);
+		}
+		
+		parriba.add(c);
+		this.add(parriba, BorderLayout.NORTH);
+		
+		p = new JPanel(new BorderLayout());
+		p.setBorder(BorderFactory.createTitledBorder("MODIFICACIÓN DEL EQUIPAMIENTO"));
+		
+		JLabel idEq = new JLabel("Id Equipamiento:");
+		id = new JTextField();
+		id.setPreferredSize(new Dimension(120, 20));
+		p.add(idEq);
+		p.add(id);
+		
+		JLabel nombreEq = new JLabel("Nombre Equipamiento:");
+		nombre = new JTextField();
+		nombre.setPreferredSize(new Dimension(120, 20));
+		p.add(nombreEq);
+		
+		JLabel descripcion = new JLabel("Descripcion Equipamiento:");
+		descrip = new JTextField();
+		descrip.setPreferredSize(new Dimension(120, 20));
+		
+		JLabel idAct = new JLabel("Id Actividad:");
+		idact = new JTextField();
+		idact.setPreferredSize(new Dimension(120, 20));
+		
+		JLabel idMant = new JLabel("Id Mantenimiento:");
+		idmante = new JTextField();
+		idmante.setPreferredSize(new Dimension(120, 20));
+		
+		this.add(p, BorderLayout.CENTER);	
+		
+		
+		JPanel pabajo = new JPanel();
+		modificar = new JButton("Modificar");
+		salir = new JButton("Salir");
+		pabajo.add(modificar);
+		pabajo.add(salir);
+		this.add(pabajo, BorderLayout.SOUTH);
+	}
+}

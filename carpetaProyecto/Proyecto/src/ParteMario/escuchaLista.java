@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 public class escuchaLista implements ActionListener {
 	private latizq lizq;
-	private ListadoEquipMant em;
 	escuchaLista(latizq lz){
 		lizq = lz;
 	}
