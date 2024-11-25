@@ -118,30 +118,7 @@ public class ObjPedido {
 			}
 		}
 		
-		//Casa la id Max de pedido
-		public int idMax() {
-			int idMax=0;
-			String sql="SELECT MAX(id) FROM pedido";
-			BaseDatos bs=null;
-			ResultSet result=null;
-			try {
-				bs=new BaseDatos();
-				result=bs.ejecutarSQL1(sql);
-				
-				if(result.next()) {
-					idMax=result.getInt("MAX(id)");
-				}
-				bs.cerrarConex();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				System.out.println("Error con el idMax");
-				e.printStackTrace();
-			}
-			idMax++;
-			return idMax;
-		}
+		
 		
 		
 		public void anadirMetPedido(String cliente, int idCliente, Date fechaSql, String id, ObjPedido gestionCompras) {//Crea el pedido

@@ -27,6 +27,8 @@ public class ObjCliente {
 		this.id = id;
 	}
 	
+
+	
 	
 	public void clientesNombre() {
 		String sql="SELECT nombre, id FROM cliente";
