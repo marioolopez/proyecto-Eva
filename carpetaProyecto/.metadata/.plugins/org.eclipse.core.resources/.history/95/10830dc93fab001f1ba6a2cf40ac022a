@@ -45,7 +45,7 @@ public class exportarPDFEquip implements ActionListener {
             pdfTabla.addCell(modelo.getColumnName(col));
         }
 
-        //agrego datos de la tabla
+        //agregar datos de la tabla
         for(int datos = 0; datos < modelo.getRowCount(); datos++){
             for(int col = 0; col < modelo.getColumnCount(); col++) {
                 pdfTabla.addCell(modelo.getValueAt(datos, col).toString());

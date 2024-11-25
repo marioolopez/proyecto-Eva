@@ -21,8 +21,8 @@ public class latizq extends JPanel {
 		bd.conexionBD();
 		
 		this.setLayout(new GridLayout(2, 1));
-        p1 = new JPanel(new GridLayout(4,2)); 
-	    p1.setBackground(new Color(240, 240, 230));
+        p1 = new JPanel(new GridLayout(4,2));
+	    p1.setBackground(new Color(240, 240, 230)); 
 
         NomId = new JLabel("Ultimo Id Equipamiento:");
         NomId.setFont(new Font("Arial Black", Font.BOLD, 12));

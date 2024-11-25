@@ -41,8 +41,8 @@ public class exportarPDFEquip implements ActionListener {
         PdfPTable pdfTabla = new PdfPTable(modelo.getColumnCount()); //igual al número de columnas
 
         //agrego encabezados de columna
-        for(int col = 0; col < modelo.getColumnCount(); col++){
-            pdfTabla.addCell(modelo.getColumnName(col));
+        for(int i = 0; i < modelo.getColumnCount(); i++){
+            pdfTabla.addCell(modelo.getColumnName(i));
         }
 
         //agrego datos de la tabla

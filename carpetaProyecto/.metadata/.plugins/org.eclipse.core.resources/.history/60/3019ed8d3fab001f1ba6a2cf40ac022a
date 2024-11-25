@@ -99,7 +99,7 @@ public class ventanaPrincipal extends JFrame {
         barra.add(menu4);
         barra.add(menu5);
         barra.add(menu6);
-        this.setJMenuBar(barra); //hasta aqui todo son opciones en el JMenuBar
+        this.add(barra); //hasta aqui todo son opciones en el JMenuBar
         //-----------------------------------------------------------
        
         

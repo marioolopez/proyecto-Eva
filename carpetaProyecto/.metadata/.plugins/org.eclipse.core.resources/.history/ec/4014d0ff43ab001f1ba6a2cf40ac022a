@@ -34,7 +34,8 @@ public class ListadoEquipMant extends JDialog {
         pboton.add(exportarPdf);
         this.add(pboton, BorderLayout.SOUTH);      
 	}
-
+	
+	
 	private void cargarInfo() throws SQLException {
 		 ResultSet rs = lizq.getBd().ejecutarSQL1("SELECT id, nombre, descripcion, idactividad, idmantenimiento FROM equipamiento");
 	        while(rs.next()) {

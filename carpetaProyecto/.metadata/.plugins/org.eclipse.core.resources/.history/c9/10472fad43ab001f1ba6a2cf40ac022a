@@ -13,7 +13,7 @@ public class latderch extends JPanel {
 	private JTextField nomMantTx;
 	private latizq izq;
 	private JButton insertar, borrar;
-	public latderch(latizq latizq) throws ClassNotFoundException, SQLException {
+	public latderch(latizq latizq) throws ClassNotFoundException, SQLException{
 		 this.setLayout(new GridLayout(2, 1));
 		 this.izq = latizq;
 

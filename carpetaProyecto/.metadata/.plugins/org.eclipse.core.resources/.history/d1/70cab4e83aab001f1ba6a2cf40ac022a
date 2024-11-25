@@ -26,7 +26,7 @@ public class accionMantenimiento implements ActionListener {
 	                    try {
 	                        int idMI = d.getIzq().incrementarMantenimientoTablaMantenimiento();
 	                        
-	                        if(d.getNomMantTx().getText().matches(".*\\d.*")) {
+	                        if(d.getNomMantTx().getText().matches("")) {
 	                            JOptionPane.showMessageDialog(d, "No puedes introducir datos numéricos, solo texto.");
 	                            return;
 	            			}

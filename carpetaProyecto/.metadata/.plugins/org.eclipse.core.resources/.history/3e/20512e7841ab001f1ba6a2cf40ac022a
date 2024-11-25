@@ -212,7 +212,7 @@ public class ventanaPrincipal extends JFrame {
         
        
         
-        JPanel p4 = new JPanel(new BorderLayout());
+        JPanel p4 = new JPanel();
         p4.setBackground(new Color(240, 240, 230)); 
         JLabel imgmapa = new JLabel(new ImageIcon(new ImageIcon("img/mapa.png").getImage().getScaledInstance(130, 110, Image.SCALE_SMOOTH)));
         imgmapa.addMouseListener(new MouseAdapter() {
