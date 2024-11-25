@@ -9,9 +9,6 @@ import java.sql.SQLException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -133,7 +130,7 @@ public static void pdf(int pos)
 	if(pos==1)
 	{
 		elegir.setSelectedFile(new File("Tarifas.pdf"));
-	}else if(pos==2){
+	}else {
 		elegir.setSelectedFile(new File("Salas.pdf"));
 	}
 	int seleccion=elegir.showSaveDialog(null);
@@ -141,86 +138,10 @@ public static void pdf(int pos)
 	{
 		File guardar=elegir.getSelectedFile();
 	}
-
-    int userSelection = elegir.showSaveDialog(this);
-
-
-    if (userSelection == JFileChooser.APPROVE_OPTION) {
-
-        String filePath = elegir.getSelectedFile().getAbsolutePath();
-
-
-        // Create PDF Document
-
-        PdfWriter writer = new PdfWriter(filePath + ".pdf");
-
-        PdfDocument pdfDocument = new PdfDocument(writer);
-
-        Document document = new Document(pdfDocument); 
-
-
-        // Añadimos un titulo
-if(pos==1)
-{
-	document.add(new Paragraph("Tarifas Del Gimnasio").setBold().setFontSize(18).setMarginBottom(20));
-}else {
-	document.add(new Paragraph("Salas Del Gimanasio").setBold().setFontSize(18).setMarginBottom(20));
+	Document doc=new Document();
+	PdfWriter.getInstance(doc,new FileOutputStream(pdfPath));
+	doc.open();
 }
-        
-
-
-        // Creamos la tabla para pdf
-
-        int columnCount = listado.getColumnCount();
-
-        Table pdfTable = new Table(columnCount); 
-
-
-        // Añadimos las cabeceras
-
-        for (int col = 0; col < columnCount; col++) {
-
-            pdfTable.addHeaderCell(listado.getColumnName(col));
-
-        }
-
-
-        // Añadir las filas de LISTADO a la tabla que sera exportada
-
-        for (int row = 0; row < listado.getRowCount(); row++) {
-
-            for (int col = 0; col < columnCount; col++) {
-
-                Object cellValue = listado.getValueAt(row, col);
-
-                pdfTable.addCell(cellValue != null ? cellValue.toString() : "");
-
-            }
-
-        }
-
-
-        // Añadimos la tabla al documento
-
-        document.add(pdfTable);
-
-
-        // Cerrar documento
-
-        document.close();
-
-        JOptionPane.showMessageDialog(EmpList.this, "Datos Exportados Correctamente");
-
-    }
-
-
-    JOptionPane.showMessageDialog(EmpList.this, "Error al guardar el PDF: " + ex.getMessage());
-
-}
-
-
-
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -294,13 +215,6 @@ if(pos==1)
 			altaA.getPpa().settext(1);
 			altaA.getPpa().getCbidsala().setSelectedIndex(-1);
 			altaA.getPpa().getCbidemple().setSelectedIndex(-1);
-			break;
-		case "PDFtar":
-		pdf(1);
-		break;
-		case "PDFalt":
-			pdf(2);
-			break;
 		}
 		
 	}

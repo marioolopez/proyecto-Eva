@@ -93,7 +93,7 @@ public class ventanaPrincipal extends JFrame{
         menu6 = new JMenu("TARIFA");
         tar1 = new JMenuItem("Alta de Tarifa");
         tar1.setFont(new Font("Arial Black", Font.BOLD, 12));
-        tar2=new JMenuItem("Baja Tarifa");
+        tar2=new JMenuItem("Bajas Tarifas");
         tar2.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu6.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu6.add(tar1);
