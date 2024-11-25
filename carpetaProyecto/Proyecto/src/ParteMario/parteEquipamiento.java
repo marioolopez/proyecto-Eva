@@ -16,7 +16,6 @@ public class parteEquipamiento extends JInternalFrame {
 	     p.add(derecha);
 	     this.add(p);
 	     this.setVisible(true);
-	     //this.setClosable(true);   
 	}
 	public JPanel getP() {
 		return p;

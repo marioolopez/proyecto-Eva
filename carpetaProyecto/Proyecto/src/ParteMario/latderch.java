@@ -84,7 +84,6 @@ public class latderch extends JPanel {
 
 	     this.add(p1);
 	     this.add(p2);
-	    
 	}
 	public latizq getIzq() {
 		return izq;

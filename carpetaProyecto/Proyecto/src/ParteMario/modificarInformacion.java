@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import javax.swing.*;
 public class modificarInformacion extends JDialog{
 	private JPanel p;
-	private JButton modificar, salir;
+	private JButton modificar, salir, borrar;
 	private JTextField id, nombre, descrip, idact, idmante;
 	private JComboBox<String>c;
 	private latizq lizq;
@@ -38,24 +38,28 @@ public class modificarInformacion extends JDialog{
 		JLabel idEq = new JLabel("Id Equipamiento:");
 		id = new JTextField();
 		id.setPreferredSize(new Dimension(120, 20));
+		id.setEnabled(false);
 		p.add(idEq);
 		p.add(id);
 		
 		JLabel nombreEq = new JLabel("Nombre Equipamiento:");
 		nombre = new JTextField();
 		nombre.setPreferredSize(new Dimension(120, 20));
+		nombre.setEnabled(false);
 		p.add(nombreEq);
 		p.add(nombre);
 		
 		JLabel descripcion = new JLabel("Descripcion Equipamiento:");
 		descrip = new JTextField();
 		descrip.setPreferredSize(new Dimension(120, 20));
+		descrip.setEnabled(false);
 		p.add(descripcion); 
 		p.add(descrip);
 		
 		JLabel idAct = new JLabel("Id Actividad:");
 		idact = new JTextField();
 		idact.setPreferredSize(new Dimension(120, 20));
+		idact.setEnabled(false);
 		p.add(idAct);
 		p.add(idact);
 		
@@ -63,6 +67,7 @@ public class modificarInformacion extends JDialog{
 		JLabel idMant = new JLabel("Id Mantenimiento:");
 		idmante = new JTextField();
 		idmante.setPreferredSize(new Dimension(120, 20));
+		idmante.setEnabled(false);
 		p.add(idMant);
 		p.add(idmante);
 		this.add(p, BorderLayout.CENTER);	
@@ -75,6 +80,11 @@ public class modificarInformacion extends JDialog{
 		modificar = new JButton("Modificar");
 		modificar.setActionCommand("mod");
 		modificar.addActionListener(new escuchaModificar(this));
+		
+		borrar = new JButton("Borrar");
+		borrar.setActionCommand("borrar");
+		borrar.addActionListener(new escuchaModificar(this));
+		pabajo.add(borrar);
 		
 		salir = new JButton("Salir");
 		salir.setActionCommand("salir");

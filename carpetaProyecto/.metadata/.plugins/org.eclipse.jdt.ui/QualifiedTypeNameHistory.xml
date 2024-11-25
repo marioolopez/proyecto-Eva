@@ -40,7 +40,6 @@
     <fullyQualifiedTypeName name="ParteMario.accionEquipamiento"/>
     <fullyQualifiedTypeName name="javax.swing.JDialog"/>
     <fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
-    <fullyQualifiedTypeName name="javax.swing.JButton"/>
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
@@ -51,4 +50,5 @@
     <fullyQualifiedTypeName name="ParteMario.modificarInformacion"/>
     <fullyQualifiedTypeName name="ParteMario.escuchaModificar"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="javax.swing.JButton"/>
 </qualifiedTypeNameHistroy>

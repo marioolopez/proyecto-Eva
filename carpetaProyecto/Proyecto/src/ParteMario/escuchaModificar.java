@@ -18,6 +18,7 @@ public class escuchaModificar implements ActionListener {
 			String[] pos = recojoCombo.split("-");
 			String pos1 = pos[0]; //id
 			String pos2 = pos[1]; //nombre
+			
 			try {
 				ResultSet rs = modInfo.getLizq().getBd().ejecutarSQL1("SELECT * FROM equipamiento WHERE id like "+pos1);
 				if(rs.next()) {
@@ -33,10 +34,17 @@ public class escuchaModificar implements ActionListener {
 				modInfo.getIdact().setEditable(false);
 				modInfo.getIdmante().setEditable(false);
 				
+				modInfo.getNombre().setEnabled(true);
+				modInfo.getDescrip().setEnabled(true);
+				
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}		
+			break;
+		case "borrar":
+			modInfo.getNombre().setText("");
+			modInfo.getDescrip().setText("");
 			break;
 		case "mod":
 			boolean enc = false;
