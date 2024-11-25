@@ -116,6 +116,10 @@ public class PanelEmp extends JInternalFrame{
 	public int getIdentificador () {
 		return identificador;
 	}
+	
+	/*Este metodo modifica la visibilidad de los botones segun sea el caso. Tambien cambia el texto del boton de accion 
+	 * ya que puede ser "INSERTAR EMPLEADO", "BORRAR EMPLEADO", "ACTUALIZAR EMPLEADO"
+	 * */
 	private void modTextoBotton() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		switch (identificador) {
@@ -138,7 +142,7 @@ public class PanelEmp extends JInternalFrame{
 		   buscar.setEnabled(true);
 		   confirmacion.setEnabled(false);
 		   confirmacion.setVisible(true);
-		   desactivarcampos();
+		  
 		break;
 		case 3:accion.setText("Actualizar Datos");
 		this.setTitle("Panel - Modificar datos de Empleado");
@@ -166,6 +170,9 @@ public class PanelEmp extends JInternalFrame{
 	public JTextField CampoSalario () {
 		return campos[3];
 	}
+	public JCheckBox CasillaVerificar () {
+		return confirmacion;
+	}
 	
 	public void desactivarcampos () {
 		for (int i=1;i<campos.length;i++)
@@ -179,6 +186,7 @@ public class PanelEmp extends JInternalFrame{
 		for (JTextField i:campos)
 			i.setText("");
 	}
+	//Los campos solo se verifican cuando la accion sea insertar o modificar un Empleado
 	public void verificarcampos () throws ClassNotFoundException, SQLException {
 		
 		if (campos[0].getText().isEmpty()||
@@ -189,18 +197,21 @@ public class PanelEmp extends JInternalFrame{
 			JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
 		}
 		else {
-			if (!esDecimal(campos[3].getText()))
-				JOptionPane.showMessageDialog(this, "El campo SALARIO debe ser un numero");
-			else {
-				if (identificador==1)
-				insertarEmpleado();
-				else if (identificador==3)
-					actualizarEmpleado();
-					
-				  vaciarcampos();
-				  modTextoBotton();
-				  
-			}
+				if (dnivalido()) {
+					if (!esDecimal(campos[3].getText()))
+						JOptionPane.showMessageDialog(this, "El campo SALARIO debe ser un numero");
+					else {
+						if (identificador==1)
+						insertarEmpleado();
+						else if (identificador==3)
+							actualizarEmpleado();
+							
+						  vaciarcampos();
+						  modTextoBotton();
+						  
+					}
+				
+				}
 		}
 		
 	}
@@ -238,7 +249,7 @@ public class PanelEmp extends JInternalFrame{
 	}
 	public void insertarEmpleado () throws ClassNotFoundException, SQLException {
 		BaseDatos bd=new BaseDatos();
-		bd.ejecutarSQL2("INSERT INTO empleado VALUES ("+Integer.parseInt(campos[0].getText().toString())+",'"+campos[1].getText().toString()+"','"+campos[2].getText().toString()+"',"+Double.parseDouble(campos[3].getText().toString())+")");
+		bd.ejecutarSQL2("INSERT INTO empleado VALUES ("+Integer.parseInt(campos[0].getText().toString())+",'"+campos[1].getText().toString()+"','"+campos[2].getText().toString().toUpperCase()+"',"+Double.parseDouble(campos[3].getText().toString())+")");
 		bd.cerrarConex();
 		JOptionPane.showMessageDialog(this, "Empleado Insertado Correctamente");
 	}
@@ -297,9 +308,39 @@ public class PanelEmp extends JInternalFrame{
 		BaseDatos bd=new BaseDatos();
 		
 		bd.ejecutarSQL2("UPDATE empleado SET nombre = '"+campos[1].getText().toString()+"', "
-				+ "dni = '"+campos[2].getText().toString()+"', salario = "+Double.parseDouble(campos[3].getText().toString())+" WHERE id = "+Integer.parseInt(campos[0].getText().toString())+"");
+				+ "dni = '"+campos[2].getText().toString().toUpperCase()+"', salario = "+Double.parseDouble(campos[3].getText().toString())+" WHERE id = "+Integer.parseInt(campos[0].getText().toString())+"");
 		
 		bd.cerrarConex();
 		JOptionPane.showMessageDialog(this, "Datos Actualizados Correctamente");
 	}
+	public boolean dnivalido () { //metodo para controlar el ingreso de un DNI correcto, 8 caracteres, el primero debe ser una letra
+		boolean verif=true;
+		
+		if (campos[2].getText().toString().length()!=8)
+			{
+				verif=false;
+				JOptionPane.showMessageDialog(this, "El campo dni debe contener 8 caracteres");
+			}
+		else if (esEntero(""+campos[2].getText().toString().charAt(0)))
+				{
+					verif=false;
+					JOptionPane.showMessageDialog(this, "El primer caracter del dni debe ser una letra");
+				}
+		else {
+			String dninumbers="";
+			for (int i=1;i<campos[2].getText().toString().length();i++)
+				dninumbers=dninumbers+campos[2].getText().toString().charAt(i);
+			
+			if (!esEntero(dninumbers))
+				{
+				verif=false;
+				JOptionPane.showMessageDialog(this, "El resto de caracteres deben ser numericos");
+				}
+		}
+		
+		
+		
+		return verif;
+	}
+	
 }

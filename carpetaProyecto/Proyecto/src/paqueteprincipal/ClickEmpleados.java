@@ -62,7 +62,7 @@ public class ClickEmpleados implements ActionListener {
 			
 			break;
 		case "showlistemp": try {
-				EmpList listaempleados=new EmpList(v);
+				EmpList listaempleados=new EmpList();
 				v.getContentPane().removeAll();
 				v.getContentPane().add(listaempleados);
 			} catch (ClassNotFoundException | SQLException e1) {
@@ -86,6 +86,11 @@ public class ClickEmpleados implements ActionListener {
 							try {
 								pel.borrarEmpleado();
 								pel.vaciarcampos();
+								pel.CampoCodigo().setEnabled(true);
+								pel.CampoCodigo().setEditable(true);
+								pel.activarbtnborrar().setEnabled(false);
+								pel.CasillaVerificar().setEnabled(false);
+								pel.CasillaVerificar().setSelected(false);
 							} catch (ClassNotFoundException | SQLException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();

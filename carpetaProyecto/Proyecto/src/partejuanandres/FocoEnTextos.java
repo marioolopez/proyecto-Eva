@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 public class FocoEnTextos implements FocusListener {
 
-	
+	//Gestor del evento OnFocus para cambiar estilos de cada campo
 	private PanelEmp  pe;
 	
 	FocoEnTextos (PanelEmp emp)

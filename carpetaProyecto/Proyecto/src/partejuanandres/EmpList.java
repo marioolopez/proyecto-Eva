@@ -24,16 +24,10 @@ public class EmpList extends JInternalFrame{
 	
 	private JTable listado;
 	private JButton exportar;
-	public EmpList (ventanaPrincipal vp) throws ClassNotFoundException, SQLException{
+	public EmpList () throws ClassNotFoundException, SQLException{
 		 super("LISTA DE EMPLEADOS",false,true,false,false);
 		 
-		 this.addInternalFrameListener(new InternalFrameAdapter() {
-			    @Override
-			    public void internalFrameClosing(InternalFrameEvent e) {
-			        EmpList.this.dispose(); // Closes the frame
-			        vp.repaint();
-			    }
-			});
+		
 		 
 		 
 		 
@@ -44,7 +38,7 @@ public class EmpList extends JInternalFrame{
 	        DefaultTableModel dtm = new DefaultTableModel() {
 	            @Override
 	            public boolean isCellEditable(int row, int column) {
-	                return false; // Make cells non-editable
+	                return false; // Desactivamos las celdas para que no sean editables
 	            }
 	        };
 
@@ -58,7 +52,7 @@ public class EmpList extends JInternalFrame{
 	        dtm.addColumn("DNI");
 	        dtm.addColumn("SALARIO");
 
-	        // Load data into the table (You should define your CargarTabla method)
+	        // Cargamos los datos en la tabla
 	        CargarTabla(dtm);
 
 	        JScrollPane barras = new JScrollPane(listado);
@@ -69,7 +63,12 @@ public class EmpList extends JInternalFrame{
 	        titulos.setBackground(new Color(173, 173, 151));
 
 	        exportar = new JButton("EXPORTAR REGISTROS A PDF");
+	        exportar.setFont(new Font("Arial Black",Font.BOLD,17));
 	        exportar.setBackground(new Color(173, 173, 151));
+	        
+	      //EXPORTACION A PDF UTILIZANDO LA LIBRERIA ITEXT QUE SE DIVIDE EN VARIOS PLUGINS
+	        
+	        
 	        exportar.addActionListener(new ActionListener() {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
@@ -80,10 +79,10 @@ public class EmpList extends JInternalFrame{
 	                    int userSelection = fileChooser.showSaveDialog(EmpList.this);
 
 	                    if (userSelection == JFileChooser.APPROVE_OPTION) {
-	                        String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+	                        String filePath = fileChooser.getSelectedFile().getAbsolutePath(); //Guardamos el PATH elegido por el usuario
 
-	                        // Create PDF Document
-	                        PdfWriter writer = new PdfWriter(filePath + ".pdf");
+	                        // Creamos el documento PDF
+	                        PdfWriter writer = new PdfWriter(filePath + ".pdf"); //Creamos el archivo pdf en la ruta elegida por el usuario
 	                        PdfDocument pdfDocument = new PdfDocument(writer);
 	                        Document document = new Document(pdfDocument); 
 
@@ -119,7 +118,7 @@ public class EmpList extends JInternalFrame{
 	                }
 	            }
 	        });
-
+	        	
 	        this.getContentPane().add(barras);
 	        this.getContentPane().add(exportar);
 	        this.pack();
