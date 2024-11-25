@@ -11,7 +11,7 @@ public class PanelParaContenidoActividades extends JPanel{
 private JLabel []lbs;
 private JTextField[]tx;
 private JComboBox<Integer> cbidsala,cbidemple;
- PanelParaContenidoActividades(AltaActividades a) {
+ PanelParaContenidoActividades() {
 	 this.setLayout(new FlowLayout());
 	 this.setPreferredSize(new Dimension(50,20));
 	 lbs=new JLabel[4];
@@ -32,19 +32,19 @@ this.add(tx[1]);
 this.add(lbs[2]);
 this.add(cbidsala);
 cbidsala.setActionCommand("idsala");
-cbidsala.addActionListener(new escuchador(a));
+//cbidsala.addActionListener(new escuchador(a));
 this.add(lbs[3]);
 this.add(cbidemple);
 cbidemple.setActionCommand("idemple");
-cbidemple.addActionListener(new escuchador(a));
+//cbidemple.addActionListener(new escuchador(a));
 }
  public String gettext(int pos)
  {
 	 return tx[pos].getText();
  }
- public void settext(int pos)
+ public void settext(int pos,String cad)
  {
-	 tx[pos].setText(" ");
+	 tx[pos].setText(cad);
  }
 public JLabel[] getLbs() {
 	return lbs;

@@ -87,6 +87,8 @@ public class ventanaPrincipal extends JFrame{
         menu5.add(act2);
         act1.setActionCommand("Actividades");
         act1.addActionListener(new escuchador(this));
+        act2.setActionCommand("BajasAct");
+        act2.addActionListener(new escuchador(this));
         
         
         
@@ -100,6 +102,8 @@ public class ventanaPrincipal extends JFrame{
         menu6.add(tar2);
         tar1.setActionCommand("Tarifa");
         tar1.addActionListener(new escuchador(this));
+        tar2.setActionCommand("BajaTar");
+        tar2.addActionListener(new escuchador(this));
         
         barra.add(menu1);
         barra.add(menu2);

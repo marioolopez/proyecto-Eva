@@ -6,7 +6,7 @@ import PaquetePrincipal.escuchador;
 import PaquetePrincipal.ventanaPrincipal;
 
 public class PanelParaBotonestar extends JPanel{
-private JButton btaceptar,btcancelar,btpdf;
+private JButton btaceptar,btcancelar,btpdf,btborrar;
 public PanelParaBotonestar(Altatarifas at)
 {
 	btaceptar=new JButton("Aceptar");
@@ -34,5 +34,23 @@ public PanelParaBotonestar(AltaActividades aa)
 	btpdf.addActionListener(new escuchador(aa));
 	this.add(btaceptar);
 	this.add(btcancelar);
+}
+public PanelParaBotonestar(BajaTarifas bt)
+{
+	
+	btborrar=new JButton("Borrar");
+	btborrar.setActionCommand("borrartar");
+	btborrar.addActionListener(new escuchador(bt));
+	
+	this.add(btborrar);
+}
+public PanelParaBotonestar(BajaActividad ba)
+{
+	
+	btborrar=new JButton("Borrar");
+	btborrar.setActionCommand("borraract");
+	btborrar.addActionListener(new escuchador(ba));
+	
+	this.add(btborrar);
 }
 }

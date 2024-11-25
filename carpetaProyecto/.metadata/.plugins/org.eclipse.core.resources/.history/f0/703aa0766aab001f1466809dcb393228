@@ -1,0 +1,17 @@
+package Yoel;
+
+import javax.swing.*;
+
+public class BajaActividad extends JInternalFrame{
+private Buscar bb;
+private PanelParaContenidoActividades pa;
+private PanelParaBotonestar bt;
+BajaActividad()
+{
+	bb=new Buscar(this);
+	pa=new PanelParaContenidoActividades();
+	bt=new PanelParaBotonestar(this);
+	
+}
+
+}

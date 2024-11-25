@@ -17,12 +17,17 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import Yoel.AltaActividades;
 import Yoel.Altatarifas;
+import Yoel.BajaActividad;
+import Yoel.BajaTarifas;
+import Yoel.Buscar;
 
 public class escuchador implements ActionListener {
 private static ventanaPrincipal vp;
 private Altatarifas at;
 private AltaActividades altaA;
- 
+private BajaTarifas bt;
+private BajaActividad ba;
+private Buscar bs;
 public escuchador(ventanaPrincipal v) 
 {
 vp=v;
@@ -34,6 +39,18 @@ public escuchador(Altatarifas tarifas)
 public escuchador(AltaActividades aa)
 {
 	altaA=aa;
+}
+public escuchador(BajaTarifas btarifa)
+{
+	bt=btarifa;
+}
+public escuchador(Buscar bb)
+{
+bs=bb;	
+}
+public escuchador(BajaActividad bactividad)
+{
+	ba=bactividad;
 }
 public static boolean compvaciotar(Altatarifas at)
 {
@@ -123,6 +140,21 @@ public static void ids(AltaActividades aa,int pos) throws ClassNotFoundException
 			aa.getPpa().getCbidemple().addItem(res.getInt("id"));
 		}
 	}
+	b.cerrarConex();
+}
+public static void idsbajatar(BajaTarifas bt) throws ClassNotFoundException, SQLException
+{
+	BaseDatos b=new BaseDatos();
+	b.abrircon();
+	
+		ResultSet res;
+		res=b.ejecutarSQL1("Select id from tarifa ");
+		while(res.next())
+		{
+		
+			bt.getBb().getCb().addItem(res.getInt("id"));
+		}
+
 	b.cerrarConex();
 }
 public static void pdf(int pos)
@@ -219,8 +251,70 @@ if(pos==1)
 }
 
 
-
-
+private void buscar(BajaTarifas bs2,BajaActividad ba,int pos) throws ClassNotFoundException, SQLException
+{
+	BaseDatos b=new BaseDatos();
+	b.abrircon();
+	ResultSet res;
+	if(pos==1)
+	{
+		
+		res=b.ejecutarSQL1("Select * from tarifa where id like "+bs2.getBb().getCb().getSelectedItem()+"");
+		if(res.next())
+		{
+			bs2.getPbaja().settext(0,res.getString("nombre"));
+			bs2.getPbaja().settext(1,""+res.getDouble("precio"));
+			bs2.getPbaja().getTa().setText(res.getString("descripcion"));
+		}
+		
+	}else {
+		res=b.ejecutarSQL1("Select * from actividad where id like "+bs2.getBb().getCb().getSelectedItem()+"");
+		if(res.next())
+		{
+			ba.getPbaja().settext(0,res.getString("nombre"));
+			ba.getPbaja().settext(1,""+res.getDouble("precio"));
+			ba.getPbaja().getTa().setText(res.getString("descripcion"));
+		}
+	}
+	
+}
+public void borrar(BajaTarifas bt,BajaActividad ba,int select) throws ClassNotFoundException, SQLException
+{
+	BaseDatos b=new BaseDatos();
+	b.abrircon();
+	if(select==1)
+	{
+		int opc=JOptionPane.showConfirmDialog(null,"Seguro desea eliminar?","Confirmacion",JOptionPane.YES_NO_OPTION );
+		if(opc==0)
+		{
+			b.ejecutarSQL2("delete from tarifa where id like "+bt.getBb().getCb().getSelectedItem()+"");
+			JOptionPane.showInternalMessageDialog(null,"Tarifa eliminada");
+			bt.getBb().getCb().setSelectedItem(-1);
+			bt.getPbaja().settext(0, " ");
+			bt.getPbaja().getTa().setText(" ");
+			bt.getPbaja().settext(1," ");
+			
+		}else {
+			
+		}
+	}else {
+		int opc=JOptionPane.showConfirmDialog(null,"Seguro desea eliminar?","Confirmacion",JOptionPane.YES_NO_OPTION );
+		if(opc==0)
+		{
+			b.ejecutarSQL2("delete from actividad where id like "+ba.getBb().getCb().getSelectedItem()+"");
+			JOptionPane.showInternalMessageDialog(null,"Tarifa eliminada");
+			bt.getBb().getCb().setSelectedItem(-1);
+			bt.getPbaja().settext(0, " ");
+			bt.getPbaja().getTa().setText(" ");
+			bt.getPbaja().settext(1," ");
+			
+		}else {
+			
+		}
+	}
+	
+	
+}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -255,7 +349,7 @@ if(pos==1)
 			}else if(compnomb(at.getPa().gettext(0))==false)
 			{
 				JOptionPane.showMessageDialog(null, "El nombre no puede tener numeros","error",JOptionPane.ERROR_MESSAGE);
-				at.getPa().settext(0);
+				at.getPa().settext(0," ");
 			}else {
 				try {
 					insertartarifa(at);
@@ -272,7 +366,7 @@ if(pos==1)
 			}else if(compnomb(altaA.getPpa().gettext(0))==false)
 				{
 					JOptionPane.showMessageDialog(null, "El nombre no puede tener numeros","error",JOptionPane.ERROR_MESSAGE);
-					altaA.getPpa().settext(0);
+					altaA.getPpa().settext(0," ");
 				}else {
 					try {
 						insertaractividad(altaA);
@@ -285,13 +379,13 @@ if(pos==1)
 			
 			break;
 		case "Cancelartar":
-			at.getPa().settext(0);
+			at.getPa().settext(0," ");
 			at.getPa().getTa().setText(	" ");
-			at.getPa().settext(1);
+			at.getPa().settext(1," ");
 			break;
 		case "Cancelaract":
-			altaA.getPpa().settext(0);
-			altaA.getPpa().settext(1);
+			altaA.getPpa().settext(0," ");
+			altaA.getPpa().settext(1," ");
 			altaA.getPpa().getCbidsala().setSelectedIndex(-1);
 			altaA.getPpa().getCbidemple().setSelectedIndex(-1);
 			break;
@@ -301,8 +395,63 @@ if(pos==1)
 		case "PDFalt":
 			pdf(2);
 			break;
-		}
+		case "BajasAct":
+			BajaActividad bac=new BajaActividad();
+			vp.getContentPane().removeAll();
+			vp.getContentPane().add(bac);
+			bac.getPa().getTx()[0].setEnabled(false);
+			bac.getPa().getTx()[1].setEnabled(false);
+			bac.getPa().getCbidemple().setSelectedItem(-1);
+			bac.getPa().getCbidsala().setSelectedItem(-1);
+			break;
+		case "BajaTar":
+			BajaTarifas btar=new BajaTarifas();
+			vp.getContentPane().removeAll();
+			vp.getContentPane().add(btar);
+			btar.getPbaja().getTx()[0].setEnabled(false);
+			btar.getPbaja().getTx()[1].setEnabled(false);
+			btar.getPbaja().getTa().setEnabled(false);
+			try {
+				idsbajatar(btar);
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
+		case "Buscartar":
+			try {
+				buscar(bt,ba,1);
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
+		case "borrartar":
+			try {
+				borrar(bt,ba,1);
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
+		case "Buscaract":
+			try {
+				buscar(bt,ba,2);
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
+		case "borraract":
+			try {
+				borrar(bt,ba,2);
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
 		
+		}
 	}
 
 }

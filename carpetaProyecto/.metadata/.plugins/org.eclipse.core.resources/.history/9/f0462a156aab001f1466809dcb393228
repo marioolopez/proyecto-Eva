@@ -1,0 +1,8 @@
+package Yoel;
+
+import javax.swing.*;
+
+public class BajaSalas extends JPanel{
+	
+
+}

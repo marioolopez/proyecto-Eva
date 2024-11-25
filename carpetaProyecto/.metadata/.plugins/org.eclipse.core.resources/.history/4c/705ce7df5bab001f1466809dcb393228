@@ -1,0 +1,28 @@
+package Yoel;
+
+import javax.swing.*;
+
+public class Buscar extends JPanel{
+private JComboBox<String>cb;
+private JButton bt;
+Buscar()
+{
+	cb=new JComboBox<String>();
+	bt=new JButton("Buscar");
+	this.add(cb);
+	this.add(bt);
+}
+public JComboBox<String> getCb() {
+	return cb;
+}
+public void setCb(JComboBox<String> cb) {
+	this.cb = cb;
+}
+public JButton getBt() {
+	return bt;
+}
+public void setBt(JButton bt) {
+	this.bt = bt;
+}
+
+}

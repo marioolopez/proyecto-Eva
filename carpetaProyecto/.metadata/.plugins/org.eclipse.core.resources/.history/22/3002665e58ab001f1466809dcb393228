@@ -1,0 +1,19 @@
+package Yoel;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+
+public class BajaTarifas extends JInternalFrame{
+	private PanelParaContenidoBaja pbaja;
+	private PanelParaBotonestar pb;
+	public BajaTarifas() {
+	this.setLayout(new BorderLayout());
+	pbaja=new PanelParaContenidoBaja();
+	pb=new PanelParaBotonestar(this);
+	this.getContentPane().add(pbaja,BorderLayout.CENTER);
+	this.getContentPane().add(pb,BorderLayout.SOUTH);
+	this.setVisible(true);
+}
+}

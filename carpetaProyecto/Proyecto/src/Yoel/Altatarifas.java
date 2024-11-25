@@ -14,7 +14,7 @@ public class Altatarifas extends JInternalFrame{
 private PanelParaContenidoAltas pa;
 private PanelParaBotonestar pb;
 public Altatarifas() {
-	this.setLayout(new BorderLayout());
+this.setLayout(new BorderLayout());
 pa=new PanelParaContenidoAltas();
 pb=new PanelParaBotonestar(this);
 this.getContentPane().add(pa,BorderLayout.CENTER);

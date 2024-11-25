@@ -16,20 +16,20 @@ public class PanelParaContenidoAltas extends JPanel{
 	private JTextField []tx;
 PanelParaContenidoAltas()
 {
-	this.setLayout(new GridLayout(3,3));
+	this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		lb=new JLabel[3];
 		ta=new JTextArea();
 		tx=new JTextField[2];
 		String []titulos= {"Nombre:","Descripcion:","Precio:"};
 		for (int i = 0; i < lb.length; i++) {
 			lb[i]=new JLabel(titulos[i]);
-			lb[i].setPreferredSize(new Dimension(200,20));
+			lb[i].setPreferredSize(new Dimension(350,20));
 		}
 		for (int i = 0; i < tx.length; i++) {
 			tx[i]=new JTextField();
-			tx[i].setPreferredSize(new Dimension(150,20));
+			tx[i].setPreferredSize(new Dimension(350,20));
 		}
-		ta.setPreferredSize(new Dimension(400,200));
+		ta.setPreferredSize(new Dimension(350,200));
 		this.add(lb[0]);
 		this.add(tx[0]);
 		this.add(lb[1]);
@@ -41,9 +41,9 @@ public String gettext(int pos)
 {
 	return tx[pos].getText();
 }
-public void settext(int pos)
+public void settext(int pos,String cad)
 {
-	 tx[pos].setText(" ");
+	 tx[pos].setText(cad);
 }
 public JLabel[] getLb() {
 	return lb;

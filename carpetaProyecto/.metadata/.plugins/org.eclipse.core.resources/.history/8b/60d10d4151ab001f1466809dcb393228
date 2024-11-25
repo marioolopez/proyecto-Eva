@@ -1,0 +1,41 @@
+package Yoel;
+
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.*;
+
+public class PanelParaContenidoBaja extends JPanel{
+	private JLabel []lb;
+	private JTextArea ta;
+	private JTextField []tx;
+	private JComboBox<String>cb;
+	private JButton buscar;
+PanelParaContenidoBaja()
+{
+	this.setLayout(new GridLayout(4,4));
+		lb=new JLabel[3];
+		ta=new JTextArea();
+		tx=new JTextField[2];
+		cb=new JComboBox<String>();
+		buscar=new JButton();
+		String []titulos= {"Nombre:","Descripcion:","Precio:"};
+		for (int i = 0; i < lb.length; i++) {
+			lb[i]=new JLabel(titulos[i]);
+			lb[i].setPreferredSize(new Dimension(200,20));
+		}
+		for (int i = 0; i < tx.length; i++) {
+			tx[i]=new JTextField();
+			tx[i].setPreferredSize(new Dimension(150,20));
+		}
+		ta.setPreferredSize(new Dimension(400,200));
+		this.add(cb);
+		this.add(buscar);
+		this.add(lb[0]);
+		this.add(tx[0]);
+		this.add(lb[1]);
+		this.add(ta);
+		this.add(lb[2]);
+		this.add(tx[1]);
+}
+}

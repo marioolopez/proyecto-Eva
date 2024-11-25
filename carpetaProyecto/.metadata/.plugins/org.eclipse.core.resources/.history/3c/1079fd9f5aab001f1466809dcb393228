@@ -1,0 +1,7 @@
+package Yoel;
+
+import javax.swing.*;
+
+public class PanelBusqueda extends JPanel{
+
+}

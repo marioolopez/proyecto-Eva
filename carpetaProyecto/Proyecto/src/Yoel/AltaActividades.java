@@ -10,7 +10,7 @@ private PanelParaBotonestar pb;
 public AltaActividades()
 {
 	this.setLayout(new BorderLayout());
-	ppa=new PanelParaContenidoActividades(this);
+	ppa=new PanelParaContenidoActividades();
 	pb=new PanelParaBotonestar(this);
 	this.getContentPane().add(ppa,BorderLayout.CENTER);
 	this.getContentPane().add(pb,BorderLayout.SOUTH);
