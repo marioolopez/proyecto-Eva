@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2024 a las 19:12:52
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 25-11-2024 a las 15:28:38
+-- Versión del servidor: 9.0.1
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `actividad` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `descripcion` varchar(20) NOT NULL,
-  `idsala` int(11) NOT NULL,
-  `idempleado` int(11) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `idsala` int NOT NULL,
+  `idempleado` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -42,13 +42,21 @@ CREATE TABLE `actividad` (
 --
 
 CREATE TABLE `cliente` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `dni` varchar(20) NOT NULL,
-  `edad` int(11) NOT NULL,
-  `idtarifa` int(11) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `telefono` int NOT NULL,
+  `dni` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `edad` int NOT NULL,
+  `idtarifa` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `nombre`, `telefono`, `dni`, `edad`, `idtarifa`) VALUES
+(1, 'jotrg', 444, '4444', 4, 1),
+(2, 'aaaaaa', 999999999, '99999', 99999999, 1);
 
 -- --------------------------------------------------------
 
@@ -57,10 +65,29 @@ CREATE TABLE `cliente` (
 --
 
 CREATE TABLE `compra` (
-  `idpedido` int(11) NOT NULL,
-  `idproducto` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `idpedido` int NOT NULL,
+  `idproducto` int NOT NULL,
+  `cantidad` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`idpedido`, `idproducto`, `cantidad`) VALUES
+(5, 2, 10),
+(6, 2, 10),
+(7, 2, 10),
+(7, 1, 5),
+(7, 2, 10),
+(8, 1, 5),
+(9, 2, 10),
+(10, 2, 10),
+(11, 2, 10),
+(11, 1, 5),
+(12, 2, 10),
+(13, 2, 10),
+(13, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -69,9 +96,9 @@ CREATE TABLE `compra` (
 --
 
 CREATE TABLE `empleado` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `dni` varchar(20) NOT NULL,
+  `id` int NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `dni` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `salario` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -82,11 +109,11 @@ CREATE TABLE `empleado` (
 --
 
 CREATE TABLE `equipamiento` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `descripcion` varchar(20) NOT NULL,
-  `idactividad` int(11) NOT NULL,
-  `idmantenimiento` int(11) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `idactividad` int NOT NULL,
+  `idmantenimiento` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -96,8 +123,8 @@ CREATE TABLE `equipamiento` (
 --
 
 CREATE TABLE `mantenimiento` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -107,10 +134,27 @@ CREATE TABLE `mantenimiento` (
 --
 
 CREATE TABLE `pedido` (
-  `id` int(11) NOT NULL,
-  `fecha` date NOT NULL,
-  `IdCliente` int(11) NOT NULL
+  `id` int NOT NULL,
+  `fechaEntrega` date NOT NULL,
+  `IdCliente` int NOT NULL,
+  `fechaRealizada` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`id`, `fechaEntrega`, `IdCliente`, `fechaRealizada`) VALUES
+(4, '2024-11-28', 1, '2024-11-24'),
+(5, '2024-11-24', 2, '2024-11-24'),
+(6, '2024-11-24', 1, '2024-11-24'),
+(7, '2024-11-24', 1, '2024-11-24'),
+(8, '2024-11-24', 1, '2024-11-24'),
+(9, '2024-11-14', 1, '2024-11-24'),
+(10, '2024-11-30', 2, '2024-11-25'),
+(11, '2024-11-30', 2, '2024-11-25'),
+(12, '2024-11-25', 1, '2024-11-25'),
+(13, '2024-11-30', 2, '2024-11-25');
 
 -- --------------------------------------------------------
 
@@ -119,11 +163,19 @@ CREATE TABLE `pedido` (
 --
 
 CREATE TABLE `producto` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `stock` int(11) NOT NULL,
-  `idproveedor` int(11) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `stock` int NOT NULL,
+  `idproveedor` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `nombre`, `stock`, `idproveedor`) VALUES
+(1, 'patatas', 5, 1),
+(2, 'caramelos', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -132,10 +184,17 @@ CREATE TABLE `producto` (
 --
 
 CREATE TABLE `proveedor` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `cif` int(11) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `cif` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`id`, `nombre`, `cif`) VALUES
+(1, 'pro', 22);
 
 -- --------------------------------------------------------
 
@@ -144,8 +203,8 @@ CREATE TABLE `proveedor` (
 --
 
 CREATE TABLE `sala` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL
+  `id` int NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -155,11 +214,18 @@ CREATE TABLE `sala` (
 --
 
 CREATE TABLE `tarifa` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `descripcion` varchar(20) NOT NULL,
+  `id` int NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tarifa`
+--
+
+INSERT INTO `tarifa` (`id`, `nombre`, `descripcion`, `precio`) VALUES
+(1, 'plana', 'aaa', 8);
 
 --
 -- Índices para tablas volcadas
@@ -211,8 +277,7 @@ ALTER TABLE `mantenimiento`
 -- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idCliente` (`IdCliente`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `producto`
@@ -260,7 +325,7 @@ ALTER TABLE `cliente`
 -- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`idpedido`) REFERENCES `pedido` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -269,12 +334,6 @@ ALTER TABLE `compra`
 ALTER TABLE `equipamiento`
   ADD CONSTRAINT `equipamiento_ibfk_1` FOREIGN KEY (`idactividad`) REFERENCES `actividad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `equipamiento_ibfk_2` FOREIGN KEY (`idmantenimiento`) REFERENCES `mantenimiento` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `pedido`
---
-ALTER TABLE `pedido`
-  ADD CONSTRAINT `idCliente` FOREIGN KEY (`IdCliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `producto`
