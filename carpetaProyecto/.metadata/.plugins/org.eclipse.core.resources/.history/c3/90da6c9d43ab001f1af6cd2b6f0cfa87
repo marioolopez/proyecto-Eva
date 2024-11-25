@@ -62,7 +62,7 @@ public class ClickEmpleados implements ActionListener {
 			
 			break;
 		case "showlistemp": try {
-				EmpList listaempleados=new EmpList(v);
+				EmpList listaempleados=new EmpList();
 				v.getContentPane().removeAll();
 				v.getContentPane().add(listaempleados);
 			} catch (ClassNotFoundException | SQLException e1) {

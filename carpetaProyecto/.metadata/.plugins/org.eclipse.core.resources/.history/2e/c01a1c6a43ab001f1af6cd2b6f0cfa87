@@ -24,14 +24,14 @@ public class EmpList extends JInternalFrame{
 	
 	private JTable listado;
 	private JButton exportar;
-	public EmpList (ventanaPrincipal vp) throws ClassNotFoundException, SQLException{
+	public EmpList () throws ClassNotFoundException, SQLException{
 		 super("LISTA DE EMPLEADOS",false,true,false,false);
 		 
 		 this.addInternalFrameListener(new InternalFrameAdapter() {
 			    @Override
 			    public void internalFrameClosing(InternalFrameEvent e) {
 			        EmpList.this.dispose(); // Closes the frame
-			        vp.repaint();
+			        ventanaPrincipal vp = new ventanaPrincipal();
 			    }
 			});
 		 
