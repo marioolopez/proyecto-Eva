@@ -13,7 +13,7 @@ import Main.BaseDatos;
 
 public class ObjPedido {
 	private String nombre;
-	private int id,cantidad;
+	private int idPedido,cantidad, idProducto;
 	private Date fechaEntrega,fechaRealizada;
 	
 	private ArrayList<ObjPedido> listaProductosTotal; //Almacena el nombre, su id y stock de toda bd
@@ -39,20 +39,22 @@ public class ObjPedido {
 	public ObjPedido(String nombre, int id, int cantidad) { //Para crear la compra q realiza el cliente
 		super();
 		this.nombre = nombre;
-		this.id = id;
+		this.idPedido = id;
 		this.cantidad = cantidad;
 	}
 	
-	public ObjPedido(String nombre, int cantidad, Date fechaEntrega) { 
+	public ObjPedido(String nombre, int cantidad, Date fechaEntrega, int idPedido, int idProducto) { 
 		super();
 		this.nombre = nombre;
 		this.cantidad = cantidad;
 		this.fechaEntrega=fechaEntrega;
+		this.idPedido=idPedido;
+		this.idProducto=idProducto;
 	}
 	
 	public ObjPedido(int id, Date fechaRealizada, Date fechaEntrega) {
 		super();
-		this.id = id;
+		this.idPedido = id;
 		this.fechaRealizada = fechaRealizada;
 		this.fechaEntrega=fechaEntrega;
 	}
@@ -166,8 +168,8 @@ public class ObjPedido {
 			try {
 				bs=new BaseDatos();
 				for(ObjPedido a:gestionCompras.getListaComprasTotal()) {
-					System.out.println(a.getId());
-					int idproducto=a.getId();
+					System.out.println(a.getIdPedido());
+					int idproducto=a.getIdPedido();
 					int cantidad=a.getCantidad();
 					String sql="INSERT INTO compra (idpedido,idproducto,cantidad) VALUES ('" + Integer.parseInt(id) + "','" + idproducto + "','" + cantidad + "')";
 					bs.ejecutarSQL2(sql);
@@ -185,8 +187,8 @@ public class ObjPedido {
 		public void buscarCompras(int id) {
 			listaComprasTotal.clear();
 			listaCompras.clear();
-			String sql="SELECT compra.cantidad, producto.nombre, pedido.fechaEntrega FROM compra JOIN producto ON compra.idProducto = producto.id "
-					+ "JOIN pedido ON pedido.id = compra.idpedido WHERE compra.idpedido = '" + id + "'";
+			String sql="SELECT compra.cantidad, producto.nombre, pedido.fechaEntrega, pedido.id AS idPedido, producto.id AS idProducto FROM compra JOIN producto ON compra.idProducto = producto.id "
+					+ "JOIN pedido ON producto.id = compra.idpedido WHERE compra.idpedido = '" + id + "'";
 			BaseDatos bs=null;
 			ResultSet result=null;
 			try {
@@ -196,7 +198,10 @@ public class ObjPedido {
 					int cantidad=result.getInt("cantidad");
 					String nombre=result.getString("nombre");
 					Date fechaEntrega=result.getDate("fechaEntrega");
-					ObjPedido objCompra=new ObjPedido(nombre, cantidad, fechaEntrega);
+					int idProducto=result.getInt("idProducto");
+					int idPedido=result.getInt("idPedido");
+					System.out.println("El id del producto es: " + idProducto);
+					ObjPedido objCompra=new ObjPedido(nombre, cantidad, fechaEntrega, idProducto, idPedido);
 					listaComprasTotal.add(objCompra);
 					listaCompras.addElement(nombre);
 
@@ -211,7 +216,8 @@ public class ObjPedido {
 			}
 		}
 		
-		public void actualizarCompras(int idProducto, int cantidad, int idPedido) {
+		public void actualizarCompras(int idProducto, int idPedido, int cantidad) {
+			System.out.println("idProducto:" + idProducto + "cantidad: " + cantidad + " idPedido: " +idPedido);
 			String sql="UPDATE compra SET idproducto='" + idProducto + "', cantidad = '" + cantidad + "' WHERE idPedido='" + idPedido +"'";
 			BaseDatos bs=null;
 			ResultSet result=null;
@@ -291,13 +297,6 @@ public class ObjPedido {
 			this.nombre = nombre;
 		}
 
-		public int getId() {
-			return id;
-		}
-
-		public void setId(int id) {
-			this.id = id;
-		}
 
 		public int getCantidad() {
 			return cantidad;
@@ -325,8 +324,24 @@ public class ObjPedido {
 
 		@Override
 		public String toString() {
-			return "ObjPedido [nombre=" + nombre + ", id=" + id + ", cantidad=" + cantidad + ", fechaEntrega="
+			return "ObjPedido [nombre=" + nombre + ", id=" + idPedido + ", cantidad=" + cantidad + ", fechaEntrega="
 					+ fechaEntrega + ", fechaRealizada=" + fechaRealizada + "]";
+		}
+
+		public int getIdPedido() {
+			return idPedido;
+		}
+
+		public void setIdPedido(int idPedido) {
+			this.idPedido = idPedido;
+		}
+
+		public int getIdProducto() {
+			return idProducto;
+		}
+
+		public void setIdProducto(int idProducto) {
+			this.idProducto = idProducto;
 		}
 
 

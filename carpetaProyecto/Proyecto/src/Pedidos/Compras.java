@@ -131,7 +131,7 @@ public class Compras extends JPanel{
 	        for (ObjPedido producto : gestionPedidos.getListaProductosTotal()) {
 	        	System.out.println(producto);
 	            if (producto.getNombre().equals(nombreProducto)) {
-	            	idProducto=producto.getId(); //Saco la id del producto
+	            	idProducto=producto.getIdPedido(); //Saco la id del producto
 	            	
 	            	int cantidadMax=producto.getCantidad(); //RESTO LA CANTIDAD Q COMPRA
 	            	producto.setCantidad(cantidadMax-cantidadSeleccionada);

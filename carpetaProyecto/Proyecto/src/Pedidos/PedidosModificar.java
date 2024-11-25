@@ -231,9 +231,8 @@ public class PedidosModificar extends JInternalFrame{
 			int idPedido= Integer.parseInt(pedido[1]);
 			int index=listaCompra.getSelectedIndex();
 			ObjPedido producto=gestionPedidos.getListaComprasTotal().get(index);
-			gestionPedidos.actualizarCompras(producto.getId(), producto.getCantidad(), idPedido);
 			
-					
+			gestionPedidos.actualizarCompras(producto.getIdProducto(), idPedido, producto.getCantidad());
 		}
 
 	}
