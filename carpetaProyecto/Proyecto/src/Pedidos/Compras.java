@@ -34,13 +34,14 @@ public class Compras extends JPanel{
 	private JList listaProducto;
 	private JSlider cantidad;
 	
-	private ObjCompra gestionCompras;
+	private ObjPedido gestionPedidos;
 	
 	
 	//ABAJO
-	public Compras(Pedidos pedidos, ObjCompra gestionCompras) {
+	public Compras(Pedidos pedidos, ObjPedido gestionPedidos) {
 		this.pedidos=pedidos;
-		this.gestionCompras=gestionCompras;
+		this.gestionPedidos=gestionPedidos;
+
 		
 		
 		//Cargar interfaz
@@ -58,7 +59,7 @@ public class Compras extends JPanel{
 			izq.setLayout(new BorderLayout());
 			txt1=new JLabel("Seleccionar productos");
 			izq.add(txt1, BorderLayout.NORTH);
-			listaProducto=new JList(gestionCompras.getListaProductos());
+			listaProducto=new JList(gestionPedidos.getListaProductos());
 			listaProducto.addMouseListener(new AccionListaCompras(this));
 			barra=new JScrollPane(listaProducto, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			izq.add(barra, BorderLayout.CENTER);
@@ -98,7 +99,7 @@ public class Compras extends JPanel{
 	//Busca el producto seleccionado y mira en el array la cantidad para sl JSlider
 	public void cantidadMet(String producto) { //Se activa desde AccionLista
 		
-		for(ObjCompra a:gestionCompras.getListaProductosTotal()) {
+		for(ObjPedido a:gestionPedidos.getListaProductosTotal()) {
 			if(a.getNombre().equals(producto)) { //Encontrado
 				int stock=a.getCantidad();
 				if(stock==0) {
@@ -121,13 +122,13 @@ public class Compras extends JPanel{
 	
 	 //Cuando se de al boton añadir este objeto se crea y se pasa a la lista listaComprasTotal
 	public void compraRealizadaMet() {
-		ObjCompra compraProducto=null;
+		ObjPedido compraProducto=null;
 		if(validar()) {
 			String nombreProducto = (String) listaProducto.getSelectedValue(); 
 	        int cantidadSeleccionada = cantidad.getValue();
 	        //Busco id
 	        int idProducto=0;
-	        for (ObjCompra producto : gestionCompras.getListaProductosTotal()) {
+	        for (ObjPedido producto : gestionPedidos.getListaProductosTotal()) {
 	        	System.out.println(producto);
 	            if (producto.getNombre().equals(nombreProducto)) {
 	            	idProducto=producto.getId(); //Saco la id del producto
@@ -137,8 +138,8 @@ public class Compras extends JPanel{
 	                break;
 	            }
 	        }
-	        compraProducto =new ObjCompra(nombreProducto, idProducto, cantidadSeleccionada); //Compra realizada
-	        gestionCompras.getListaComprasTotal().add(compraProducto);
+	        compraProducto =new ObjPedido(nombreProducto, idProducto, cantidadSeleccionada); //Compra realizada
+	        gestionPedidos.getListaComprasTotal().add(compraProducto);
 	        pedidos.listaComprasMet(); //Actualiza la lista
 		}
 	}

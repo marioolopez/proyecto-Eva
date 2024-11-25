@@ -39,8 +39,8 @@ public class Pedidos extends JInternalFrame{
 	
 	
 	private ObjCliente gestionClientes; //Para gestion de clientes
-	private ObjCompra gestionCompras;
 	private ObjPedido gestionPedidos;
+
 	
 
 	//ARRIBA
@@ -50,7 +50,6 @@ public class Pedidos extends JInternalFrame{
 		this.setLayout(new FlowLayout());
 		
 		gestionClientes=new ObjCliente();
-		gestionCompras=new ObjCompra();
 		gestionPedidos=new ObjPedido();
 		
 		datosMe();//Dibuja
@@ -58,7 +57,7 @@ public class Pedidos extends JInternalFrame{
 		
 		id.setText(String.valueOf(gestionPedidos.idMax()));
 		
-		compra=new Compras(this,gestionCompras);
+		compra=new Compras(this,gestionPedidos);
 		compra.setPreferredSize(new Dimension(700,150));
 		compra.setVisible(true);
 		this.add(compra);
@@ -102,7 +101,7 @@ public class Pedidos extends JInternalFrame{
 			der.setLayout(new BorderLayout());
 				txt4=new JLabel("Id Compras");
 				der.add(txt4, BorderLayout.NORTH);
-				listaCompra=new JList<String>(gestionCompras.getListaCompras());
+				listaCompra=new JList<String>(gestionPedidos.getListaCompras());
 				listaCompra.addMouseListener(new AccionListaPedidos(this));
 				barra2=new JScrollPane(listaCompra,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 				der.add(barra2, BorderLayout.CENTER);
@@ -133,11 +132,11 @@ public class Pedidos extends JInternalFrame{
 
 	//FUNCIONALIDAD
 	public void listaComprasMet() { //Actualiza y si hay algo activa el botón añadir
-		gestionCompras.getListaCompras().removeAllElements();
-		for(ObjCompra a: gestionCompras.getListaComprasTotal()) {
-			gestionCompras.getListaCompras().addElement(a.getNombre());
+		gestionPedidos.getListaCompras().removeAllElements();
+		for(ObjPedido a: gestionPedidos.getListaComprasTotal()) {
+			gestionPedidos.getListaCompras().addElement(a.getNombre());
 		}
-		if(gestionCompras.getListaComprasTotal().isEmpty()) {
+		if(gestionPedidos.getListaComprasTotal().isEmpty()) {
 			boton[0].setEnabled(false);
 		}else {
 			boton[0].setEnabled(true);
@@ -165,7 +164,7 @@ public class Pedidos extends JInternalFrame{
 			//Fecha del calendario
 			java.util.Date fecha = calendario.getDate();
 			java.sql.Date fechaSql = new java.sql.Date(fecha.getTime());
-			gestionPedidos.anadirMetPedido(cliente, idCliente, fechaSql, id.getText(), gestionCompras);
+			gestionPedidos.anadirMetPedido(cliente, idCliente, fechaSql, id.getText(), gestionPedidos);
 			
 			reseteoMet();
 		}
@@ -173,8 +172,8 @@ public class Pedidos extends JInternalFrame{
 		 
 	//Reseteo
 	public void reseteoMet() { 
-		gestionCompras.getListaCompras().clear();
-		gestionCompras.getListaComprasTotal().clear();
+		gestionPedidos.getListaCompras().clear();
+		gestionPedidos.getListaComprasTotal().clear();
 		id.setText(String.valueOf(Integer.parseInt(id.getText())+1));
 	}
 	
@@ -183,17 +182,17 @@ public class Pedidos extends JInternalFrame{
 		if(listaCompra.getSelectedValue()!=null) {
 			
 			int index=listaCompra.getSelectedIndex(); //eL INDEX de listaCompras y listaComprasTotal es el mismo, se añaden en el mismo orden 
-			int cantidad= gestionCompras.getListaComprasTotal().get(index).getCantidad(); //Stock total actual
-			int id=gestionCompras.getListaComprasTotal().get(index).getId(); //Id producto selecicionado en el JLIst
-			for(ObjCompra gestionCompras: gestionCompras.getListaProductosTotal()) {
+			int cantidad= gestionPedidos.getListaComprasTotal().get(index).getCantidad(); //Stock total actual
+			int id=gestionPedidos.getListaComprasTotal().get(index).getId(); //Id producto selecicionado en el JLIst
+			for(ObjPedido gestionCompras: gestionPedidos.getListaProductosTotal()) {
 				if(gestionCompras.getId()==id) {
 					System.out.println(gestionCompras.getCantidad());
 					gestionCompras.setCantidad(gestionCompras.getCantidad()+cantidad);
 					System.out.println(gestionCompras.getCantidad());
 				}
 			}
-			gestionCompras.getListaComprasTotal().get(index).getCantidad();
-			gestionCompras.getListaComprasTotal().remove(listaCompra.getSelectedIndex());
+			gestionPedidos.getListaComprasTotal().get(index).getCantidad();
+			gestionPedidos.getListaComprasTotal().remove(listaCompra.getSelectedIndex());
 			listaComprasMet();
 			listaCompra.clearSelection();
 			boton[1].setEnabled(false);
@@ -203,6 +202,7 @@ public class Pedidos extends JInternalFrame{
 	public void eliminarBoton() {
 		boton[1].setEnabled(true);
 	}
+	
 
 	public JList getListaCompra() {
 		return listaCompra;

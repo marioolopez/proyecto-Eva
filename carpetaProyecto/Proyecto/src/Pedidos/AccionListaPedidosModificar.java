@@ -20,10 +20,12 @@ public class AccionListaPedidosModificar implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		Object source = e.getSource();
 		if(source == ped.getListaCliente()){
-		    //Busca los pedidos
 		    ped.pedidosCliente();
 		}else if(source == ped.getListaPedido()){
 			ped.buscarCompras();
+		}else if(source == ped.getListaCompra()) {
+			ped.getProductos().setEditable(true);
+			ped.mostrarCompra();
 		}
 
 
