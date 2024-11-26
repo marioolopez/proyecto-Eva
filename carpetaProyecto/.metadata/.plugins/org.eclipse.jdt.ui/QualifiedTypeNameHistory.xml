@@ -21,8 +21,6 @@
     <fullyQualifiedTypeName name="Yoel.PanelParaBotones"/>
     <fullyQualifiedTypeName name="Yoel.Altatarifas"/>
     <fullyQualifiedTypeName name="Yoel.AltaActividades"/>
-    <fullyQualifiedTypeName name="com.itextpdf.text.Document"/>
-    <fullyQualifiedTypeName name="com.itextpdf.text.pdf.PdfWriter"/>
     <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
     <fullyQualifiedTypeName name="javax.swing.JFileChooser"/>
     <fullyQualifiedTypeName name="javax.swing.JMenuItem"/>
@@ -33,7 +31,6 @@
     <fullyQualifiedTypeName name="Yoel.PanelParaContenidoAltas"/>
     <fullyQualifiedTypeName name="com.itextpdf.text.log.SysoCounter"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
-    <fullyQualifiedTypeName name="PaquetePrincipal.BaseDatos"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="Yoel.Buscar"/>
     <fullyQualifiedTypeName name="Yoel.PanelParaContenidoActividades"/>
@@ -43,4 +40,10 @@
     <fullyQualifiedTypeName name="Yoel.BajaTarifas"/>
     <fullyQualifiedTypeName name="PaquetePrincipal.escuchador"/>
     <fullyQualifiedTypeName name="Yoel.BajaActividad"/>
+    <fullyQualifiedTypeName name="com.itextpdf.text.pdf.PdfWriter"/>
+    <fullyQualifiedTypeName name="com.itextpdf.kernel.pdf.PdfDocument"/>
+    <fullyQualifiedTypeName name="java.lang.Deprecated"/>
+    <fullyQualifiedTypeName name="com.itextpdf.text.Document"/>
+    <fullyQualifiedTypeName name="PaquetePrincipal.BaseDatos"/>
+    <fullyQualifiedTypeName name="com.itextpdf.layout.element.Paragraph"/>
 </qualifiedTypeNameHistroy>
