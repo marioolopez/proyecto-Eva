@@ -23,6 +23,7 @@ public class ObjCompra {
 		BaseDatos bs=null;
 		try {
 			bs=new BaseDatos();
+			bs.conexionBD();
 			bs.ejecutarSQL2(sql);
 			bs.cerrarConex();
 		} catch (ClassNotFoundException e) {

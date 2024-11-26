@@ -56,6 +56,7 @@ public class ObjPedido {
 		ResultSet result=null;
 		try {
 			bs=new BaseDatos();
+			bs.conexionBD();
 			result=bs.ejecutarSQL1(sql);
 			
 			if(result.next()) {
@@ -80,6 +81,7 @@ public class ObjPedido {
 		BaseDatos bs=null;
 		try {
 			bs=new BaseDatos();
+			bs.conexionBD();
 			bs.ejecutarSQL2(sql);
 			for(ObjCompra compra:pedido.getListaComprasTotal()) {
 				String sql2="INSERT INTO compra(idpedido, idproducto, cantidad) VALUES ('" +pedido.getIdPedido() + "','" + compra.getIdProducto() + "','" + compra.getCantidad() +"')";
@@ -104,6 +106,7 @@ public class ObjPedido {
 		ResultSet result=null;
 		try {
 			bs=new BaseDatos();
+			bs.conexionBD();
 			result=bs.ejecutarSQL1(sql);
 			while(result.next()) {
 				String nombre=result.getString("nombre");
@@ -130,6 +133,7 @@ public class ObjPedido {
 		BaseDatos bs=null;
 		try {
 			bs=new BaseDatos();
+			bs.conexionBD();
 			bs.ejecutarSQL2(sql);
 			bs.cerrarConex();
 		} catch (ClassNotFoundException e) {

@@ -39,6 +39,7 @@ public class ObjCliente {
 		ResultSet result=null;
 		try {
 			bs=new BaseDatos();
+			bs.conexionBD();
 			result=bs.ejecutarSQL1(sql);
 			while(result.next()) {
 				ObjCliente cliente=new ObjCliente(result.getString("nombre"), result.getInt("id"));
@@ -62,6 +63,7 @@ public class ObjCliente {
 		ResultSet result=null;
 		try {
 			bs=new BaseDatos();
+			bs.conexionBD();
 			result=bs.ejecutarSQL1(sql);
 			while(result.next()) {
 				int id=result.getInt("id");
@@ -77,7 +79,7 @@ public class ObjCliente {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error con ");
+			System.out.println("Error al buscarPedidosCliente ");
 			e.printStackTrace();
 		}
 	}

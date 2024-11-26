@@ -25,6 +25,7 @@ public class ObjProducto {
 		ResultSet result=null;
 		try {
 			bs=new BaseDatos();
+			bs.conexionBD();
 			result=bs.ejecutarSQL1(sql);
 			
 			while(result.next()) {
@@ -37,7 +38,7 @@ public class ObjProducto {
 			
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("error en listaProductosMet");
+			System.out.println("error en cargarProductosBD");
 			e.printStackTrace();
 		}
 	}
