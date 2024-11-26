@@ -23,8 +23,10 @@ public class AccionListaPedidosModificar implements MouseListener {
 			ped.buscarPedidos();
 		}else if(source == ped.getListaPedido()){
 			ped.buscarCompras();
+			ped.getEliminarPedido().setEnabled(true);
 		}else if(source == ped.getListaCompra()) {
 			ped.mostrarCompra();
+			ped.getEliminarCompra().setEnabled(true);
 		}
 
 

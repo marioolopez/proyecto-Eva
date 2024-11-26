@@ -34,6 +34,24 @@ public class ObjCompra {
 			e.printStackTrace();
 		}
 	}
+	
+	public void eliminarCompra() {
+		String sql = "DELETE FROM compra WHERE idpedido = '" + idProducto + "'";
+
+		BaseDatos bs=null;
+		try {
+			bs=new BaseDatos();
+			bs.conexionBD();
+			bs.ejecutarSQL2(sql);
+			bs.cerrarConex();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error al eliminar la compra en BD");
+			e.printStackTrace();
+		}
+	}
 
 
 	public String getNombre() {

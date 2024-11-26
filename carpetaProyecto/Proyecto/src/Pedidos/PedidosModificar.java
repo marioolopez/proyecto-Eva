@@ -158,12 +158,17 @@ public class PedidosModificar extends JInternalFrame{
 
 	    // Panel Botones dentro de Editar
 	    panelBotones = new JPanel();
-	    panelBotones.setLayout(new FlowLayout());
+	    panelBotones.setLayout(new GridLayout(2,2));
 
 	    guardar = new JButton("Guardar");
 	    guardar.addActionListener(new AccionPedidosModificar(this));
 	    guardar.setEnabled(false);
 	    panelBotones.add(guardar);
+	    
+	    entrega = new JButton("Cambiar entrega");
+	    entrega.setEnabled(false);
+	    entrega.addActionListener(new AccionPedidosModificar(this));
+	    panelBotones.add(entrega);
 
 	    eliminarPedido = new JButton("Eliminar pedido");
 	    eliminarPedido.setEnabled(false);
@@ -174,12 +179,7 @@ public class PedidosModificar extends JInternalFrame{
 	    eliminarCompra.setEnabled(false);
 	    eliminarCompra.addActionListener(new AccionPedidosModificar(this));
 	    panelBotones.add(eliminarCompra);
-
-	    entrega = new JButton("Cambiar entrega");
-	    entrega.setEnabled(false);
-	    entrega.addActionListener(new AccionPedidosModificar(this));
-	    panelBotones.add(entrega);
-
+	    
 	    panelEditar.add(panelBotones, BorderLayout.SOUTH);
 
 	    // Agregar Editar al panel inferior
@@ -198,7 +198,7 @@ public class PedidosModificar extends JInternalFrame{
 		clienteSeleccionado.buscarPedidosCliente(idCliente);
 		
 		listaPedido.setModel(clienteSeleccionado.getListaPedidosCliente());
-		
+		eliminarPedido.setEnabled(false); //Bloquea el boton eliminar
 	}
 	
 	public void buscarCompras() { //Busca las compras y mira las fechas de entrega
@@ -265,10 +265,16 @@ public class PedidosModificar extends JInternalFrame{
 	}
 	
 	public void eliminarPedido() {
-		
+		pedidoSeleccionado.eliminarPedido();
+		buscarPedidos();
+		//System.out.println(pedidoSeleccionado.toString());
 	}
 	
-	public void eliminarCompra() {
+	public void eliminarCompra() { //NO FUNCIONA
+		compraSeleccionada.eliminarCompra();
+		eliminarCompra.setEnabled(false); //Desactivo el boton
+		pedidoSeleccionado.getListaComprasTotal().remove(compraSeleccionada);
+		pedidoSeleccionado.getListaPedidos().removeElement(compraSeleccionada.getNombre());
 		
 	}
 
@@ -361,6 +367,26 @@ public class PedidosModificar extends JInternalFrame{
 
 	public void setPedidoSeleccionado(ObjPedido pedidoSeleccionado) {
 		this.pedidoSeleccionado = pedidoSeleccionado;
+	}
+
+
+	public JButton getEliminarPedido() {
+		return eliminarPedido;
+	}
+
+
+	public void setEliminarPedido(JButton eliminarPedido) {
+		this.eliminarPedido = eliminarPedido;
+	}
+
+
+	public JButton getEliminarCompra() {
+		return eliminarCompra;
+	}
+
+
+	public void setEliminarCompra(JButton eliminarCompra) {
+		this.eliminarCompra = eliminarCompra;
 	}
 	
 	

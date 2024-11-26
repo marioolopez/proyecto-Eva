@@ -146,6 +146,23 @@ public class ObjPedido {
 	}
 	
 	public void eliminarPedido() {
+		String sql = "DELETE FROM pedido WHERE id = '" + idPedido + "'";
+
+		BaseDatos bs=null;
+		try {
+			bs=new BaseDatos();
+			bs.conexionBD();
+			bs.ejecutarSQL2(sql);
+			bs.cerrarConex();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error al eliminar el pedido en BD");
+			e.printStackTrace();
+		}
+		listaCompras.clear();
+		listaComprasTotal.clear();
 		
 	}
 	
