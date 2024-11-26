@@ -190,10 +190,10 @@ public static void pdf(int pos) throws FileNotFoundException, ClassNotFoundExcep
 		{doc.add(new Paragraph("Tarifas"));
 			ResultSet res;
 			res=b.ejecutarSQL1("Select * from tarifa");
-		
+			doc.add(new Paragraph("Nombre"+ "\t"+"Descripcion"+"\t"+"Precio"));
 			while(res.next())
 			{
-				doc.add(new Paragraph("Nombre: "+res.getString("nombre")+"Descripcion: "+res.getString("descripcion")+"Precio: "+res.getDouble("precio")));
+				doc.add(new Paragraph(res.getString("nombre")+"\t"+res.getString("descripcion")+"\t"+res.getDouble("precio")));
 			}
 			doc.close();
 		}else if(pos==2){
@@ -266,11 +266,11 @@ public void borrar(BajaTarifas bt,BajaActividad ba,int select) throws ClassNotFo
 		{
 			b.ejecutarSQL2("delete from actividad where id like "+ba.getBb().getCb().getSelectedItem()+"");
 			JOptionPane.showInternalMessageDialog(null,"Actividad eliminada");
-			ba.getBb().getCb().setSelectedItem(-1);
-			ba.getPa().settext(0, " ");
-			ba.getPa().settext(1," ");
-			ba.getPa().getCbidemple().setSelectedIndex(-1);
-			ba.getPa().getCbidsala().setSelectedIndex(-1);
+			bt.getBb().getCb().setSelectedItem(-1);
+			bt.getPbaja().settext(0, " ");
+			bt.getPbaja().getTa().setText(" ");
+			bt.getPbaja().settext(1," ");
+			
 		}else {
 			
 		}

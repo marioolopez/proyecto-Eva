@@ -20,7 +20,6 @@ public PanelParaBotonestar(Altatarifas at)
 	btpdf.addActionListener(new escuchador(at));
 	this.add(btaceptar);
 	this.add(btcancelar);
-	this.add(btpdf);
 }
 public PanelParaBotonestar(AltaActividades aa)
 {
@@ -35,7 +34,6 @@ public PanelParaBotonestar(AltaActividades aa)
 	btpdf.addActionListener(new escuchador(aa));
 	this.add(btaceptar);
 	this.add(btcancelar);
-	this.add(btpdf);
 }
 public PanelParaBotonestar(BajaTarifas bt)
 {

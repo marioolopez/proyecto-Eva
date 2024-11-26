@@ -266,11 +266,11 @@ public void borrar(BajaTarifas bt,BajaActividad ba,int select) throws ClassNotFo
 		{
 			b.ejecutarSQL2("delete from actividad where id like "+ba.getBb().getCb().getSelectedItem()+"");
 			JOptionPane.showInternalMessageDialog(null,"Actividad eliminada");
-			ba.getBb().getCb().setSelectedItem(-1);
-			ba.getPa().settext(0, " ");
-			ba.getPa().settext(1," ");
-			ba.getPa().getCbidemple().setSelectedIndex(-1);
-			ba.getPa().getCbidsala().setSelectedIndex(-1);
+			bt.getBb().getCb().setSelectedItem(-1);
+			bt.getPbaja().settext(0, " ");
+			bt.getPbaja().getTa().setText(" ");
+			bt.getPbaja().settext(1," ");
+			
 		}else {
 			
 		}

@@ -85,8 +85,8 @@ public static void insertartarifa(Altatarifas at) throws ClassNotFoundException,
 		id=1;
 	}
 	b.ejecutarSQL2("Insert into tarifa values("+id+",'"+at.getPa().gettext(0)+"','"+at.getPa().getTa().getText()+"',"+Double.parseDouble(at.getPa().gettext(1))+")");
-	at.getPa().settext(0," ");
-	at.getPa().settext(1," ");
+	at.getPa().settext(0);
+	at.getPa().settext(1);
 	b.cerrarConex();
 }
 public static void insertaractividad(AltaActividades aa) throws SQLException, ClassNotFoundException
@@ -105,8 +105,8 @@ public static void insertaractividad(AltaActividades aa) throws SQLException, Cl
 		id=1;
 	}
 	b.ejecutarSQL2("Insert into actividad values("+id+",'"+aa.getPpa().gettext(0)+"','"+aa.getPpa().gettext(1)+"',"+idsala+","+idemple+")");
-	aa.getPpa().settext(0," ");
-	aa.getPpa().settext(1," ");
+	aa.getPpa().settext(0);
+	aa.getPpa().settext(1);
 	aa.getPpa().getCbidsala().setSelectedIndex(-1);
 	aa.getPpa().getCbidemple().setSelectedIndex(-1);
 	b.cerrarConex();
@@ -190,10 +190,10 @@ public static void pdf(int pos) throws FileNotFoundException, ClassNotFoundExcep
 		{doc.add(new Paragraph("Tarifas"));
 			ResultSet res;
 			res=b.ejecutarSQL1("Select * from tarifa");
-		
+			doc.add(new Paragraph("Nombre"+ "\t"+"Descripcion"+"\t"+"Precio"));
 			while(res.next())
 			{
-				doc.add(new Paragraph("Nombre: "+res.getString("nombre")+"Descripcion: "+res.getString("descripcion")+"Precio: "+res.getDouble("precio")));
+				doc.add(new Paragraph(res.getString("nombre")+"\t"+res.getString("descripcion")+"\t"+res.getDouble("precio")));
 			}
 			doc.close();
 		}else if(pos==2){
@@ -203,7 +203,7 @@ public static void pdf(int pos) throws FileNotFoundException, ClassNotFoundExcep
 			doc.add(new Paragraph("Nombre"+ "\t"+"Descripcion"+"\t"+"idsala"+"\t"+"idempleado"));
 			while(res.next())
 			{
-				doc.add(new Paragraph(res.getString("nombre")+"\t"+res.getString("descripcion")+"\t"+res.getInt("idsala")+"\t"+res.getInt("idempleado")));
+				doc.add(new Paragraph(res.getString("nombre")+"\t"+res.getString("descripcion")+"\t"+res.getInt("idasala")+"\t"+res.getInt("idempleado")));
 			}
 			doc.close();
 		}
@@ -235,8 +235,9 @@ private void buscar(BajaTarifas bs2,BajaActividad ba,int pos) throws ClassNotFou
 		{
 			ba.getPa().settext(0,res.getString("nombre"));
 			ba.getPa().settext(1,res.getString("descripcion"));
-			ba.getPa().getCbidsala().addItem(res.getInt("idsala"));
-			ba.getPa().getCbidemple().addItem(res.getInt("idempleado"));
+			ba.getPa().getCbidsala().setSelectedItem(""+res.getInt("idsala"));
+			System.out.println(res.getInt("idsala"));
+			ba.getPa().getCbidemple().setSelectedItem(""+res.getInt("idempleado"));
 		}
 	}
 	
@@ -265,12 +266,12 @@ public void borrar(BajaTarifas bt,BajaActividad ba,int select) throws ClassNotFo
 		if(opc==0)
 		{
 			b.ejecutarSQL2("delete from actividad where id like "+ba.getBb().getCb().getSelectedItem()+"");
-			JOptionPane.showInternalMessageDialog(null,"Actividad eliminada");
-			ba.getBb().getCb().setSelectedItem(-1);
-			ba.getPa().settext(0, " ");
-			ba.getPa().settext(1," ");
-			ba.getPa().getCbidemple().setSelectedIndex(-1);
-			ba.getPa().getCbidsala().setSelectedIndex(-1);
+			JOptionPane.showInternalMessageDialog(null,"Tarifa eliminada");
+			bt.getBb().getCb().setSelectedItem(-1);
+			bt.getPbaja().settext(0, " ");
+			bt.getPbaja().getTa().setText(" ");
+			bt.getPbaja().settext(1," ");
+			
 		}else {
 			
 		}

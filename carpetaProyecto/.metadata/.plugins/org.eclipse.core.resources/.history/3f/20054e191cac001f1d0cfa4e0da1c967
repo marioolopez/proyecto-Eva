@@ -2,7 +2,6 @@ package PaquetePrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,8 +12,8 @@ import javax.swing.JOptionPane;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
-import com.itextpdf.layout.Document;
-import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import Yoel.AltaActividades;
 import Yoel.Altatarifas;
@@ -85,8 +84,8 @@ public static void insertartarifa(Altatarifas at) throws ClassNotFoundException,
 		id=1;
 	}
 	b.ejecutarSQL2("Insert into tarifa values("+id+",'"+at.getPa().gettext(0)+"','"+at.getPa().getTa().getText()+"',"+Double.parseDouble(at.getPa().gettext(1))+")");
-	at.getPa().settext(0," ");
-	at.getPa().settext(1," ");
+	at.getPa().settext(0);
+	at.getPa().settext(1);
 	b.cerrarConex();
 }
 public static void insertaractividad(AltaActividades aa) throws SQLException, ClassNotFoundException
@@ -105,8 +104,8 @@ public static void insertaractividad(AltaActividades aa) throws SQLException, Cl
 		id=1;
 	}
 	b.ejecutarSQL2("Insert into actividad values("+id+",'"+aa.getPpa().gettext(0)+"','"+aa.getPpa().gettext(1)+"',"+idsala+","+idemple+")");
-	aa.getPpa().settext(0," ");
-	aa.getPpa().settext(1," ");
+	aa.getPpa().settext(0);
+	aa.getPpa().settext(1);
 	aa.getPpa().getCbidsala().setSelectedIndex(-1);
 	aa.getPpa().getCbidemple().setSelectedIndex(-1);
 	b.cerrarConex();
@@ -173,42 +172,96 @@ public static void idsbajaact(BajaActividad bact) throws ClassNotFoundException,
 
 	b.cerrarConex();
 }
-public static void pdf(int pos) throws FileNotFoundException, ClassNotFoundException, SQLException
+public static void pdf(int pos)
 {
-	BaseDatos b=new BaseDatos();
-	b.abrircon();
 	JFileChooser elegir=new JFileChooser();
 	elegir.setDialogTitle("Guardar PDF como...");
-	int eleccion=elegir.showSaveDialog(vp);
-	if(eleccion==elegir.APPROVE_OPTION)
+	elegir.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	if(pos==1)
 	{
-		String ruta=elegir.getSelectedFile().getAbsolutePath();//guardo la ruta que halla elegido el usuario
-		PdfWriter lapiz=new PdfWriter(ruta + ".pdf");
-		PdfDocument boli=new PdfDocument(lapiz);
-		Document doc=new Document(boli);
-		if(pos==1)
-		{doc.add(new Paragraph("Tarifas"));
-			ResultSet res;
-			res=b.ejecutarSQL1("Select * from tarifa");
-		
-			while(res.next())
-			{
-				doc.add(new Paragraph("Nombre: "+res.getString("nombre")+"Descripcion: "+res.getString("descripcion")+"Precio: "+res.getDouble("precio")));
-			}
-			doc.close();
-		}else if(pos==2){
-			doc.add(new Paragraph("Actividades"));
-			ResultSet res;
-			res=b.ejecutarSQL1("Select * from actividad");
-			doc.add(new Paragraph("Nombre"+ "\t"+"Descripcion"+"\t"+"idsala"+"\t"+"idempleado"));
-			while(res.next())
-			{
-				doc.add(new Paragraph(res.getString("nombre")+"\t"+res.getString("descripcion")+"\t"+res.getInt("idsala")+"\t"+res.getInt("idempleado")));
-			}
-			doc.close();
-		}
-		
+		elegir.setSelectedFile(new File("Tarifas.pdf"));
+	}else if(pos==2){
+		elegir.setSelectedFile(new File("Salas.pdf"));
 	}
+	int seleccion=elegir.showSaveDialog(null);
+	if(seleccion==JFileChooser.APPROVE_OPTION)
+	{
+		File guardar=elegir.getSelectedFile();
+	}
+
+    int userSelection = elegir.showSaveDialog(this);
+
+
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+
+        String filePath = elegir.getSelectedFile().getAbsolutePath();
+
+
+        // Create PDF Document
+
+        PdfWriter writer = new PdfWriter(filePath + ".pdf");
+
+        PdfDocument pdfDocument = new PdfDocument(writer);
+
+        Document document = new Document(pdfDocument); 
+
+
+        // Añadimos un titulo
+if(pos==1)
+{
+	document.add(new Paragraph("Tarifas Del Gimnasio").setBold().setFontSize(18).setMarginBottom(20));
+}else {
+	document.add(new Paragraph("Salas Del Gimanasio").setBold().setFontSize(18).setMarginBottom(20));
+}
+        
+
+
+        // Creamos la tabla para pdf
+
+        int columnCount = listado.getColumnCount();
+
+        Table pdfTable = new Table(columnCount); 
+
+
+        // Añadimos las cabeceras
+
+        for (int col = 0; col < columnCount; col++) {
+
+            pdfTable.addHeaderCell(listado.getColumnName(col));
+
+        }
+
+
+        // Añadir las filas de LISTADO a la tabla que sera exportada
+
+        for (int row = 0; row < listado.getRowCount(); row++) {
+
+            for (int col = 0; col < columnCount; col++) {
+
+                Object cellValue = listado.getValueAt(row, col);
+
+                pdfTable.addCell(cellValue != null ? cellValue.toString() : "");
+
+            }
+
+        }
+
+
+        // Añadimos la tabla al documento
+
+        document.add(pdfTable);
+
+
+        // Cerrar documento
+
+        document.close();
+
+        JOptionPane.showMessageDialog(EmpList.this, "Datos Exportados Correctamente");
+
+    }
+
+
+    JOptionPane.showMessageDialog(EmpList.this, "Error al guardar el PDF: " + ex.getMessage());
 
 }
 
@@ -235,8 +288,9 @@ private void buscar(BajaTarifas bs2,BajaActividad ba,int pos) throws ClassNotFou
 		{
 			ba.getPa().settext(0,res.getString("nombre"));
 			ba.getPa().settext(1,res.getString("descripcion"));
-			ba.getPa().getCbidsala().addItem(res.getInt("idsala"));
-			ba.getPa().getCbidemple().addItem(res.getInt("idempleado"));
+			ba.getPa().getCbidsala().setSelectedItem(""+res.getInt("idsala"));
+			System.out.println(res.getInt("idsala"));
+			ba.getPa().getCbidemple().setSelectedItem(""+res.getInt("idempleado"));
 		}
 	}
 	
@@ -265,12 +319,12 @@ public void borrar(BajaTarifas bt,BajaActividad ba,int select) throws ClassNotFo
 		if(opc==0)
 		{
 			b.ejecutarSQL2("delete from actividad where id like "+ba.getBb().getCb().getSelectedItem()+"");
-			JOptionPane.showInternalMessageDialog(null,"Actividad eliminada");
-			ba.getBb().getCb().setSelectedItem(-1);
-			ba.getPa().settext(0, " ");
-			ba.getPa().settext(1," ");
-			ba.getPa().getCbidemple().setSelectedIndex(-1);
-			ba.getPa().getCbidsala().setSelectedIndex(-1);
+			JOptionPane.showInternalMessageDialog(null,"Tarifa eliminada");
+			bt.getBb().getCb().setSelectedItem(-1);
+			bt.getPbaja().settext(0, " ");
+			bt.getPbaja().getTa().setText(" ");
+			bt.getPbaja().settext(1," ");
+			
 		}else {
 			
 		}
@@ -353,20 +407,10 @@ public void borrar(BajaTarifas bt,BajaActividad ba,int select) throws ClassNotFo
 			altaA.getPpa().getCbidemple().setSelectedIndex(-1);
 			break;
 		case "PDFtar":
-			try {
-				pdf(1);
-			} catch (FileNotFoundException | ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		pdf(1);
 		break;
 		case "PDFalt":
-			try {
-				pdf(2);
-			} catch (FileNotFoundException | ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			pdf(2);
 			break;
 		case "BajasAct":
 			BajaActividad bac=new BajaActividad();
