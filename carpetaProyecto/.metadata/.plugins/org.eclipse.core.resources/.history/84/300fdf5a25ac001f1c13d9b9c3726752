@@ -1,0 +1,66 @@
+package alvaro;
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
+public class OnClickProductosYProveedores implements ActionListener{
+
+	private FrameProductosYProveedores ventanaMostrarMensaje;
+	private FrameAñadir añadir;
+	
+	public OnClickProductosYProveedores(FrameProductosYProveedores ventana) {
+		ventanaMostrarMensaje=ventana;
+	}
+	public OnClickProductosYProveedores(FrameAñadir añadir) {
+		this.añadir=añadir;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent evento) {
+		switch (evento.getActionCommand()){
+		case "MOSTRAR PRODUCTOS","MOSTRAR AGOTADOS","BUSCAR POR NOMBRE": 
+			ventanaMostrarMensaje.rellenarTabla(evento.getActionCommand(), ventanaMostrarMensaje.crearConexion());
+			break;
+		case "ACTUALIZAR STOCK":
+			try {
+				ventanaMostrarMensaje.actualizarStock();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "AÑADIR PRODUCTO":
+			try {
+				ventanaMostrarMensaje.completarInternalFrame();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "AÑADIR PRODUCTO ":
+			if(añadir!=null) {
+				try {
+					añadir.insertarProducto(ventanaMostrarMensaje.crearConexion());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			break;
+			
+		case "ELIMINAR PRODUCTOS":
+			try {
+				ventanaMostrarMensaje.eliminarProducto();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		}
+	}
+}
+

@@ -20,4 +20,7 @@
     <fullyQualifiedTypeName name="java.util.Calendar"/>
     <fullyQualifiedTypeName name="java.awt.GridBagLayout"/>
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
+    <fullyQualifiedTypeName name="alvaro.FrameProductosYProveedores"/>
+    <fullyQualifiedTypeName name="paqueteprincipal.ventanaPrincipal"/>
+    <fullyQualifiedTypeName name="alvaro.OnClickProductosYProveedores"/>
 </qualifiedTypeNameHistroy>
