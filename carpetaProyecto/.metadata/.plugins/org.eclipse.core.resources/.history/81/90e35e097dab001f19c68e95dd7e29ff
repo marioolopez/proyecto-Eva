@@ -283,14 +283,12 @@ private void buscar(BajaTarifas bs2,BajaActividad ba,int pos) throws ClassNotFou
 		}
 		
 	}else {
-		res=b.ejecutarSQL1("Select * from actividad where id like "+ba.getBb().getCb().getSelectedItem()+"");
+		res=b.ejecutarSQL1("Select * from actividad where id like "+bs2.getBb().getCb().getSelectedItem()+"");
 		if(res.next())
 		{
 			ba.getPa().settext(0,res.getString("nombre"));
 			ba.getPa().settext(1,res.getString("descripcion"));
-			ba.getPa().getCbidsala().setSelectedItem(""+res.getInt("idsala"));
-			System.out.println(res.getInt("idsala"));
-			ba.getPa().getCbidemple().setSelectedItem(""+res.getInt("idempleado"));
+			ba.getPbaja().getTa().setText(res.getString("descripcion"));
 		}
 	}
 	

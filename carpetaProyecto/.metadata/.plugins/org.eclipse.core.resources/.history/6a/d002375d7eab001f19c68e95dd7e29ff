@@ -288,7 +288,7 @@ private void buscar(BajaTarifas bs2,BajaActividad ba,int pos) throws ClassNotFou
 		{
 			ba.getPa().settext(0,res.getString("nombre"));
 			ba.getPa().settext(1,res.getString("descripcion"));
-			ba.getPa().getCbidsala().setSelectedItem(""+res.getInt("idsala"));
+			ba.getPa().getCbidsala().setSelectedIndex(0);
 			System.out.println(res.getInt("idsala"));
 			ba.getPa().getCbidemple().setSelectedItem(""+res.getInt("idempleado"));
 		}

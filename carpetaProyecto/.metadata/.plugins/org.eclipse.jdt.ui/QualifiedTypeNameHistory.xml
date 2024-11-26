@@ -41,6 +41,6 @@
     <fullyQualifiedTypeName name="javax.swing.JInternalFrame"/>
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="Yoel.BajaTarifas"/>
-    <fullyQualifiedTypeName name="Yoel.BajaActividad"/>
     <fullyQualifiedTypeName name="PaquetePrincipal.escuchador"/>
+    <fullyQualifiedTypeName name="Yoel.BajaActividad"/>
 </qualifiedTypeNameHistroy>
