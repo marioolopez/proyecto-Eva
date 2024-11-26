@@ -26,7 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
 
-import Main.BaseDatos;
+import main.BaseDatos;
 
 public class PedidosModificar extends JInternalFrame{
 	private JPanel panelCliente, panelPedidos, panelArriba, panelAbajo, panelCompras, panelEditar, panelBotones, panelEditarCentro, panelEditarNorte;

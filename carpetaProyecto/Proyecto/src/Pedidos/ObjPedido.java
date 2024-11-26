@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 
-import Main.BaseDatos;
+import main.BaseDatos;
 
 public class ObjPedido {
 	private int idPedido, idCliente;

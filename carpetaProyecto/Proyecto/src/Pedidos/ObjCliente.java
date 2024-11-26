@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
-import Main.BaseDatos;
+import main.BaseDatos;
 
 public class ObjCliente {
 	private String nombre;

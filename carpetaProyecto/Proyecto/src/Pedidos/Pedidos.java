@@ -23,8 +23,8 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JCalendar;
 
-import Main.BaseDatos;
-import Main.ventanaPrincipal;
+import main.BaseDatos;
+import main.ventanaPrincipal;
 
 public class Pedidos extends JInternalFrame{
 	private JLabel txt1,txt2,txt3,txt4;

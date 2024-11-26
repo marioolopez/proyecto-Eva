@@ -19,7 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
-import Main.BaseDatos;
+import main.BaseDatos;
 
 public class Compras extends JPanel{
 	private Pedidos pedidos;

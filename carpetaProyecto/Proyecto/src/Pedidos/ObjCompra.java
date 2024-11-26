@@ -3,7 +3,7 @@ package Pedidos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Main.BaseDatos;
+import main.BaseDatos;
 
 public class ObjCompra {
 	private String nombre;

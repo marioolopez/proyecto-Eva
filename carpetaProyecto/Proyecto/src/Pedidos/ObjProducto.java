@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 
-import Main.BaseDatos;
+import main.BaseDatos;
 
 public class ObjProducto {
 	private ArrayList<ObjCompra> listaProductosTotal; //Almacena el nombre, su id y stock de toda bd
