@@ -1,5 +1,8 @@
 package Conexiones;
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,21 +11,27 @@ import java.sql.Statement;
 
 public class BaseDatos {
 	private Connection c;
+<<<<<<< HEAD
 
 	public BaseDatos() throws SQLException, ClassNotFoundException {
 	}
 
+=======
+	public BaseDatos() throws SQLException, ClassNotFoundException {
+	}
+	
+>>>>>>> main
 	public void conexionBD() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		String url = "jdbc:mysql://localhost/gimnasio";
 		c = DriverManager.getConnection(url, "root", "");
 		System.out.println("Conexion realidada!");
 	}
-
+	
 	public Connection getC() {
 		return c;
 	}
-
+	
 	public void setC(Connection c) {
 		this.c = c;
 	}

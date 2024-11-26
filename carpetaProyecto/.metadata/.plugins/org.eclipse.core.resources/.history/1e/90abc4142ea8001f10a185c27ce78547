@@ -1,0 +1,10 @@
+package ParteMario;
+import javax.swing.JInternalFrame;
+public class PDFEquipamiento extends JInternalFrame {
+
+	PDFEquipamiento() {
+
+	}
+	
+}
+//mod , soluc de errores, pdf
