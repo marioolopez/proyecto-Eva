@@ -22,8 +22,8 @@ public class AccionListaCompras implements MouseListener {
 		Object source = e.getSource();
 
 		if(source == compras.getListaProducto()) {
-			String producto=(String) compras.getProductos().getSelectedValue();
-			compras.cantidadMet(producto);
+			compras.infoSeleccionado();
+
 		}
 
 	}

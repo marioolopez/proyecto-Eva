@@ -15,7 +15,7 @@ public class AccionPedidos implements ActionListener {
 		String comando=e.getActionCommand();
 		
 		if(comando.equals("Añadir")) {
-			pedidos.anadePedidoBD();
+			pedidos.crearPedido();
 		}else if(comando.equals("eliminar")) {
 			pedidos.eliminarCompra();
 		}

@@ -35,17 +35,22 @@ public class PedidosModificar extends JInternalFrame{
 	private JScrollPane barra1,barra2,barra3;
 	private JSpinner cantidad;
 	private JComboBox productos;
-	private JButton guardar, eliminar, entrega;
+	private JButton guardar, eliminarPedido, eliminarCompra, entrega;
 	private ObjCliente gestionClientes;
 	private ObjPedido gestionPedidos;
+	private ObjProducto gestionProductos;
 	private JRadioButton entregado, espera;
 	private ButtonGroup grupo;
 	
+	private ObjCliente clienteSeleccionado;
+	private ObjPedido pedidoSeleccionado;
+	private ObjCompra compraSeleccionada;
 	public PedidosModificar() {
 		this.setLayout(new GridLayout(2,1, 15 ,10));
 		gestionClientes=new ObjCliente();
 		gestionPedidos=new ObjPedido();
-		
+		gestionProductos=new ObjProducto();
+		pedidoSeleccionado=new ObjPedido();
 		//DIBUJA
 		dibujoMe1();
 		dibujoMe2();
@@ -65,7 +70,7 @@ public class PedidosModificar extends JInternalFrame{
 	    txt1 = new JLabel("Lista clientes");
 	    panelCliente.add(txt1, BorderLayout.NORTH);
 
-	    listaCliente = new JList<>(gestionClientes.getListaClientes());
+	    listaCliente = new JList<>(gestionClientes.getListaClientes()); //Lista 1
 	    listaCliente.addMouseListener(new AccionListaPedidosModificar(this));
 	    barra1 = new JScrollPane(listaCliente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	    panelCliente.add(barra1, BorderLayout.CENTER);
@@ -76,11 +81,11 @@ public class PedidosModificar extends JInternalFrame{
 	    panelPedidos = new JPanel();
 	    panelPedidos.setBorder(new EmptyBorder(10, 5, 10, 90));
 	    panelPedidos.setLayout(new BorderLayout());
-	    txt2 = new JLabel("Lista compras del cliente");
+	    txt2 = new JLabel("Lista pedidos del cliente");
 	    panelPedidos.add(txt2, BorderLayout.NORTH);
 
-	    listaPedido = new JList<>(gestionPedidos.getListaPedidos());
-	    listaPedido.addMouseListener(new AccionListaPedidosModificar(this));
+	    listaPedido = new JList<>();
+	    listaPedido.addMouseListener(new AccionListaPedidosModificar(this)); //Lista2
 	    barra2 = new JScrollPane(listaPedido, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	    panelPedidos.add(barra2, BorderLayout.CENTER);
 
@@ -102,7 +107,7 @@ public class PedidosModificar extends JInternalFrame{
 	    txt3 = new JLabel("Compras");
 	    panelCompras.add(txt3, BorderLayout.NORTH);
 
-	    listaCompra = new JList<>(gestionPedidos.getListaCompras());
+	    listaCompra = new JList<>();
 	    listaCompra.addMouseListener(new AccionListaPedidosModificar(this)); //Lista 3
 	    barra3 = new JScrollPane(listaCompra, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	    panelCompras.add(barra3, BorderLayout.CENTER);
@@ -122,7 +127,7 @@ public class PedidosModificar extends JInternalFrame{
 	    grupo.add(entregado);
 	    panelEditarNorte.add(entregado);
 	    espera=new JRadioButton("No entregado");
-	    espera.setEnabled(false); //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+	    espera.setEnabled(false); 
 	    grupo.add(espera);
 	    panelEditarNorte.add(espera);
 	    panelEditar.add(panelEditarNorte, BorderLayout.NORTH);
@@ -135,7 +140,7 @@ public class PedidosModificar extends JInternalFrame{
 
 	    productos = new JComboBox<>();
 	    productos.setEnabled(false);
-	    for(ObjPedido nombre:gestionPedidos.getListaProductosTotal()) {
+	    for(ObjCompra nombre:gestionProductos.getListaProductosTotal()) {
 	    	productos.addItem(nombre.getNombre());
 	    }
 	    productos.setPreferredSize(new Dimension(190, 25));
@@ -160,10 +165,15 @@ public class PedidosModificar extends JInternalFrame{
 	    guardar.setEnabled(false);
 	    panelBotones.add(guardar);
 
-	    eliminar = new JButton("Eliminar");
-	    eliminar.setEnabled(false);
-	    eliminar.addActionListener(new AccionPedidosModificar(this));
-	    panelBotones.add(eliminar);
+	    eliminarPedido = new JButton("Eliminar pedido");
+	    eliminarPedido.setEnabled(false);
+	    eliminarPedido.addActionListener(new AccionPedidosModificar(this));
+	    panelBotones.add(eliminarPedido);
+	    
+	    eliminarCompra = new JButton("Eliminar compra");
+	    eliminarCompra.setEnabled(false);
+	    eliminarCompra.addActionListener(new AccionPedidosModificar(this));
+	    panelBotones.add(eliminarCompra);
 
 	    entrega = new JButton("Cambiar entrega");
 	    entrega.setEnabled(false);
@@ -178,68 +188,68 @@ public class PedidosModificar extends JInternalFrame{
 	    // Agregar panel inferior al contenedor principal
 	    this.add(panelAbajo);
 	}
-
 	
-	public void pedidosCliente() {		//Saca el id del cliente que se ha seleccionado
-		int index=(int) listaCliente.getSelectedIndex();
-		ObjCliente cliente=gestionClientes.getListaClientesTotal().get(index);
-		int idCliente=cliente.getId(); //Saca el id
+	public void buscarPedidos() { //Busca los pedidos del cliente seleccionado
+		int index= listaCliente.getSelectedIndex();
+		clienteSeleccionado=gestionClientes.getListaClientesTotal().get(index);
+		clienteSeleccionado.getListaPedidosClienteTotal().clear();
+		clienteSeleccionado.getListaPedidosCliente().clear();
+		int idCliente=clienteSeleccionado.getId(); //Saca el id
+		clienteSeleccionado.buscarPedidosCliente(idCliente);
 		
-		gestionPedidos.buscarPedidosCliente(idCliente);
+		listaPedido.setModel(clienteSeleccionado.getListaPedidosCliente());
+		
 	}
 	
+	public void buscarCompras() { //Busca las compras y mira las fechas de entrega
+		int index=listaPedido.getSelectedIndex();
+		pedidoSeleccionado=clienteSeleccionado.getListaPedidosClienteTotal().get(index);
+		//System.out.println(pedidoSeleccionado.toString());
+		pedidoSeleccionado.buscarCompras();
+		listaCompra.setModel(pedidoSeleccionado.getListaPedidos());
+		
+		//Para los radioButtons
+		LocalDate fechaHoy=LocalDate.now();
+		//Formateo fecha
+		String fechaFormateada = pedidoSeleccionado.getFechaEntrega().toString();
+		LocalDate fechaEntrega = LocalDate.parse(fechaFormateada);
 
-	public void buscarCompras() {
-		String pedido[]= listaPedido.getSelectedValue().toString().split(" ");
-		int id= Integer.parseInt(pedido[1]);
-		//System.out.println(id);
-		gestionPedidos.buscarCompras(id);
-		eliminar.setEnabled(true);
-		entrega.setEnabled(true);
+		 if(fechaEntrega.isBefore(fechaHoy)){ //Saber si es anterior a fecha hoy
+	        entregado.setSelected(true);
+	        espera.setSelected(false);
+	     }else{
+			espera.setSelected(true);
+			entregado.setSelected(false);
+	     }
+		 entrega.setEnabled(true);
+		 
+		productos.setEnabled(false);
+		cantidad.setEnabled(false);
+		guardar.setEnabled(false);
 	}
 	
 	public void mostrarCompra() {
+		int index=listaCompra.getSelectedIndex();
+		compraSeleccionada=pedidoSeleccionado.getListaComprasTotal().get(index);
+		productos.setSelectedItem(compraSeleccionada.getNombre());
+		cantidad.setValue(compraSeleccionada.getCantidad());
+		
 		productos.setEnabled(true);
 		cantidad.setEnabled(true);
-		LocalDate fechaHoy=LocalDate.now();
-		//Pinta en el ComboBox,...
-		String nombre=listaCompra.getSelectedValue().toString();
-		for(ObjPedido a:gestionPedidos.getListaComprasTotal()) {
-			if(a.getNombre().equals(nombre)) {
-				cantidad.setValue(a.getCantidad());
-				productos.setSelectedItem(a.getNombre());
-				//Formateo fecha
-				String fechaFormateada = a.getFechaEntrega().toString();
-				LocalDate fechaEntrega = LocalDate.parse(fechaFormateada);
-
-				 if(fechaEntrega.isBefore(fechaHoy)){ //Saber si es anterior a fecha hoy
-			        entregado.setSelected(true);
-			        espera.setSelected(false);
-			     }else{
-					espera.setSelected(true);
-					entregado.setSelected(false);
-			     }
-			}
-		}
 		guardar.setEnabled(true);
 	}
 	
-
-	public void actualizarCompras() {
+	public void modificarCompra() {
 		if(validar()) {
-			String pedido[]= listaPedido.getSelectedValue().toString().split(" ");
-			int idPedido= Integer.parseInt(pedido[1]);
-			int index=listaCompra.getSelectedIndex();
-			ObjPedido producto=gestionPedidos.getListaComprasTotal().get(index);
-			
-			gestionPedidos.actualizarCompras(producto.getIdProducto(), idPedido, producto.getCantidad());
+			int index=productos.getSelectedIndex();
+			ObjCompra productoSeleccionado=gestionProductos.getListaProductosTotal().get(index);
+			compraSeleccionada.actualizaCompra(productoSeleccionado.getIdProducto(), Integer.parseInt(cantidad.getValue().toString()) ,pedidoSeleccionado.getIdPedido());
 		}
-
+		buscarCompras();
 	}
 	
-	
 	public boolean validar() {
-		if(!productos.isEnabled()) {
+		if(!productos.isEnabled() && listaCompra.getSelectedValue()!=null) {
 			JOptionPane.showMessageDialog(this, "Selecciona una compra para modificar");
 		}else if(Integer.parseInt(cantidad.getValue().toString())<0) {
 			JOptionPane.showMessageDialog(this, "Pon una cantidad en positivo");
@@ -249,6 +259,20 @@ public class PedidosModificar extends JInternalFrame{
 		return false;
 	}
 	
+	public void cambiarEntrega() {
+		PanelCalendario panelCalendario=new PanelCalendario(this);
+		panelCalendario.setVisible(true);
+	}
+	
+	public void eliminarPedido() {
+		
+	}
+	
+	public void eliminarCompra() {
+		
+	}
+
+
 
 	public JPanel getPanelCompra() {
 		return panelPedidos;
@@ -307,6 +331,36 @@ public class PedidosModificar extends JInternalFrame{
 
 	public void setProductos(JComboBox productos) {
 		this.productos = productos;
+	}
+
+
+	public JSpinner getCantidad() {
+		return cantidad;
+	}
+
+
+	public void setCantidad(JSpinner cantidad) {
+		this.cantidad = cantidad;
+	}
+
+
+	public JButton getGuardar() {
+		return guardar;
+	}
+
+
+	public void setGuardar(JButton guardar) {
+		this.guardar = guardar;
+	}
+
+
+	public ObjPedido getPedidoSeleccionado() {
+		return pedidoSeleccionado;
+	}
+
+
+	public void setPedidoSeleccionado(ObjPedido pedidoSeleccionado) {
+		this.pedidoSeleccionado = pedidoSeleccionado;
 	}
 	
 	

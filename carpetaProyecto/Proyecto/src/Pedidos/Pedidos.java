@@ -34,13 +34,13 @@ public class Pedidos extends JInternalFrame{
 	private JList listaCliente, listaCompra;
 	private JScrollPane barra1,barra2;
 	private JButton[] boton;
-	private String[] botonesNom= {"Añadir", "eliminar", "modificar", "mostrar"};
+	private String[] botonesNom= {"Añadir", "eliminar"};
 	private Compras compra;
 	
 	
 	private ObjCliente gestionClientes; //Para gestion de clientes
 	private ObjPedido gestionPedidos;
-
+	private ObjProducto gestionProductos;
 	
 
 	//ARRIBA
@@ -49,15 +49,17 @@ public class Pedidos extends JInternalFrame{
 		this.setClosable(true);;
 		this.setLayout(new FlowLayout());
 		
-		gestionClientes=new ObjCliente();
+		gestionClientes= new ObjCliente();
 		gestionPedidos=new ObjPedido();
-		
+		gestionProductos=new ObjProducto(); //Carga los productos
+
 		datosMe();//Dibuja
 		botonesMe();//Dibuja
 		
+		//Saco la idMax de pedido
 		id.setText(String.valueOf(gestionPedidos.idMax()));
 		
-		compra=new Compras(this,gestionPedidos);
+		compra=new Compras(this,gestionPedidos, gestionProductos);
 		compra.setPreferredSize(new Dimension(700,150));
 		compra.setVisible(true);
 		this.add(compra);
@@ -83,7 +85,7 @@ public class Pedidos extends JInternalFrame{
 			izqAba.setLayout(new BorderLayout());
 				txt2=new JLabel("Cliente");
 				izqAba.add(txt2,BorderLayout.NORTH);
-					listaCliente=new JList<String>(gestionClientes.getListaClientes());
+					listaCliente=new JList<String>(gestionClientes.getListaClientes());//Lista 1
 					barra1=new JScrollPane(listaCliente,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 				izqAba.add(barra1, BorderLayout.CENTER);
 			izq.add(izqAba, BorderLayout.CENTER);
@@ -101,7 +103,7 @@ public class Pedidos extends JInternalFrame{
 			der.setLayout(new BorderLayout());
 				txt4=new JLabel("Id Compras");
 				der.add(txt4, BorderLayout.NORTH);
-				listaCompra=new JList<String>(gestionPedidos.getListaCompras());
+				listaCompra=new JList<String>(gestionPedidos.getListaPedidos());//Lista 2
 				listaCompra.addMouseListener(new AccionListaPedidos(this));
 				barra2=new JScrollPane(listaCompra,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 				der.add(barra2, BorderLayout.CENTER);
@@ -117,92 +119,93 @@ public class Pedidos extends JInternalFrame{
 		boton=new JButton[botonesNom.length];
 		for(int i=0; i<botonesNom.length; i++) {
 			boton[i]=new JButton(botonesNom[i]);
-			boton[i].addActionListener(new AccionPedidos( this));
+			boton[i].addActionListener(new AccionPedidos(this));
+			boton[i].setEnabled(false);
 			botones.add(boton[i]);
 		}
-		boton[0].setEnabled(false);
-		boton[1].setEnabled(false);
-		boton[1].addActionListener(new AccionPedidos(this));
-		boton[2].setEnabled(false);
-		boton[3].setEnabled(false);
 		this.add(botones);
 	}
-	
 
-
-	//FUNCIONALIDAD
-	public void listaComprasMet() { //Actualiza y si hay algo activa el botón añadir
-		gestionPedidos.getListaCompras().removeAllElements();
-		for(ObjPedido a: gestionPedidos.getListaComprasTotal()) {
-			gestionPedidos.getListaCompras().addElement(a.getNombre());
-		}
-		if(gestionPedidos.getListaComprasTotal().isEmpty()) {
+	public void activarBotones() {
+		if(gestionPedidos.getListaPedidos().isEmpty()) {
 			boton[0].setEnabled(false);
+			boton[1].setEnabled(false);
 		}else {
 			boton[0].setEnabled(true);
+			boton[1].setEnabled(true);
 		}
+	}
+	
+	public void eliminarCompra() { //Elimina la compra seleccionada
+		int index=listaCompra.getSelectedIndex();
+		ObjCompra compraEliminar=gestionPedidos.getListaComprasTotal().get(index); //Selecciona el objeto a eliminar
+		//System.out.println("Compra a eliminar " + compraEliminar.toString());
+		int cantidadCompra=compraEliminar.getCantidad();
+		
+		//Añado al stock global la cantidad de la compraEliminada
+		for(ObjCompra a:gestionPedidos.getListaComprasTotal()) {
+			if(a.getIdProducto()==compraEliminar.getIdProducto()) {
+				a.setCantidad(a.getCantidad()+cantidadCompra);
+			}
+		}
+		
+		//Elimino la compra
+		gestionPedidos.getListaComprasTotal().remove(index);
+		gestionPedidos.getListaPedidos().remove(index);
+		
+		activarBotones(); //Desactivo o no los botones
+	}
+	
+	
+	//Crea el pedido
+	public void crearPedido() {
+		if(listaCliente.getSelectedValue()!=null) {
+			int idPedido=Integer.parseInt(id.getText());
+			int index=listaCliente.getSelectedIndex();
+			ObjCliente cliente=gestionClientes.getListaClientesTotal().get(index);
+			
+			 //Fecha del calendario
+	        java.util.Date fecha = calendario.getDate();
+	        java.sql.Date fechaSql = new java.sql.Date(fecha.getTime());
 
-	}
-	
-	public boolean validar() {
-		if(listaCliente.getSelectedValue()==null) {
-			JOptionPane.showMessageDialog(compra, "Selecciona un cliente");
-			return false;
-		}
-		return true;
-	}
-	
-	public void anadePedidoBD() {
-		if(validar()) {
-			String cliente= (String) listaCliente.getSelectedValue();
-			int idCliente=0;
-			for(ObjCliente a:gestionClientes.getListaClientesTotal()) {
-				if(listaCliente.getSelectedValue().equals(a.getNombre())) {
-					idCliente=a.getId();
-				}
-			}
-			//Fecha del calendario
-			java.util.Date fecha = calendario.getDate();
-			java.sql.Date fechaSql = new java.sql.Date(fecha.getTime());
-			gestionPedidos.anadirMetPedido(cliente, idCliente, fechaSql, id.getText(), gestionPedidos);
+	        //Fecha actual
+	        LocalDate fechaLocal = LocalDate.now();
+	        java.sql.Date fechaLocalSql = java.sql.Date.valueOf(fechaLocal);
 			
-			reseteoMet();
+			ObjPedido pedidoTerminado=new ObjPedido(idPedido, fechaSql, fechaLocalSql, gestionPedidos.getListaComprasTotal());
+			System.out.println(pedidoTerminado.toString());
+			gestionPedidos.crearPedido(pedidoTerminado);
+			
+			limpieza();
 		}
 	}
-		 
-	//Reseteo
-	public void reseteoMet() { 
-		gestionPedidos.getListaCompras().clear();
+	
+	public void limpieza() {
+		//Saco la idMax de pedido
+		id.setText(String.valueOf(gestionPedidos.idMax()));
 		gestionPedidos.getListaComprasTotal().clear();
-		id.setText(String.valueOf(Integer.parseInt(id.getText())+1));
+		gestionPedidos.getListaPedidos().clear();
+		listaCliente.clearSelection();
+		listaCompra.clearSelection();
+		activarBotones();
 	}
 	
-	//Elimina la compra de la lista y añade el stock restado anteriormente en la clase Compras, METODO compraRealizadaMet
-	public void eliminarCompra() {
-		if(listaCompra.getSelectedValue()!=null) {
-			
-			int index=listaCompra.getSelectedIndex(); //eL INDEX de listaCompras y listaComprasTotal es el mismo, se añaden en el mismo orden 
-			int cantidad= gestionPedidos.getListaComprasTotal().get(index).getCantidad(); //Stock total actual
-			int id=gestionPedidos.getListaComprasTotal().get(index).getId(); //Id producto selecicionado en el JLIst
-			for(ObjPedido gestionCompras: gestionPedidos.getListaProductosTotal()) {
-				if(gestionCompras.getId()==id) {
-					System.out.println(gestionCompras.getCantidad());
-					gestionCompras.setCantidad(gestionCompras.getCantidad()+cantidad);
-					System.out.println(gestionCompras.getCantidad());
-				}
-			}
-			gestionPedidos.getListaComprasTotal().get(index).getCantidad();
-			gestionPedidos.getListaComprasTotal().remove(listaCompra.getSelectedIndex());
-			listaComprasMet();
-			listaCompra.clearSelection();
-			boton[1].setEnabled(false);
-		}
-	}
-	//Se activa el boton cuando se selecciona algo en la lista compra
-	public void eliminarBoton() {
-		boton[1].setEnabled(true);
-	}
 	
+	public JButton[] getBoton() {
+		return boton;
+	}
+
+	public void setBoton(JButton[] boton) {
+		this.boton = boton;
+	}
+
+	public JList getListaCliente() {
+		return listaCliente;
+	}
+
+	public void setListaCliente(JList listaCliente) {
+		this.listaCliente = listaCliente;
+	}
 
 	public JList getListaCompra() {
 		return listaCompra;
@@ -214,6 +217,15 @@ public class Pedidos extends JInternalFrame{
 	
 	
 	
+
+
+	
+	
+	
+	
+	
+	
+
 	
 	
 	

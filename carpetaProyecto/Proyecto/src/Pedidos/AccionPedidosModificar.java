@@ -14,12 +14,15 @@ public class AccionPedidosModificar implements ActionListener {
 		String comandos=e.getActionCommand();
 		
 		if(comandos.equals("Guardar")) {
-			pedi.actualizarCompras();
-		}else if(comandos.equals("Eliminar")) {
-			
+			pedi.modificarCompra();
+		}else if(comandos.equals("Eliminar pedido")) {
+			pedi.eliminarPedido();
 		}else if(comandos.equals("Cambiar entrega")) {
-			
+			pedi.cambiarEntrega();
+		}else if(comandos.equals("Eliminar compra")) {
+			pedi.eliminarCompra();
 		}
+		
 
 	}
 

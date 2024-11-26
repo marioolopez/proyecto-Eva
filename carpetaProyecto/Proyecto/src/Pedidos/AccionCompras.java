@@ -15,10 +15,8 @@ public class AccionCompras implements ActionListener {
 		String comando=e.getActionCommand();
 		
 		if(comando.equals("Añadir")) {
-			compras.compraRealizadaMet();
-			compras.reseteoMet();
-
-	}
+			compras.guardarCompra();
+		}
 	}
 
 }
