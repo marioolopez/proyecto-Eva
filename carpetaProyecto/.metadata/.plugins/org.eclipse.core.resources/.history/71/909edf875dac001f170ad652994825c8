@@ -256,7 +256,6 @@ public void borrar(BajaTarifas bt,BajaActividad ba,int select) throws ClassNotFo
 			bt.getPbaja().settext(0, " ");
 			bt.getPbaja().getTa().setText(" ");
 			bt.getPbaja().settext(1," ");
-			bt.getBb().getCb().setSelectedIndex(-1);
 			
 		}else {
 			
@@ -272,7 +271,6 @@ public void borrar(BajaTarifas bt,BajaActividad ba,int select) throws ClassNotFo
 			ba.getPa().settext(1," ");
 			ba.getPa().getCbidemple().setSelectedIndex(-1);
 			ba.getPa().getCbidsala().setSelectedIndex(-1);
-			ba.getBb().getCb().setSelectedIndex(-1);
 		}else {
 			
 		}
