@@ -13,6 +13,6 @@ REPARTO TAREAS:
 	MARCOS: Alta, baja modificación de clientes.
 	YOEL: Alta de tarifas y actividades.
 	JUAN: Alta, baja modificación de empleados.
-	JORGE: Alta de productos.
+	JORGE: Alta de pedidos.
 	MARIO: Alta de equipamiento y mantenimiento.
 	álvaro: Alta de productos y proveedores.

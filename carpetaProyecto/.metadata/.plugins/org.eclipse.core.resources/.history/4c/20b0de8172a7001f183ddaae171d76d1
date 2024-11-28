@@ -1,0 +1,26 @@
+package ParteMario;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+public class escuchaLista implements ActionListener {
+	private latizq lizq;
+	private ListadoEquipMant em;
+	escuchaLista(latizq lz){
+		lizq = lz;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		switch(e.getActionCommand()) {
+		case "lista":
+			ListadoEquipMant em;
+			
+				em = new ListadoEquipMant();
+				em.setBounds(200, 200, 600, 400);
+				em.setVisible(true);
+			
+					
+			break;
+		}	
+	}
+}
