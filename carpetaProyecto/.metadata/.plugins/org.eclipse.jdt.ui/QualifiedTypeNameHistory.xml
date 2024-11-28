@@ -51,4 +51,5 @@
     <fullyQualifiedTypeName name="ParteMario.escuchaModificar"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
+    <fullyQualifiedTypeName name="paqueteprincipal.MenuAccion"/>
 </qualifiedTypeNameHistroy>
