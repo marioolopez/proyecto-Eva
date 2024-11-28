@@ -10,8 +10,8 @@ public class ventanaPrincipal extends JFrame {
     private JLabel fotoGym;
     private ImageIcon img;
     private JMenuBar barra;
-    private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3,emp4, equip1, prod1, act1, tar1;
-    private JMenu menu1, menu2, menu3, menu4, menu5, menu6;
+    private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3,emp4, equip1, prod1, act1, tar1, ped1, ped2;
+    private JMenu menu1, menu2, menu3, menu4, menu5, menu6, menu7;
     ventanaPrincipal() throws ClassNotFoundException, SQLException {
         setTitle("BIENVENIDO A NUESTRA WEB");
         this.setBounds(200, 200, 800, 600);
@@ -106,12 +106,27 @@ public class ventanaPrincipal extends JFrame {
         menu6.add(tar1);
 
         
+        menu7 = new JMenu("PEDIDOS");
+        ped1 = new JMenuItem("Pedidos Añandir");
+        ped1.setActionCommand("pedidoA");
+        ped1.addActionListener(new MenuAccion(this));
+        ped1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        ped2 = new JMenuItem("Pedidos Modificar/Ver");
+        ped2.setActionCommand("pedidoM");
+        ped2.addActionListener(new MenuAccion(this));
+        ped2.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu7.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu7.add(ped1);
+        menu7.add(ped2);
+        
+        
         barra.add(menu1);
         barra.add(menu2);
         barra.add(menu3);
         barra.add(menu4);
         barra.add(menu5);
         barra.add(menu6);
+        barra.add(menu7);
         this.setJMenuBar(barra); //hasta aqui todo son opciones en el JMenuBar
         //-----------------------------------------------------------
        
