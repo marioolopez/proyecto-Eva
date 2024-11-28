@@ -46,7 +46,6 @@ public class Pedidos extends JInternalFrame{
 	//ARRIBA
 	public Pedidos() {
 		super();
-		this.setClosable(true);;
 		this.setLayout(new FlowLayout());
 		
 		gestionClientes= new ObjCliente();
@@ -163,6 +162,7 @@ public class Pedidos extends JInternalFrame{
 			int idPedido=Integer.parseInt(id.getText());
 			int index=listaCliente.getSelectedIndex();
 			ObjCliente cliente=gestionClientes.getListaClientesTotal().get(index);
+			//System.out.println(cliente.toString());
 			
 			 //Fecha del calendario
 	        java.util.Date fecha = calendario.getDate();
@@ -172,11 +172,14 @@ public class Pedidos extends JInternalFrame{
 	        LocalDate fechaLocal = LocalDate.now();
 	        java.sql.Date fechaLocalSql = java.sql.Date.valueOf(fechaLocal);
 			
-			ObjPedido pedidoTerminado=new ObjPedido(idPedido, fechaSql, fechaLocalSql, gestionPedidos.getListaComprasTotal());
-			System.out.println(pedidoTerminado.toString());
+			ObjPedido pedidoTerminado=new ObjPedido(idPedido,cliente.getId(), fechaSql, fechaLocalSql, gestionPedidos.getListaComprasTotal());
+			//System.out.println(pedidoTerminado.toString());
+			//System.out.println("a");
 			gestionPedidos.crearPedido(pedidoTerminado);
 			
 			limpieza();
+		}else {
+			JOptionPane.showMessageDialog(this, "Indica un cliente");
 		}
 	}
 	

@@ -226,6 +226,7 @@ public class PedidosModificar extends JInternalFrame{
 		productos.setEnabled(false);
 		cantidad.setEnabled(false);
 		guardar.setEnabled(false);
+		eliminarCompra.setEnabled(false);
 	}
 	
 	public void mostrarCompra() {
@@ -243,7 +244,11 @@ public class PedidosModificar extends JInternalFrame{
 		if(validar()) {
 			int index=productos.getSelectedIndex();
 			ObjCompra productoSeleccionado=gestionProductos.getListaProductosTotal().get(index);
-			compraSeleccionada.actualizaCompra(productoSeleccionado.getIdProducto(), Integer.parseInt(cantidad.getValue().toString()) ,pedidoSeleccionado.getIdPedido());
+			if((int)cantidad.getValue()<productoSeleccionado.getCantidad()) {
+				compraSeleccionada.actualizaCompra(productoSeleccionado.getIdProducto(), Integer.parseInt(cantidad.getValue().toString()) ,pedidoSeleccionado.getIdPedido());
+			}else {
+				JOptionPane.showMessageDialog(this, "Stock disponible: " + gestionProductos.getListaProductosTotal().get(index).getCantidad());
+			}
 		}
 		buscarCompras();
 	}
@@ -253,11 +258,12 @@ public class PedidosModificar extends JInternalFrame{
 			JOptionPane.showMessageDialog(this, "Selecciona una compra para modificar");
 		}else if(Integer.parseInt(cantidad.getValue().toString())<0) {
 			JOptionPane.showMessageDialog(this, "Pon una cantidad en positivo");
-		}else {
+		}else{
 			return true;
 		}
 		return false;
 	}
+	
 	
 	public void cambiarEntrega() {
 		PanelCalendario panelCalendario=new PanelCalendario(this);
@@ -270,11 +276,24 @@ public class PedidosModificar extends JInternalFrame{
 		//System.out.println(pedidoSeleccionado.toString());
 	}
 	
-	public void eliminarCompra() { //NO FUNCIONA
-		compraSeleccionada.eliminarCompra();
-		eliminarCompra.setEnabled(false); //Desactivo el boton
-		pedidoSeleccionado.getListaComprasTotal().remove(compraSeleccionada);
-		pedidoSeleccionado.getListaPedidos().removeElement(compraSeleccionada.getNombre());
+	public void eliminarCompra() { //Elimina la compra
+		//System.out.println(compraSeleccionada.toString());
+ 		if(pedidoSeleccionado.getListaComprasTotal().size()==1) {
+	       int respuesta = JOptionPane.showConfirmDialog(this,"Solo hay una compra, si la eliminas se eliminará el pedido", "Borrar pedido",JOptionPane.YES_NO_OPTION);
+	       if (respuesta == JOptionPane.YES_OPTION) {
+	    	   eliminarPedido();
+	        } else if (respuesta == JOptionPane.NO_OPTION) {
+	    	   	compraSeleccionada.eliminarCompra(pedidoSeleccionado.getIdPedido());
+		   	   	eliminarCompra.setEnabled(false); //Desactivo el boton
+				pedidoSeleccionado.getListaComprasTotal().remove(compraSeleccionada);
+				pedidoSeleccionado.getListaPedidos().removeElement(compraSeleccionada.getNombre());
+	        } else {
+	        	JOptionPane.showMessageDialog(this, "No se ha actualizado la compra/pedido");
+	        }
+		}
+		
+
+
 		
 	}
 

@@ -1,5 +1,6 @@
 package Pedidos;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class ObjProducto {
 			e.printStackTrace();
 		}
 	}
+	
 
 	public ArrayList<ObjCompra> getListaProductosTotal() {
 		return listaProductosTotal;

@@ -37,7 +37,12 @@ import java.sql.Statement;
 	}
 	public void ejecutarSQL2(String cad) throws SQLException{
 		Statement stm = crearStm();
-		stm.executeUpdate(cad);
+		 int filasAfectadas = stm.executeUpdate(cad);
+		/**
+		System.out.println("----INFO----");
+		System.out.println("Consulta SQL generada: " + cad);
+		System.out.println("Filas afectadas: " + filasAfectadas);
+		**/
 	}
 	
 	}

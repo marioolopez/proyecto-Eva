@@ -45,6 +45,7 @@ public class ObjCliente {
 				ObjCliente cliente=new ObjCliente(result.getString("nombre"), result.getInt("id"));
 				listaClientesTotal.add(cliente);
 				listaClientes.addElement(cliente.getNombre());
+				//System.out.println(cliente.toString());
 			}
 			bs.cerrarConex();
 		} catch (ClassNotFoundException e) {

@@ -18,12 +18,13 @@ public class ObjPedido {
 	private DefaultListModel<String> listaCompras; //Almacena los nompres del pedido
 	
 
-	public ObjPedido(int idPedido, Date fechaEntrega, Date fechaRealizada,ArrayList<ObjCompra> listaComprasTotal) {
+	public ObjPedido(int idPedido, int idCliente,Date fechaEntrega, Date fechaRealizada,ArrayList<ObjCompra> listaComprasTotal) {
 		super();
 		this.idPedido = idPedido;
 		this.fechaEntrega = fechaEntrega;
 		this.fechaRealizada = fechaRealizada;
 		this.listaComprasTotal=listaComprasTotal;
+		this.idCliente=idCliente;
 	}
 	
 	public ObjPedido(int idPedido, Date fechaEntrega, Date fechaRealizada) {
@@ -51,7 +52,7 @@ public class ObjPedido {
 	//Busca la id Max de pedido
 	public int idMax() {
 		int idMax=0;
-		String sql="SELECT MAX(id) FROM pedido";
+		String sql="SELECT MAX(id) AS max FROM pedido";
 		BaseDatos bs=null;
 		ResultSet result=null;
 		try {
@@ -60,7 +61,7 @@ public class ObjPedido {
 			result=bs.ejecutarSQL1(sql);
 			
 			if(result.next()) {
-				idMax=result.getInt("MAX(id)");
+				idMax=result.getInt("max");
 			}
 			bs.cerrarConex();
 		} catch (ClassNotFoundException e) {
@@ -71,6 +72,7 @@ public class ObjPedido {
 			e.printStackTrace();
 		}
 		idMax++;
+		//System.out.println("El idMax es: " + idMax);
 		return idMax;
 	}
 
@@ -83,9 +85,15 @@ public class ObjPedido {
 			bs=new BaseDatos();
 			bs.conexionBD();
 			bs.ejecutarSQL2(sql);
-			for(ObjCompra compra:pedido.getListaComprasTotal()) {
+			//System.out.println("Creado el pedido");
+			for(ObjCompra compra:pedido.getListaComprasTotal()) { //Inserto comprS
 				String sql2="INSERT INTO compra(idpedido, idproducto, cantidad) VALUES ('" +pedido.getIdPedido() + "','" + compra.getIdProducto() + "','" + compra.getCantidad() +"')";
 				bs.ejecutarSQL2(sql2);
+				//Resto el stock
+				String sql3 = "UPDATE producto SET stock= stock -'" + compra.getCantidad() + "' WHERE id='" + compra.getIdProducto() + "'";
+				bs.ejecutarSQL2(sql3);
+				//System.out.println("inserto compra");
+				//System.out.println(sql2);
 			}
 			bs.cerrarConex();
 		} catch (ClassNotFoundException e) {

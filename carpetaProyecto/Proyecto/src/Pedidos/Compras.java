@@ -88,9 +88,8 @@ public class Compras extends JPanel{
 	public void infoSeleccionado() { //Detecta el obje seleccionado en la lista y saca la cantidad para ponerla en el JSpinner
 		int index = listaProducto.getSelectedIndex();
 		ObjCompra compra=gestionProductos.getListaProductosTotal().get(index);
-		System.out.println(compra.toString());
 		//System.out.println(compra.toString());
-		
+
 		int stock=compra.getCantidad();
 		if(stock==0) {
 			JOptionPane.showMessageDialog(datos, "No hay stock");
@@ -121,7 +120,7 @@ public class Compras extends JPanel{
 		
 		gestionPedidos.getListaComprasTotal().add(compraTerminada);
 		gestionPedidos.getListaPedidos().addElement(compraTerminada.getNombre());
-		System.out.println(compraTerminada.toString());
+		//System.out.println(compraTerminada.toString());
 		
 		//Resta para actualizar el stock
 		compra.setCantidad(compra.getCantidad()-cantidadProducto);
