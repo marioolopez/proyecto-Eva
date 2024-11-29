@@ -84,11 +84,12 @@ public class ventanaPrincipal extends JFrame {
         
         
         menu4 = new JMenu("PRODUCTOS");
-        menu4.setFont(new Font("Arial Black", Font.BOLD, 12));
+        menu4.setFont(new Font("Arial Black", Font.BOLD, 12));       
         prod1 = new JMenuItem("Agregar Producto");
         prod1.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu4.add(prod1);
-        
+        prod1.addActionListener(new MenuAccion(this));
+        prod1.setActionCommand("Productos");
         
         
         menu5 = new JMenu("ACTIVIDADES");

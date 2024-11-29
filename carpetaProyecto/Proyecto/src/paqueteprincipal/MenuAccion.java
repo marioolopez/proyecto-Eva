@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import Pedidos.Pedidos;
 import Pedidos.PedidosModificar;
+import alvaro.FrameProductosYProveedores;
 
 
 
@@ -34,6 +35,13 @@ public class MenuAccion implements ActionListener {
 			ven.getContentPane().removeAll();
 			ven.getContentPane().add(pedidoM);
 			pedidoM.setVisible(true);
+		}
+		else if(comando.equals("Productos")) {
+			FrameProductosYProveedores ventanaInterna=new FrameProductosYProveedores();			
+			ven.getContentPane().removeAll();
+			ventanaInterna.completarFrame();
+			ven.getContentPane().add(ventanaInterna);
+					
 		}
 
 	}
