@@ -23,6 +23,7 @@ public class ventanaPrincipal extends JFrame {
     ventanaPrincipal() throws ClassNotFoundException, SQLException {
         setTitle("BIENVENIDO A NUESTRA WEB");
         this.setBounds(200, 200, 800, 600);
+        this.setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //es la barra superior
