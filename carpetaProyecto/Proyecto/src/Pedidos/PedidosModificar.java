@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -45,6 +46,8 @@ public class PedidosModificar extends JInternalFrame{
 	private ObjCliente clienteSeleccionado;
 	private ObjPedido pedidoSeleccionado;
 	private ObjCompra compraSeleccionada;
+	
+
 	public PedidosModificar() {
 		this.setLayout(new GridLayout(2,1, 15 ,10));
 		gestionClientes=new ObjCliente();
