@@ -188,18 +188,18 @@ public static void pdf(int pos) throws FileNotFoundException, ClassNotFoundExcep
 	{
 		String ruta=elegir.getSelectedFile().getAbsolutePath();//guardo la ruta que halla elegido el usuario
 		PdfWriter lapiz=new PdfWriter(ruta + ".pdf");
-		PdfDocument boli=new PdfDocument(lapiz); //esto es como los objetos de escritura en txt
+		PdfDocument boli=new PdfDocument(lapiz);
 		Document doc=new Document(boli);
-		if(pos==1)//simplemente diferenciacion de los dos tipos de pdf que quiero crear
+		if(pos==1)
 		{doc.add(new Paragraph("Tarifas"));
 			ResultSet res;
-			res=b.ejecutarSQL1("Select * from tarifa");//aqui se añade el rsultado de la consulta en unparrafo dentro del documento
+			res=b.ejecutarSQL1("Select * from tarifa");
 		
 			while(res.next())
 			{
 				doc.add(new Paragraph("Nombre: "+res.getString("nombre")+"Descripcion: "+res.getString("descripcion")+"Precio: "+res.getDouble("precio")));
 			}
-			doc.close();//una vez acabado cierro el documento
+			doc.close();
 		}else if(pos==2){
 			doc.add(new Paragraph("Actividades"));
 			ResultSet res;
@@ -209,7 +209,7 @@ public static void pdf(int pos) throws FileNotFoundException, ClassNotFoundExcep
 			{
 				doc.add(new Paragraph(res.getString("nombre")+"\t"+res.getString("descripcion")+"\t"+res.getInt("idsala")+"\t"+res.getInt("idempleado")));
 			}
-			doc.close();//una vez acabado cierro el documento
+			doc.close();
 		}
 		
 	}
