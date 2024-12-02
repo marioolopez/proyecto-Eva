@@ -40,7 +40,6 @@ public class ObjCompra {
 	}
 	
 	public void eliminarCompra(int idPedido) {
-		//String sql = "DELETE FROM compra WHERE idpedido ='" + idProducto + "'AND idproducto = '" + idPedido + "'";
 	    String sql = "DELETE FROM compra WHERE idpedido = ? AND idproducto = ?";
 
 		BaseDatos bs=null;

@@ -277,19 +277,23 @@ public class PedidosModificar extends JInternalFrame{
 	}
 	
 	public void eliminarCompra() { //Elimina la compra
-		//System.out.println(compraSeleccionada.toString());
- 		if(pedidoSeleccionado.getListaComprasTotal().size()==1) {
+		System.out.println(compraSeleccionada.toString());
+ 		if(pedidoSeleccionado.getListaComprasTotal().size()<=1) {
 	       int respuesta = JOptionPane.showConfirmDialog(this,"Solo hay una compra, si la eliminas se eliminará el pedido", "Borrar pedido",JOptionPane.YES_NO_OPTION);
 	       if (respuesta == JOptionPane.YES_OPTION) {
 	    	   eliminarPedido();
 	        } else if (respuesta == JOptionPane.NO_OPTION) {
 	    	   	compraSeleccionada.eliminarCompra(pedidoSeleccionado.getIdPedido());
 		   	   	eliminarCompra.setEnabled(false); //Desactivo el boton
-				pedidoSeleccionado.getListaComprasTotal().remove(compraSeleccionada);
-				pedidoSeleccionado.getListaPedidos().removeElement(compraSeleccionada.getNombre());
+				pedidoSeleccionado.getListaComprasTotal().remove(compraSeleccionada); //Elimino de listas
+				pedidoSeleccionado.getListaPedidos().removeElement(compraSeleccionada.getNombre());  //Elimino de listas
 	        } else {
 	        	JOptionPane.showMessageDialog(this, "No se ha actualizado la compra/pedido");
 	        }
+		}else {
+    	   	compraSeleccionada.eliminarCompra(pedidoSeleccionado.getIdPedido()); //Elimino compra del pedido
+			pedidoSeleccionado.getListaComprasTotal().remove(compraSeleccionada);//Elimino de listas
+			pedidoSeleccionado.getListaPedidos().removeElement(compraSeleccionada.getNombre());	//Elimino de listas
 		}
 		
 
