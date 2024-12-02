@@ -16,7 +16,7 @@ public class ventanaPrincipal extends JFrame {
     private JLabel fotoGym;
     private ImageIcon img;
     private JMenuBar barra;
-    private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3,emp4, equip1, prod1, act1, tar1, ped1, ped2;
+    private JMenuItem cli1, cli2, cli3, emp1, emp2, emp3,emp4, equip1, prod1, act1, act2,tar1,tar2,ped1, ped2;
     private JMenu menu1, menu2, menu3, menu4, menu5, menu6, menu7;
     
     private VentanaCliente ventanaCliente;
@@ -96,16 +96,29 @@ public class ventanaPrincipal extends JFrame {
         menu5.setFont(new Font("Arial Black", Font.BOLD, 12));
         act1 = new JMenuItem("Agegar Nueva Actividad");
         act1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        act2=new JMenuItem("Eliminar actividad");
+        act2.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu5.add(act1);
+        menu5.add(act2);
+        act1.setActionCommand("Actividades");
+        act1.addActionListener(new escuchador(this));
+        act2.setActionCommand("BajasAct");
+        act2.addActionListener(new escuchador(this));
         
         
         
         menu6 = new JMenu("TARIFA");
         tar1 = new JMenuItem("Alta de Tarifa");
         tar1.setFont(new Font("Arial Black", Font.BOLD, 12));
+        tar2=new JMenuItem("Baja Tarifa");
+        tar2.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu6.setFont(new Font("Arial Black", Font.BOLD, 12));
         menu6.add(tar1);
-
+        menu6.add(tar2);
+        tar1.setActionCommand("Tarifa");
+        tar1.addActionListener(new escuchador(this));
+        tar2.setActionCommand("BajaTar");
+        tar2.addActionListener(new escuchador(this));
         
         menu7 = new JMenu("PEDIDOS");
         ped1 = new JMenuItem("Pedidos Añandir");

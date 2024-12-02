@@ -6,13 +6,13 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="D:/proyecto-Eva/carpetaProyecto/Proyecto/jar/io-7.0.2.jar"/>
-	<classpathentry kind="lib" path="D:/proyecto-Eva/carpetaProyecto/Proyecto/jar/itextpdf-5.5.9.jar"/>
-	<classpathentry kind="lib" path="D:/proyecto-Eva/carpetaProyecto/Proyecto/jar/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="D:/proyecto-Eva/carpetaProyecto/Proyecto/jar/kernel-7.0.2.jar"/>
-	<classpathentry kind="lib" path="D:/proyecto-Eva/carpetaProyecto/Proyecto/jar/mysql-connector-java-8.0.19.jar"/>
-	<classpathentry kind="lib" path="D:/proyecto-Eva/carpetaProyecto/Proyecto/jar/layout-7.0.2.jar"/>
-	<classpathentry kind="lib" path="D:/proyecto-Eva/carpetaProyecto/Proyecto/jar/slf4j-api-2.0.9.jar"/>
-	<classpathentry kind="lib" path="D:/proyecto-Eva/carpetaProyecto/Proyecto/jar/slf4j-simple-2.0.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alumno/Documents/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/io-7.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alumno/Documents/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/itextpdf-5.5.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alumno/Documents/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alumno/Documents/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/kernel-7.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alumno/Documents/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/mysql-connector-java-8.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alumno/Documents/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/layout-7.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alumno/Documents/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/slf4j-api-2.0.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alumno/Documents/GitHub/proyecto-Eva/carpetaProyecto/Proyecto/jar/slf4j-simple-2.0.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
