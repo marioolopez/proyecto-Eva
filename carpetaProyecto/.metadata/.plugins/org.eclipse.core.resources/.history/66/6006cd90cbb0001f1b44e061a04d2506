@@ -12,13 +12,9 @@ public class BaseDatos {
 	public void conexionBD() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		String url = "jdbc:mysql://localhost/gimnasio";
-<<<<<<< HEAD
-	    //String url = "jdbc:mysql://localhost/gimnasio?serverTimezone=Europe/Madrid";
-=======
 	    	//String url = "jdbc:mysql://localhost/gimnasio?serverTimezone=Europe/Madrid";
-		//c = DriverManager.getConnection(url, "root","12345");
->>>>>>> b49598e900cc8142044a79ffa161ec4b2538d975
-		c = DriverManager.getConnection(url, "root","");
+
+		c = DriverManager.getConnection(url, "root","root");
 		System.out.println("Conexion realidada!");
 	}
 	

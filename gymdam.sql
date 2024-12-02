@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2024 a las 19:57:22
+-- Tiempo de generación: 02-12-2024 a las 21:02:43
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,6 +37,13 @@ CREATE TABLE `actividad` (
   `idempleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `actividad`
+--
+
+INSERT INTO `actividad` (`id`, `nombre`, `descripcion`, `idsala`, `idempleado`) VALUES
+(1, 'Correr', 'Ha correr!', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -49,8 +56,16 @@ CREATE TABLE `cliente` (
   `telefono` int(11) NOT NULL,
   `dni` varchar(20) NOT NULL,
   `edad` int(11) NOT NULL,
-  `idtarifa` int(11) NOT NULL
+  `idtarifa` int(11) NOT NULL,
+  `sexo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `nombre`, `telefono`, `dni`, `edad`, `idtarifa`, `sexo`) VALUES
+(1, 'Mario', 65432143, '76543243', 22, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -64,6 +79,13 @@ CREATE TABLE `compra` (
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`idpedido`, `idproducto`, `cantidad`) VALUES
+(1, 1, 23);
+
 -- --------------------------------------------------------
 
 --
@@ -76,6 +98,13 @@ CREATE TABLE `empleado` (
   `dni` varchar(20) NOT NULL,
   `salario` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `empleado`
+--
+
+INSERT INTO `empleado` (`id`, `nombre`, `dni`, `salario`) VALUES
+(1, 'Sergio', '654321544', 2100);
 
 -- --------------------------------------------------------
 
@@ -91,6 +120,13 @@ CREATE TABLE `equipamiento` (
   `idmantenimiento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `equipamiento`
+--
+
+INSERT INTO `equipamiento` (`id`, `nombre`, `descripcion`, `idactividad`, `idmantenimiento`) VALUES
+(1, 'Mancuernas', 'Hasta 60 kg', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -102,6 +138,13 @@ CREATE TABLE `mantenimiento` (
   `nombre` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `mantenimiento`
+--
+
+INSERT INTO `mantenimiento` (`id`, `nombre`) VALUES
+(1, 'Pablo');
+
 -- --------------------------------------------------------
 
 --
@@ -110,8 +153,17 @@ CREATE TABLE `mantenimiento` (
 
 CREATE TABLE `pedido` (
   `id` int(11) NOT NULL,
-  `fecha` date NOT NULL
+  `fechaEntrega` date NOT NULL,
+  `IdCliente` int(11) NOT NULL,
+  `fechaRealizada` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`id`, `fechaEntrega`, `IdCliente`, `fechaRealizada`) VALUES
+(1, '2024-12-11', 1, '2024-12-25');
 
 -- --------------------------------------------------------
 
@@ -126,6 +178,13 @@ CREATE TABLE `producto` (
   `idproveedor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `nombre`, `stock`, `idproveedor`) VALUES
+(1, 'barrita', 6, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -138,6 +197,13 @@ CREATE TABLE `proveedor` (
   `cif` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`id`, `nombre`, `cif`) VALUES
+(1, 'juanito', 1234);
+
 -- --------------------------------------------------------
 
 --
@@ -148,6 +214,13 @@ CREATE TABLE `sala` (
   `id` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `sala`
+--
+
+INSERT INTO `sala` (`id`, `nombre`) VALUES
+(1, 'sala1');
 
 -- --------------------------------------------------------
 
@@ -161,6 +234,13 @@ CREATE TABLE `tarifa` (
   `descripcion` varchar(20) NOT NULL,
   `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tarifa`
+--
+
+INSERT INTO `tarifa` (`id`, `nombre`, `descripcion`, `precio`) VALUES
+(1, 'estudiante', 'para estudiantes', 12);
 
 --
 -- Índices para tablas volcadas
