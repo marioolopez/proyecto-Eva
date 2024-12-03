@@ -41,7 +41,6 @@
     <fullyQualifiedTypeName name="javax.swing.JDialog"/>
     <fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
-    <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
     <fullyQualifiedTypeName name="ParteMario.latizq"/>
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
@@ -53,4 +52,5 @@
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
     <fullyQualifiedTypeName name="alvaro.FrameProductosYProveedores"/>
     <fullyQualifiedTypeName name="paqueteprincipal.MenuAccion"/>
+    <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
 </qualifiedTypeNameHistroy>
