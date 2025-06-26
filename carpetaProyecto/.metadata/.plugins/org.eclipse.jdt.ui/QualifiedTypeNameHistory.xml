@@ -26,7 +26,6 @@
     <fullyQualifiedTypeName name="javax.swing.SwingConstants"/>
     <fullyQualifiedTypeName name="java.awt.FlowLayout"/>
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
-    <fullyQualifiedTypeName name="javax.swing.JTable"/>
     <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
     <fullyQualifiedTypeName name="ParteMario.latderch"/>
     <fullyQualifiedTypeName name="ParteMario.ListadoEquipMant"/>
@@ -51,4 +50,5 @@
     <fullyQualifiedTypeName name="ParteMario.escuchaModificar"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
+    <fullyQualifiedTypeName name="javax.swing.JTable"/>
 </qualifiedTypeNameHistroy>
